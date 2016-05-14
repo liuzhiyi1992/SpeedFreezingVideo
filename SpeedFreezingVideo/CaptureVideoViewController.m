@@ -7,9 +7,11 @@
 //
 
 #import "CaptureVideoViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface CaptureVideoViewController ()
-
+@property (weak, nonatomic) IBOutlet UIView *videoPreviewView;
+@property (strong, nonatomic) AVCaptureSession *captureSession;
 @end
 
 @implementation CaptureVideoViewController
@@ -18,6 +20,49 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
+
+- (void)accessAuthorization {
+    switch ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo]) {
+        case AVAuthorizationStatusAuthorized:
+            [self configureCapture];
+            break;
+        case AVAuthorizationStatusNotDetermined: {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                if (granted) {
+                    [self configureCapture];
+                } else {
+                    NSLog(@"被拒绝，如需正常使用请与设置->隐私打开摄像头权限");
+                    //todo 提示打开权限方法
+                }
+            }];
+            break;
+        }
+        case AVAuthorizationStatusDenied:
+            NSLog(@"权限被拒绝，如需正常使用请与设置->隐私打开摄像头权限");
+            break;
+        case AVAuthorizationStatusRestricted:
+            NSLog(@"您无法改变被锁定的权限");
+            break;
+        default:                                    //用户拒绝授权/未授权
+            break;
+    }
+}
+
+- (void)configureCapture {
+    //开始配置安装
+    
+    _captureSession = [[AVCaptureSession alloc] init];
+    if ([_captureSession canSetSessionPreset:AVAssetExportPresetMediumQuality]) {
+        [_captureSession setSessionPreset:AVAssetExportPresetMediumQuality];
+    }
+    
+    [_captureSession beginConfiguration];
+    
+    [_captureSession commitConfiguration];
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
