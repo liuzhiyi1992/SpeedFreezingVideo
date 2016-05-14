@@ -11,7 +11,17 @@
 
 @interface CaptureVideoViewController ()
 @property (weak, nonatomic) IBOutlet UIView *videoPreviewView;
+
+@property (strong, nonatomic) AVCaptureDevice *captureDevice;
 @property (strong, nonatomic) AVCaptureSession *captureSession;
+
+@property (strong, nonatomic) AVCaptureDevice *audioDevice;
+@property (strong, nonatomic) AVCaptureDevice *videoDevice;
+
+@property (strong, nonatomic) AVCaptureDeviceInput *audioInput;
+@property (strong, nonatomic) AVCaptureDeviceInput *videoInput;
+
+
 @end
 
 @implementation CaptureVideoViewController
@@ -57,6 +67,15 @@
     }
     
     [_captureSession beginConfiguration];
+    
+    
+    //使用后置摄像头
+    NSArray *inputDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio];
+    for (AVCaptureDevice *device in inputDevices) {
+        if (device.position == AVCaptureDevicePositionBack) {
+            _videoInput = device;
+        }
+    }
     
     [_captureSession commitConfiguration];
     
