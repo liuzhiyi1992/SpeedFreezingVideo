@@ -13,6 +13,8 @@
 		4848F64A1CE73431009C6280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F6481CE73431009C6280 /* Main.storyboard */; };
 		4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64B1CE73431009C6280 /* Assets.xcassets */; };
 		4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64D1CE73431009C6280 /* LaunchScreen.storyboard */; };
+		4848F6591CE73884009C6280 /* CaptureVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6571CE73884009C6280 /* CaptureVideoViewController.m */; };
+		4848F65A1CE73884009C6280 /* CaptureVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,9 @@
 		4848F64B1CE73431009C6280 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4848F64E1CE73431009C6280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4848F6501CE73431009C6280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4848F6561CE73884009C6280 /* CaptureVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoViewController.h; sourceTree = "<group>"; };
+		4848F6571CE73884009C6280 /* CaptureVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoViewController.m; sourceTree = "<group>"; };
+		4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureVideoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +72,9 @@
 				4848F64D1CE73431009C6280 /* LaunchScreen.storyboard */,
 				4848F6501CE73431009C6280 /* Info.plist */,
 				4848F63F1CE73430009C6280 /* Supporting Files */,
+				4848F6561CE73884009C6280 /* CaptureVideoViewController.h */,
+				4848F6571CE73884009C6280 /* CaptureVideoViewController.m */,
+				4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */,
 			);
 			path = SpeedFreezingVideo;
 			sourceTree = "<group>";
@@ -138,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */,
+				4848F65A1CE73884009C6280 /* CaptureVideoViewController.xib in Resources */,
 				4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */,
 				4848F64A1CE73431009C6280 /* Main.storyboard in Resources */,
 			);
@@ -151,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4848F6471CE73431009C6280 /* ViewController.m in Sources */,
+				4848F6591CE73884009C6280 /* CaptureVideoViewController.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
 				4848F6411CE73430009C6280 /* main.m in Sources */,
 			);
