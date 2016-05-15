@@ -82,10 +82,12 @@
     self.audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
     //配置audio input
     self.audioInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeAudio];
-    
-    
+    [self captureSessionAddInput:_audioInput];
     
     [_captureSession commitConfiguration];
+    
+    //配置预览view
+    
 }
 
 //是否有摄像头工作
@@ -178,6 +180,11 @@
         NSLog(@"ERROR: 获取指定摄像头失败");
     }
     return willingDevice;
+}
+
+- (void)configureVideoPreview {
+    self.videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
+    [_videoPreviewView setFrame:self.view.layer.bounds];
 }
 
 
