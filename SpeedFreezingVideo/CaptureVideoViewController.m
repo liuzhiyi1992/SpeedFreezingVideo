@@ -74,9 +74,15 @@
     
     //使用后置摄像头
     self.videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    
     //配置video input
-    self.videoInput = [self createVideoInputWithDevice:_videoDevice];
+    self.videoInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeVideo];
+    [self captureSessionAddInput:_videoInput];
+    
+    //配置音频
+    self.audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+    //配置audio input
+    self.audioInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeAudio];
+    
     
     
     [_captureSession commitConfiguration];
@@ -108,21 +114,24 @@
     }
     
     //todo 切换时锁定设备，方式同时修改?
-    AVCaptureDeviceInput *videoInput = [self createVideoInputWithDevice:_videoDevice];
-    if (nil != videoInput) {
-        [self captureSessionChangeInput:videoInput];
-    }
+    AVCaptureDeviceInput *videoInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeVideo];
+    [self captureSessionChangeInput:videoInput];
 }
 
-//配置视频输入容错
-- (AVCaptureDeviceInput *)createVideoInputWithDevice:(AVCaptureDevice *)device {
+//配置媒体输入容错
+- (AVCaptureDeviceInput *)createMediaInputWithDevice:(AVCaptureDevice *)device mediaType:(NSString *)mediaType {
     if (nil != device) {
         NSError *videoInputError;
         AVCaptureDeviceInput *videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&videoInputError];
         if (nil == videoInputError) {
             return videoInput;
         } else {
-            NSLog(@"ERROR: 配置视频输入设备错误");
+            if ([mediaType isEqualToString:AVMediaTypeAudio]) {
+                NSLog(@"ERROR: 配置音频输入设备错误");
+            } else if ([mediaType isEqualToString:AVMediaTypeVideo]) {
+                NSLog(@"ERROR: 配置视频输入设备错误");
+            }
+            
         }
     }
     return nil;
@@ -143,8 +152,13 @@
 }
 
 - (void)captureSessionChangeInput:(AVCaptureDeviceInput *)input {
-    [_captureSession removeInput:_videoInput];
-    [self captureSessionAddInput:input];
+    if (nil != input) {
+        [_captureSession removeInput:_videoInput];
+        [self captureSessionAddInput:input];
+    } else {
+        NSLog(@"ERROR: 获取视频输入设备错误");
+    }
+    
 }
 
 //获取指定摄像头
