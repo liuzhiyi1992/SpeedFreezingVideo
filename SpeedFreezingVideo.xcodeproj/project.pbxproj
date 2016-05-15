@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		481467861CE89EE50003C3E0 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481467851CE89EE50003C3E0 /* AVKit.framework */; };
 		4848F6411CE73430009C6280 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6401CE73430009C6280 /* main.m */; };
 		4848F6441CE73430009C6280 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6431CE73430009C6280 /* AppDelegate.m */; };
 		4848F6471CE73431009C6280 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6461CE73431009C6280 /* ViewController.m */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		481467851CE89EE50003C3E0 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		4848F63C1CE73430009C6280 /* SpeedFreezingVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedFreezingVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4848F6401CE73430009C6280 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4848F6421CE73430009C6280 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -38,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				481467861CE89EE50003C3E0 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +50,7 @@
 		4848F6331CE73430009C6280 = {
 			isa = PBXGroup;
 			children = (
+				481467851CE89EE50003C3E0 /* AVKit.framework */,
 				4848F63E1CE73430009C6280 /* SpeedFreezingVideo */,
 				4848F63D1CE73430009C6280 /* Products */,
 			);
@@ -228,6 +232,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "a6c948ed-7c57-4911-988b-1644d201ea33";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -265,6 +270,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "a6c948ed-7c57-4911-988b-1644d201ea33";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -275,9 +281,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SpeedFreezingVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.SpeedFreezingVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiuhaodong.sport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a6c948ed-7c57-4911-988b-1644d201ea33";
 			};
 			name = Debug;
 		};
@@ -286,9 +294,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SpeedFreezingVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.SpeedFreezingVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiuhaodong.sport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a6c948ed-7c57-4911-988b-1644d201ea33";
 			};
 			name = Release;
 		};
@@ -311,6 +321,7 @@
 				4848F6551CE73431009C6280 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

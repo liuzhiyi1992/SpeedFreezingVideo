@@ -7,12 +7,18 @@
 //
 
 #import "ViewController.h"
+#import "CaptureVideoViewController.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+
+- (IBAction)enterVideoCapture:(id)sender {
+    CaptureVideoViewController *controller = [[CaptureVideoViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

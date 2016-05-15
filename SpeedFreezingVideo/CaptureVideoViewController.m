@@ -31,6 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self accessAuthorization];
+    [self configureCapture];
 }
 
 - (void)accessAuthorization {
@@ -83,6 +86,7 @@
     //配置audio input
     self.audioInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeAudio];
     [self captureSessionAddInput:_audioInput];
+    
     
     [_captureSession commitConfiguration];
     
