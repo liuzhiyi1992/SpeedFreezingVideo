@@ -186,7 +186,7 @@
     self.videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     [_videoPreviewView setFrame:self.view.layer.bounds];
     
-    [videoPreviewView.layer addSublayer:_videoPreviewLayer];
+    [_videoPreviewView.layer addSublayer:_videoPreviewLayer];
 }
 
 
