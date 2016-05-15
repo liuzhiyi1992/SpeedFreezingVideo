@@ -87,7 +87,7 @@
     [_captureSession commitConfiguration];
     
     //配置预览view
-    
+    [self configureVideoPreview];
 }
 
 //是否有摄像头工作
@@ -185,6 +185,8 @@
 - (void)configureVideoPreview {
     self.videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     [_videoPreviewView setFrame:self.view.layer.bounds];
+    
+    [videoPreviewView.layer addSublayer:_videoPreviewLayer];
 }
 
 
