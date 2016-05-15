@@ -115,7 +115,7 @@
     
     //todo 切换时锁定设备，方式同时修改?
     AVCaptureDeviceInput *videoInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeVideo];
-    [self captureSessionChangeInput:videoInput];
+    [self captureSessionChangeVideoInput:videoInput];
 }
 
 //配置媒体输入容错
@@ -131,30 +131,33 @@
             } else if ([mediaType isEqualToString:AVMediaTypeVideo]) {
                 NSLog(@"ERROR: 配置视频输入设备错误");
             }
-            
         }
     }
     return nil;
 }
 
-- (void)captureSessionAddInput:(AVCaptureDeviceInput *)input {
-    if ([_captureSession canAddInput:input]) {
-        [_captureSession addInput:input];
-        _videoInput = input;
-    } else {
-        if (nil != _videoInput) {
-            [_captureSession addInput:_videoInput];
-            NSLog(@"Error: 不能成功切换摄像头");
-        } else {
-            NSLog(@"Error: 视频输入设备出错");
+- (BOOL)captureSessionAddInput:(AVCaptureDeviceInput *)input {
+    if (nil != input) {
+        if ([_captureSession canAddInput:input]) {
+            [_captureSession addInput:input];
+            _videoInput = input;
+            return YES;
         }
+    } else {
+        NSLog(@"获取媒体输入设备出错");
     }
+    return NO;
 }
 
-- (void)captureSessionChangeInput:(AVCaptureDeviceInput *)input {
+- (void)captureSessionChangeVideoInput:(AVCaptureDeviceInput *)input {
     if (nil != input) {
         [_captureSession removeInput:_videoInput];
-        [self captureSessionAddInput:input];
+        if ( ![self captureSessionAddInput:input]) {
+            if (nil != _videoInput) {
+                [_captureSession addInput:_videoInput];
+                NSLog(@"Error: 不能成功切换摄像头");
+            }
+        }
     } else {
         NSLog(@"ERROR: 获取视频输入设备错误");
     }
