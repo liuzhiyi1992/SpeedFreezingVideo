@@ -9,6 +9,8 @@
 #import "CaptureVideoViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
+//todo 发生某些错误需要停止视频拍摄功能，对策：返回上一页
+
 @interface CaptureVideoViewController ()
 @property (weak, nonatomic) IBOutlet UIView *videoPreviewView;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer *videoPreviewLayer;
@@ -21,7 +23,6 @@
 
 @property (strong, nonatomic) AVCaptureDeviceInput *audioInput;
 @property (strong, nonatomic) AVCaptureDeviceInput *videoInput;
-
 
 @end
 
@@ -54,7 +55,7 @@
         case AVAuthorizationStatusRestricted:
             NSLog(@"您无法改变被锁定的权限");
             break;
-        default:                                    //用户拒绝授权/未授权
+        default:
             break;
     }
 }
@@ -62,28 +63,26 @@
 - (void)configureCapture {
     //开始配置安装
     
-    _captureSession = [[AVCaptureSession alloc] init];
+    //session
+    self.captureSession = [[AVCaptureSession alloc] init];
     if ([_captureSession canSetSessionPreset:AVAssetExportPresetMediumQuality]) {
         [_captureSession setSessionPreset:AVAssetExportPresetMediumQuality];
     }
     
+    
     [_captureSession beginConfiguration];
     
-    
     //使用后置摄像头
-    _videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    self.videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
-//    NSArray *videoDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-//    for (AVCaptureDevice *device in videoDevices) {
-//        if (device.position == AVCaptureDevicePositionBack) {
-//            _videoDevice = device;
-//        }
-//    }
+    //配置video input
+    self.videoInput = [self createVideoInputWithDevice:_videoDevice];
+    
     
     [_captureSession commitConfiguration];
 }
 
-//摄像头是否工作
+//是否有摄像头工作
 - (BOOL)hasMultipleCameraDevices {
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
 //    if (devices != nil && [devices count] > 1) {
@@ -99,25 +98,34 @@
 - (void)changeCameraDevice {
     switch (_videoDevice.position) {
         case AVCaptureDevicePositionBack:
-            _videoDevice = [self cameraWithPosition:AVCaptureDevicePositionFront];
+            self.videoDevice = [self cameraWithPosition:AVCaptureDevicePositionFront];
             break;
         case AVCaptureDevicePositionFront:
-            _videoDevice = [self cameraWithPosition:AVCaptureDevicePositionBack];
+            self.videoDevice = [self cameraWithPosition:AVCaptureDevicePositionBack];
             break;
         default:
             break;
     }
     
     //todo 切换时锁定设备，方式同时修改?
-    if (nil != _videoDevice) {
+    AVCaptureDeviceInput *videoInput = [self createVideoInputWithDevice:_videoDevice];
+    if (nil != videoInput) {
+        [self captureSessionChangeInput:videoInput];
+    }
+}
+
+//配置视频输入容错
+- (AVCaptureDeviceInput *)createVideoInputWithDevice:(AVCaptureDevice *)device {
+    if (nil != device) {
         NSError *videoInputError;
-        AVCaptureDeviceInput *videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:_videoDevice error:&videoInputError];
+        AVCaptureDeviceInput *videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&videoInputError];
         if (nil == videoInputError) {
-            [self captureSessionChangeInput:videoInput];
+            return videoInput;
         } else {
-            NSLog(@"Error: 切换摄像头失败(%@)", videoInputError);
+            NSLog(@"ERROR: 配置视频输入设备错误");
         }
     }
+    return nil;
 }
 
 - (void)captureSessionAddInput:(AVCaptureDeviceInput *)input {
@@ -139,6 +147,7 @@
     [self captureSessionAddInput:input];
 }
 
+//获取指定摄像头
 - (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position {
     AVCaptureDevice *willingDevice;
     NSArray *cameraDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
@@ -147,6 +156,9 @@
             willingDevice = device;
             break;
         }
+    }
+    if (nil == willingDevice) {
+        NSLog(@"ERROR: 获取指定摄像头失败");
     }
     return willingDevice;
 }
