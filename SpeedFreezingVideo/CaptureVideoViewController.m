@@ -8,12 +8,12 @@
 
 #import "CaptureVideoViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "CapturePreviewView.h"
 
 //todo 发生某些错误需要停止视频拍摄功能，对策：返回上一页
 
 @interface CaptureVideoViewController ()
-@property (weak, nonatomic) IBOutlet UIView *videoPreviewView;
-@property (strong, nonatomic) AVCaptureVideoPreviewLayer *videoPreviewLayer;
+@property (weak, nonatomic) IBOutlet CapturePreviewView *videoPreviewView;
 
 @property (strong, nonatomic) AVCaptureDevice *captureDevice;
 @property (strong, nonatomic) AVCaptureSession *captureSession;
@@ -24,6 +24,8 @@
 @property (strong, nonatomic) AVCaptureDeviceInput *audioInput;
 @property (strong, nonatomic) AVCaptureDeviceInput *videoInput;
 
+@property (strong, nonatomic) AVCaptureMovieFileOutput *videoOutput;
+
 @end
 
 @implementation CaptureVideoViewController
@@ -32,8 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
     [self accessAuthorization];
-    [self configureCapture];
 }
 
 - (void)accessAuthorization {
@@ -68,8 +70,10 @@
     
     //session
     self.captureSession = [[AVCaptureSession alloc] init];
-    if ([_captureSession canSetSessionPreset:AVAssetExportPresetMediumQuality]) {
-        [_captureSession setSessionPreset:AVAssetExportPresetMediumQuality];
+    if ([_captureSession canSetSessionPreset:AVCaptureSessionPresetHigh]) {
+        [_captureSession setSessionPreset:AVCaptureSessionPresetHigh];
+    } else {
+        NSLog(@"Can not set AVCaptureSession sessionPreset, using default %@", _captureSession.sessionPreset);
     }
     
     
@@ -84,14 +88,30 @@
     //配置音频
     self.audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
     //配置audio input
-    self.audioInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeAudio];
+    self.audioInput = [self createMediaInputWithDevice:_audioDevice mediaType:AVMediaTypeAudio];
     [self captureSessionAddInput:_audioInput];
     
     
-    [_captureSession commitConfiguration];
+    //视频输出
+    
+    
     
     //配置预览view
     [self configureVideoPreview];
+    
+    [_captureSession commitConfiguration];
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //启动会话
+        [_captureSession startRunning];
+    });
+    
+    
+}
+
+- (void)configureVideoOutput {
+    self.videoOutput = [[AVCaptureMovieFileOutput alloc] init];
 }
 
 //是否有摄像头工作
@@ -106,8 +126,20 @@
     return NO;
 }
 
+- (NSUInteger)cameraCount {
+    return [[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] count];
+}
+
+- (BOOL)canSwitchCamera {
+    return [self cameraCount] > 1;
+}
+
 //切换摄像头
 - (void)changeCameraDevice {
+    if (! [self canSwitchCamera]) {
+        NSLog(@"部分摄像头设备无法工作");
+        return;
+    }
     switch (_videoDevice.position) {
         case AVCaptureDevicePositionBack:
             self.videoDevice = [self cameraWithPosition:AVCaptureDevicePositionFront];
@@ -187,10 +219,23 @@
 }
 
 - (void)configureVideoPreview {
-    self.videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
-    [_videoPreviewView setFrame:self.view.layer.bounds];
     
-    [_videoPreviewView.layer addSublayer:_videoPreviewLayer];
+//    [self.view layoutIfNeeded];
+    
+    [self.videoPreviewView setSession:_captureSession];
+//    self.videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
+    
+//    [_videoPreviewLayer setFrame:self.view.layer.bounds];
+    
+//    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    
+//    _videoPreviewLayer.position = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height *0.5);
+//    
+//    
+//    _videoPreviewView.layer.masksToBounds = YES;
+//    [self.view layoutIfNeeded];
+//    
+//    [_videoPreviewView.layer addSublayer:_videoPreviewLayer];
 }
 
 

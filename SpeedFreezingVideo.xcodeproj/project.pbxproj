@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		481467861CE89EE50003C3E0 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481467851CE89EE50003C3E0 /* AVKit.framework */; };
+		481F157D1CEAF33A000E659B /* CapturePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 481F157C1CEAF33A000E659B /* CapturePreviewView.m */; };
 		4848F6411CE73430009C6280 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6401CE73430009C6280 /* main.m */; };
 		4848F6441CE73430009C6280 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6431CE73430009C6280 /* AppDelegate.m */; };
 		4848F6471CE73431009C6280 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6461CE73431009C6280 /* ViewController.m */; };
@@ -20,6 +21,8 @@
 
 /* Begin PBXFileReference section */
 		481467851CE89EE50003C3E0 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		481F157B1CEAF33A000E659B /* CapturePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapturePreviewView.h; sourceTree = "<group>"; };
+		481F157C1CEAF33A000E659B /* CapturePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapturePreviewView.m; sourceTree = "<group>"; };
 		4848F63C1CE73430009C6280 /* SpeedFreezingVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedFreezingVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4848F6401CE73430009C6280 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4848F6421CE73430009C6280 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,6 +82,8 @@
 				4848F6561CE73884009C6280 /* CaptureVideoViewController.h */,
 				4848F6571CE73884009C6280 /* CaptureVideoViewController.m */,
 				4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */,
+				481F157B1CEAF33A000E659B /* CapturePreviewView.h */,
+				481F157C1CEAF33A000E659B /* CapturePreviewView.m */,
 			);
 			path = SpeedFreezingVideo;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				4848F6591CE73884009C6280 /* CaptureVideoViewController.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
 				4848F6411CE73430009C6280 /* main.m in Sources */,
+				481F157D1CEAF33A000E659B /* CapturePreviewView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

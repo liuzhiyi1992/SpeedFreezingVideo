@@ -17,19 +17,25 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xD-Xw-Eom">
-                    <rect key="frame" x="0.0" y="100" width="600" height="1125"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xD-Xw-Eom" customClass="CapturePreviewView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="0xD-Xw-Eom" secondAttribute="height" multiplier="8:15" id="MdO-EA-Ph6"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="MdO-EA-Ph6"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="0xD-Xw-Eom" secondAttribute="trailing" id="BQa-qF-lBq"/>
                 <constraint firstItem="0xD-Xw-Eom" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UMg-xu-RRC"/>
-                <constraint firstItem="0xD-Xw-Eom" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="doR-f5-Ddc"/>
+                <constraint firstItem="0xD-Xw-Eom" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="doR-f5-Ddc"/>
+                <constraint firstAttribute="bottom" secondItem="0xD-Xw-Eom" secondAttribute="bottom" id="jxe-9U-rwU"/>
             </constraints>
         </view>
     </objects>
