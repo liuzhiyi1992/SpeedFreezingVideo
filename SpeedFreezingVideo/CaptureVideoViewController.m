@@ -12,7 +12,7 @@
 
 //todo 发生某些错误需要停止视频拍摄功能，对策：返回上一页
 
-@interface CaptureVideoViewController ()
+@interface CaptureVideoViewController () <CapturePreviewViewDelegate>
 @property (weak, nonatomic) IBOutlet CapturePreviewView *videoPreviewView;
 
 @property (strong, nonatomic) AVCaptureDevice *captureDevice;
@@ -238,6 +238,31 @@
 //    [_videoPreviewView.layer addSublayer:_videoPreviewLayer];
 }
 
+//对焦
+- (void)focusAtCapturePoint:(CGPoint)point {
+    if ([_videoDevice isFocusPointOfInterestSupported] &&
+            [_videoDevice isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
+        //获得锁再操作设备
+        NSError *error;
+        if ([_videoDevice lockForConfiguration:&error]) {
+            _videoDevice.focusPointOfInterest = point;
+            _videoDevice.focusMode = AVCaptureFocusModeAutoFocus;
+            [_videoDevice unlockForConfiguration];
+        } else {
+            NSLog(@"Configuration Failed ERROR: %@", error);
+        }
+    }
+}
+
+- (BOOL)cameraSupportTapToFocus {
+    return [self.videoDevice isFocusPointOfInterestSupported];
+}
+
+#pragma mark delegate
+- (void)previewViewFocusAtCapturePoint:(CGPoint)point {
+    //刷新对焦
+    [self focusAtCapturePoint:point];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

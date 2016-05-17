@@ -13,7 +13,7 @@
 
 @protocol CapturePreviewViewDelegate <NSObject>
 
-- (void)previewViewFocusAtPoint:(CGPoint)point;
+- (void)previewViewFocusAtCapturePoint:(CGPoint)point;
 
 @end
 
