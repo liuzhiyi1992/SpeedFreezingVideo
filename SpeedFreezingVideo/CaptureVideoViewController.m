@@ -107,7 +107,6 @@
         [_captureSession startRunning];
     });
     
-    
 }
 
 - (void)configureVideoOutput {
@@ -242,7 +241,7 @@
 //对焦
 - (void)focusAtCapturePoint:(CGPoint)point {
     if ([_videoDevice isFocusPointOfInterestSupported] &&
-        [_videoDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
+        [_videoDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
         //获得锁再操作设备
         NSError *error;
         if ([_videoDevice lockForConfiguration:&error]) {
@@ -258,14 +257,15 @@
 //测光
 - (void)exposeAtCapturePoint:(CGPoint)point {
     if ([_videoDevice isExposurePointOfInterestSupported] &&
-            [_videoDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
+            [_videoDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
         
         //获得锁再操作设备
         NSError *error;
         if ([_videoDevice lockForConfiguration:&error]) {
             _videoDevice.exposurePointOfInterest = point;
             _videoDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
-            //测光后壁后 锁定曝光
+            NSLog(@"%3.f", _videoDevice.exposureTargetOffset);
+            //测光完毕后 锁定曝光
             /*
             if ([_videoDevice isExposureModeSupported:AVCaptureExposureModeLocked]) {
                 [_videoDevice addObserver:self forKeyPath:@"adjustingExposure" options:NSKeyValueObservingOptionNew context:nil];
@@ -279,10 +279,6 @@
     }
 }
 
-- (BOOL)cameraSupportTapToFocus {
-    return [self.videoDevice isFocusPointOfInterestSupported];
-}
-
 #pragma mark - delegate
 - (void)previewViewFocusAtCapturePoint:(CGPoint)point {
     //刷新对焦
@@ -292,6 +288,7 @@
 }
 
 #pragma mark - KVO
+//部分版本不支持AutoExposure来持续保持曝光，需用KVO修改成Locked
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"adjustingExposure"]) {
         if (![_videoDevice isAdjustingExposure] &&
