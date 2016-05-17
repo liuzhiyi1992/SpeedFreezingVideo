@@ -38,6 +38,7 @@
 
 - (void)singleTap:(UIGestureRecognizer *)recognizer {
     CGPoint point = [recognizer locationInView:self];
+    [_delegate previewViewFocusAtPoint:point];
     //动画
     //对焦 测光
 }

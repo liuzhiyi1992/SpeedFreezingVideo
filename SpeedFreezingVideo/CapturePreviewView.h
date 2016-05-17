@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @class AVCaptureSession;
+
+
+@protocol CapturePreviewViewDelegate <NSObject>
+
+- (void)previewViewFocusAtPoint:(CGPoint)point;
+
+@end
+
 @interface CapturePreviewView : UIView
 @property (strong, nonatomic) AVCaptureSession *session;
+@property (weak, nonatomic) id<CapturePreviewViewDelegate> delegate;
 @end
