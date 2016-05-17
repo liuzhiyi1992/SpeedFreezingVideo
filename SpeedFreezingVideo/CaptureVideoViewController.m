@@ -254,14 +254,57 @@
     }
 }
 
+//测光
+- (void)exposeAtCapturePoint:(CGPoint)point {
+    if ([_videoDevice isExposurePointOfInterestSupported] &&
+        [_videoDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
+        
+        //获得锁再操作设备
+        NSError *error;
+        if ([_videoDevice lockForConfiguration:&error]) {
+            _videoDevice.exposurePointOfInterest = point;
+            _videoDevice.exposureMode = AVCaptureExposureModeAutoExpose;
+            //测光后壁后 锁定曝光
+            if ([_videoDevice isExposureModeSupported:AVCaptureExposureModeLocked]) {
+                [_videoDevice addObserver:self forKeyPath:@"adjustingExposure" options:NSKeyValueObservingOptionNew context:nil];
+            }
+            [_videoDevice unlockForConfiguration];
+        } else {
+            NSLog(@"Configuration Failed ERROR: %@", error);
+        }
+        
+    }
+}
+
 - (BOOL)cameraSupportTapToFocus {
     return [self.videoDevice isFocusPointOfInterestSupported];
 }
 
-#pragma mark delegate
+#pragma mark - delegate
 - (void)previewViewFocusAtCapturePoint:(CGPoint)point {
     //刷新对焦
     [self focusAtCapturePoint:point];
+    //刷新测光
+    [self exposeAtCapturePoint:point];
+}
+
+#pragma mark - KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"adjustingExposure"]) {
+        if (![_videoDevice isAdjustingExposure] &&
+            [_videoDevice isExposureModeSupported:AVCaptureExposureModeLocked]) {
+            //移除监听
+            [object removeObserver:self forKeyPath:@"adjustingExposure"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError *error;
+                if ([_videoDevice lockForConfiguration:&error]) {
+                    //锁定曝光
+                    _videoDevice.exposureMode = AVCaptureExposureModeLocked;
+                    [_videoDevice unlockForConfiguration];
+                }
+            });
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
