@@ -223,6 +223,7 @@
 //    [self.view layoutIfNeeded];
     
     [self.videoPreviewView setSession:_captureSession];
+    self.videoPreviewView.delegate = self;
 //    self.videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
     
 //    [_videoPreviewLayer setFrame:self.view.layer.bounds];
@@ -241,12 +242,12 @@
 //对焦
 - (void)focusAtCapturePoint:(CGPoint)point {
     if ([_videoDevice isFocusPointOfInterestSupported] &&
-            [_videoDevice isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
+        [_videoDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
         //获得锁再操作设备
         NSError *error;
         if ([_videoDevice lockForConfiguration:&error]) {
             _videoDevice.focusPointOfInterest = point;
-            _videoDevice.focusMode = AVCaptureFocusModeAutoFocus;
+            _videoDevice.focusMode = AVCaptureExposureModeContinuousAutoExposure;
             [_videoDevice unlockForConfiguration];
         } else {
             NSLog(@"Configuration Failed ERROR: %@", error);
@@ -257,17 +258,19 @@
 //测光
 - (void)exposeAtCapturePoint:(CGPoint)point {
     if ([_videoDevice isExposurePointOfInterestSupported] &&
-        [_videoDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
+            [_videoDevice isExposureModeSupported:AVCaptureExposureModeAutoExpose]) {
         
         //获得锁再操作设备
         NSError *error;
         if ([_videoDevice lockForConfiguration:&error]) {
             _videoDevice.exposurePointOfInterest = point;
-            _videoDevice.exposureMode = AVCaptureExposureModeAutoExpose;
+            _videoDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
             //测光后壁后 锁定曝光
+            /*
             if ([_videoDevice isExposureModeSupported:AVCaptureExposureModeLocked]) {
                 [_videoDevice addObserver:self forKeyPath:@"adjustingExposure" options:NSKeyValueObservingOptionNew context:nil];
             }
+            */
             [_videoDevice unlockForConfiguration];
         } else {
             NSLog(@"Configuration Failed ERROR: %@", error);
