@@ -2,8 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureVideoViewController">
@@ -19,9 +20,35 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xD-Xw-Eom" customClass="CapturePreviewView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btj-6P-aeP">
+                            <rect key="frame" x="0.0" y="520" width="600" height="80"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXA-sv-Q0O" customClass="CaptureVideoButton">
+                                    <rect key="frame" x="268" y="8" width="64" height="64"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="aXA-sv-Q0O" secondAttribute="height" multiplier="1:1" id="oK7-y9-qYL"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="clickCaptureButton:" destination="-1" eventType="touchUpInside" id="3Kb-NA-Dn9"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="aXA-sv-Q0O" firstAttribute="centerY" secondItem="btj-6P-aeP" secondAttribute="centerY" id="4ql-sL-Lv6"/>
+                                <constraint firstItem="aXA-sv-Q0O" firstAttribute="height" secondItem="btj-6P-aeP" secondAttribute="height" multiplier="4:5" id="Ec5-oQ-zNs"/>
+                                <constraint firstAttribute="height" constant="80" id="ITA-Cm-lZy"/>
+                                <constraint firstItem="aXA-sv-Q0O" firstAttribute="centerX" secondItem="btj-6P-aeP" secondAttribute="centerX" id="VMh-z8-mJq"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="0xD-Xw-Eom" secondAttribute="height" multiplier="8:15" id="MdO-EA-Ph6"/>
+                        <constraint firstAttribute="trailing" secondItem="btj-6P-aeP" secondAttribute="trailing" id="kEl-TJ-DGB"/>
+                        <constraint firstAttribute="bottom" secondItem="btj-6P-aeP" secondAttribute="bottom" id="kNt-qK-2VP"/>
+                        <constraint firstItem="btj-6P-aeP" firstAttribute="leading" secondItem="0xD-Xw-Eom" secondAttribute="leading" id="zvR-4a-o7B"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -30,7 +57,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="0xD-Xw-Eom" secondAttribute="trailing" id="BQa-qF-lBq"/>
                 <constraint firstItem="0xD-Xw-Eom" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UMg-xu-RRC"/>

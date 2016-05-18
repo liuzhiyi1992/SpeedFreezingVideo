@@ -9,6 +9,7 @@
 #import "CaptureVideoViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CapturePreviewView.h"
+#import "CaptureVideoButton.h"
 
 //todo 发生某些错误需要停止视频拍摄功能，对策：返回上一页
 
@@ -33,7 +34,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
     
     [self accessAuthorization];
 }
@@ -241,12 +241,12 @@
 //对焦
 - (void)focusAtCapturePoint:(CGPoint)point {
     if ([_videoDevice isFocusPointOfInterestSupported] &&
-        [_videoDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
+        [_videoDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
         //获得锁再操作设备
         NSError *error;
         if ([_videoDevice lockForConfiguration:&error]) {
             _videoDevice.focusPointOfInterest = point;
-            _videoDevice.focusMode = AVCaptureExposureModeContinuousAutoExposure;
+            _videoDevice.focusMode = AVCaptureFocusModeContinuousAutoFocus;
             [_videoDevice unlockForConfiguration];
         } else {
             NSLog(@"Configuration Failed ERROR: %@", error);
@@ -264,7 +264,6 @@
         if ([_videoDevice lockForConfiguration:&error]) {
             _videoDevice.exposurePointOfInterest = point;
             _videoDevice.exposureMode = AVCaptureExposureModeContinuousAutoExposure;
-            NSLog(@"%3.f", _videoDevice.exposureTargetOffset);
             //测光完毕后 锁定曝光
             /*
             if ([_videoDevice isExposureModeSupported:AVCaptureExposureModeLocked]) {
@@ -275,20 +274,22 @@
         } else {
             NSLog(@"Configuration Failed ERROR: %@", error);
         }
-        
     }
 }
 
 #pragma mark - delegate
 - (void)previewViewFocusAtCapturePoint:(CGPoint)point {
+    
+    NSLog(@"focus mode -- %ld , exposure mode --- %ld", (long)[_videoDevice focusMode], (long)[_videoDevice exposureMode]);
     //刷新对焦
     [self focusAtCapturePoint:point];
     //刷新测光
-    [self exposeAtCapturePoint:point];
+//    [self exposeAtCapturePoint:point];
 }
 
 #pragma mark - KVO
 //部分版本不支持AutoExposure来持续保持曝光，需用KVO修改成Locked
+/*
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if ([keyPath isEqualToString:@"adjustingExposure"]) {
         if (![_videoDevice isAdjustingExposure] &&
@@ -305,6 +306,13 @@
             });
         }
     }
+}
+*/
+
+#pragma mark - IBAction
+
+- (IBAction)clickCaptureButton:(CaptureVideoButton *)sender {
+    [sender beginCaptureAnimation];
 }
 
 - (void)didReceiveMemoryWarning {

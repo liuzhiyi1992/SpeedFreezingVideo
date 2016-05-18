@@ -17,6 +17,7 @@
 		4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64D1CE73431009C6280 /* LaunchScreen.storyboard */; };
 		4848F6591CE73884009C6280 /* CaptureVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6571CE73884009C6280 /* CaptureVideoViewController.m */; };
 		4848F65A1CE73884009C6280 /* CaptureVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */; };
+		4881195E1CEC07D300CA0C7F /* CaptureVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4881195D1CEC07D300CA0C7F /* CaptureVideoButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		4848F6561CE73884009C6280 /* CaptureVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoViewController.h; sourceTree = "<group>"; };
 		4848F6571CE73884009C6280 /* CaptureVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoViewController.m; sourceTree = "<group>"; };
 		4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureVideoViewController.xib; sourceTree = "<group>"; };
+		4881195C1CEC07D300CA0C7F /* CaptureVideoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoButton.h; sourceTree = "<group>"; };
+		4881195D1CEC07D300CA0C7F /* CaptureVideoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,8 @@
 				4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */,
 				481F157B1CEAF33A000E659B /* CapturePreviewView.h */,
 				481F157C1CEAF33A000E659B /* CapturePreviewView.m */,
+				4881195C1CEC07D300CA0C7F /* CaptureVideoButton.h */,
+				4881195D1CEC07D300CA0C7F /* CaptureVideoButton.m */,
 			);
 			path = SpeedFreezingVideo;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4881195E1CEC07D300CA0C7F /* CaptureVideoButton.m in Sources */,
 				4848F6471CE73431009C6280 /* ViewController.m in Sources */,
 				4848F6591CE73884009C6280 /* CaptureVideoViewController.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
