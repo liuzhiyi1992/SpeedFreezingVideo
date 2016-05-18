@@ -10,10 +10,11 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CapturePreviewView.h"
 #import "CaptureVideoButton.h"
+#import "VideoEditingController.h"
 
 //todo 发生某些错误需要停止视频拍摄功能，对策：返回上一页
 
-@interface CaptureVideoViewController () <CapturePreviewViewDelegate>
+@interface CaptureVideoViewController () <CapturePreviewViewDelegate, AVCaptureFileOutputRecordingDelegate>
 @property (weak, nonatomic) IBOutlet CapturePreviewView *videoPreviewView;
 
 @property (strong, nonatomic) AVCaptureDevice *captureDevice;
@@ -26,12 +27,20 @@
 @property (strong, nonatomic) AVCaptureDeviceInput *videoInput;
 
 @property (strong, nonatomic) AVCaptureMovieFileOutput *videoOutput;
+@property (strong, nonatomic) NSURL *videoOutputUrl;
 
-@property (assign, nonatomic) BOOL videoCaptureing;
 
 @end
 
 @implementation CaptureVideoViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -103,6 +112,8 @@
         NSLog(@"ERROR: 配置视频输出出错");
     } else {
         [_captureSession addOutput:_videoOutput];
+        
+        //todo 这些有用?
         AVCaptureConnection *captureConnection = [_videoOutput connectionWithMediaType:AVMediaTypeVideo];
         if ([captureConnection isVideoStabilizationSupported]) {
             captureConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
@@ -288,6 +299,82 @@
     }
 }
 
+- (void)startRecording {
+    if (![self videoRecording]) {
+        AVCaptureConnection *videoConnection = [_videoOutput connectionWithMediaType:AVMediaTypeVideo];
+        if ([videoConnection isVideoOrientationSupported]) {
+            videoConnection.videoOrientation = [self currentVideoOrientation];
+        }
+        
+        if ([videoConnection isVideoStabilizationSupported]) {
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {//iOS8.0以下
+                videoConnection.enablesVideoStabilizationWhenAvailable = YES;
+            } else {
+                videoConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
+            }
+        }
+        
+        //todo 这里为什么做这个set NO?
+        if (_videoDevice.isSmoothAutoFocusSupported) {
+            NSError *error;
+            if ([_videoDevice lockForConfiguration:&error]) {
+                [_videoDevice setSmoothAutoFocusEnabled:NO];
+                [_videoDevice unlockForConfiguration];
+            } else {
+                NSLog(@"ERROR");
+            }
+        }
+        
+        _videoOutputUrl = [self outputUrl];
+        [_videoOutput startRecordingToOutputFileURL:_videoOutputUrl recordingDelegate:self];
+        
+    }
+}
+
+- (NSURL *)outputUrl {
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    //todo 以上两步为何
+    NSString *outputFilePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"speedFreezing.mov"]];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:outputFilePath]) {
+        NSError *error;
+        if (![[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:&error]) {
+            NSLog(@"ERROR: 清除旧文件发生错误");
+        }
+    }
+    return [NSURL fileURLWithPath:outputFilePath];
+}
+
+- (void)stopRecording {
+    if ([self videoRecording]) {
+        [_videoOutput stopRecording];
+    }
+}
+
+- (AVCaptureVideoOrientation)currentVideoOrientation {
+    AVCaptureVideoOrientation orientation;
+    switch ([UIDevice currentDevice].orientation) {
+        case UIDeviceOrientationPortrait:
+            orientation = AVCaptureVideoOrientationPortrait;
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            orientation = AVCaptureVideoOrientationLandscapeLeft;
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+            break;
+        default:
+            orientation = AVCaptureVideoOrientationLandscapeRight;
+            break;
+    }
+    return orientation;
+}
+
+- (BOOL)videoRecording {
+    return [_videoOutput isRecording];
+}
+
 #pragma mark - delegate
 - (void)previewViewFocusAtCapturePoint:(CGPoint)point {
     
@@ -296,6 +383,22 @@
     [self focusAtCapturePoint:point];
     //刷新测光
 //    [self exposeAtCapturePoint:point];
+}
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {
+    NSLog(@"开始录制");
+}
+
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
+    NSLog(@"录制完成");
+    if (outputFileURL.absoluteString.length == 0) {
+        NSLog(@"ERROR: 保存视频错误");
+    } else {
+        //这里可以考虑保存相册
+        VideoEditingController *editingController = [[VideoEditingController alloc] initWithAssetUrl:outputFileURL];
+        [self.navigationController pushViewController:editingController animated:YES];
+//        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - KVO
@@ -323,17 +426,17 @@
 #pragma mark - IBAction
 
 - (IBAction)clickCaptureButton:(CaptureVideoButton *)sender {
-    
-    if (_videoCaptureing) {
+    if ([self videoRecording]) {
         //停止
         [sender endCaptureAnimation];
-        self.videoCaptureing = NO;
+        [self stopRecording];
     } else {
         //开始
         [sender beginCaptureAnimation];
-        self.videoCaptureing = YES;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self startRecording];
+        });
     }
-    
 }
 
 - (IBAction)clickChangeCameraButton:(id)sender {

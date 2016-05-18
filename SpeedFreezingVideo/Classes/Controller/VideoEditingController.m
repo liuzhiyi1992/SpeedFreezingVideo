@@ -58,6 +58,7 @@
     }
     self.player = [AVPlayer playerWithPlayerItem:_playerItem];
     [self.videoPlayerView setPlayer:_player];
+    [_player play];
 }
 
 - (void)didReceiveMemoryWarning {

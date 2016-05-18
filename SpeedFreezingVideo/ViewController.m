@@ -17,8 +17,8 @@
 
 - (IBAction)enterVideoCapture:(id)sender {
     CaptureVideoViewController *controller = [[CaptureVideoViewController alloc] init];
-//    [self.navigationController pushViewController:controller animated:YES];
-    [self.navigationController presentViewController:controller animated:YES completion:nil];
+    [self.navigationController pushViewController:controller animated:YES];
+//    [self.navigationController presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)viewDidLoad {
