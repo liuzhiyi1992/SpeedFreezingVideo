@@ -40,6 +40,10 @@
     [self accessAuthorization];
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (void)accessAuthorization {
     switch ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo]) {
         case AVAuthorizationStatusAuthorized:
@@ -85,13 +89,13 @@
     self.videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     //配置video input
     self.videoInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeVideo];
-    [self captureSessionAddInput:_videoInput];
+    [self captureSessionAddInput:_videoInput mediaType:AVMediaTypeVideo];
     
     //配置音频
     self.audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
     //配置audio input
     self.audioInput = [self createMediaInputWithDevice:_audioDevice mediaType:AVMediaTypeAudio];
-    [self captureSessionAddInput:_audioInput];
+    [self captureSessionAddInput:_audioInput mediaType:AVMediaTypeAudio];
     
     
     //视频输出
@@ -178,11 +182,16 @@
     return nil;
 }
 
-- (BOOL)captureSessionAddInput:(AVCaptureDeviceInput *)input {
+- (BOOL)captureSessionAddInput:(AVCaptureDeviceInput *)input mediaType:(NSString *)mediaType {
     if (nil != input) {
         if ([_captureSession canAddInput:input]) {
             [_captureSession addInput:input];
-            _videoInput = input;
+            if ([mediaType isEqualToString:AVMediaTypeAudio]) {
+                _audioInput = input;
+            } else if ([mediaType isEqualToString:AVMediaTypeVideo]) {
+                _videoInput = input;
+            }
+            
             return YES;
         }
     } else {
@@ -191,12 +200,13 @@
     return NO;
 }
 
+//切换摄像头
 - (void)captureSessionChangeVideoInput:(AVCaptureDeviceInput *)input {
     if (nil != input) {
         [_captureSession removeInput:_videoInput];
-        if ( ![self captureSessionAddInput:input]) {
+        if ( ![self captureSessionAddInput:input mediaType:AVMediaTypeVideo]) {
             if (nil != _videoInput) {
-//                [_captureSession addInput:_videoInput];
+                [_captureSession addInput:_videoInput];
                 NSLog(@"Error: 不能成功切换摄像头");
             }
         }
