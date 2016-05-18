@@ -97,9 +97,20 @@
     self.audioInput = [self createMediaInputWithDevice:_audioDevice mediaType:AVMediaTypeAudio];
     [self captureSessionAddInput:_audioInput mediaType:AVMediaTypeAudio];
     
-    
     //todo视频输出
-    
+    self.videoOutput = [[AVCaptureMovieFileOutput alloc] init];
+    if (![_captureSession canAddOutput:_videoOutput]) {
+        NSLog(@"ERROR: 配置视频输出出错");
+    } else {
+        [_captureSession addOutput:_videoOutput];
+        AVCaptureConnection *captureConnection = [_videoOutput connectionWithMediaType:AVMediaTypeVideo];
+        if ([captureConnection isVideoStabilizationSupported]) {
+            captureConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
+//            captureConnection.videoScaleAndCropFactor = captureConnection.videoMaxScaleAndCropFactor;
+        } else {
+            NSLog(@"ERROR: 视频稳定性出错");
+        }
+    }
     
     
     //配置预览view
