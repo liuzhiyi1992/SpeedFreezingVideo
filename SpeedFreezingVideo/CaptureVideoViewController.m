@@ -27,6 +27,8 @@
 
 @property (strong, nonatomic) AVCaptureMovieFileOutput *videoOutput;
 
+@property (assign, nonatomic) BOOL videoCaptureing;
+
 @end
 
 @implementation CaptureVideoViewController
@@ -312,7 +314,17 @@
 #pragma mark - IBAction
 
 - (IBAction)clickCaptureButton:(CaptureVideoButton *)sender {
-    [sender beginCaptureAnimation];
+    
+    if (_videoCaptureing) {
+        //停止
+        
+        self.videoCaptureing = NO;
+    } else {
+        //开始
+        [sender beginCaptureAnimation];
+        self.videoCaptureing = YES;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,14 +9,19 @@
 #import "CaptureVideoButton.h"
 
 const CGFloat encircleRatio = 1/12.0f;
-const CGFloat animationDuration = 0.5f;
+const CGFloat animationDuration = 0.3f;
 
 @interface CaptureVideoButton()
 @property (strong, nonatomic) CAShapeLayer *spotShapeLayer;
+
 @property (assign, nonatomic) CGRect spotRect;
 @property (assign, nonatomic) CGRect blockRect;
 @property (assign, nonatomic) CGFloat encircleWidth;
 @property (assign, nonatomic) CGRect encircleRect;
+
+@property (strong, nonatomic) UIBezierPath *encirclePath;
+@property (strong, nonatomic) UIBezierPath *spotPath;
+@property (strong, nonatomic) UIBezierPath *blockPath;
 @end
 
 
@@ -29,6 +34,29 @@ const CGFloat animationDuration = 0.5f;
         [self.layer addSublayer:_spotShapeLayer];
     }
     return _spotShapeLayer;
+}
+
+- (UIBezierPath *)encirclePath {
+    if (_encirclePath == nil) {
+        _encirclePath = [UIBezierPath bezierPathWithOvalInRect:_encircleRect];
+        _encirclePath.lineWidth = _encircleWidth;
+    }
+    return _encirclePath;
+}
+
+- (UIBezierPath *)spotPath {
+    if (_spotPath == nil) {
+        _spotPath = [UIBezierPath bezierPathWithOvalInRect:_spotRect];
+    }
+    return _spotPath;
+}
+
+- (UIBezierPath *)blockPath {
+    if (_blockPath == nil) {
+        CGFloat cornerRadius = _spotRect.size.height * 0.1;
+        _blockPath = [UIBezierPath bezierPathWithRoundedRect:_blockRect cornerRadius:cornerRadius];
+    }
+    return _blockPath;
 }
 
 - (void)layoutSubviews {
@@ -47,33 +75,32 @@ const CGFloat animationDuration = 0.5f;
     [super drawRect:rect];
     
     //外围
-    UIBezierPath *encirclePath = [UIBezierPath bezierPathWithOvalInRect:_encircleRect];
-    encirclePath.lineWidth = _encircleWidth;
     [[UIColor whiteColor] setStroke];
-    [encirclePath stroke];
+    [self.encirclePath stroke];
     
     //内部
-    UIBezierPath *spotPath = [UIBezierPath bezierPathWithOvalInRect:_spotRect];
-    self.spotShapeLayer.path = spotPath.CGPath;
+    self.spotShapeLayer.path = self.spotPath.CGPath;
     [self.spotShapeLayer setFillColor:[UIColor redColor].CGColor];
 }
 
 - (void)beginCaptureAnimation {
     CABasicAnimation *beginAnim = [CABasicAnimation animationWithKeyPath:@"path"];
     
-    CGFloat cornerRadius = _spotRect.size.height * 0.1;
-    UIBezierPath *blockPath = [UIBezierPath bezierPathWithRoundedRect:_blockRect cornerRadius:cornerRadius];
-    
     beginAnim.fromValue = (__bridge id _Nullable)(_spotShapeLayer.path);
-    beginAnim.toValue = (__bridge id _Nullable)(blockPath.CGPath);
+    beginAnim.toValue = (__bridge id _Nullable)(self.blockPath.CGPath);
     beginAnim.duration = animationDuration;
     
     [_spotShapeLayer addAnimation:beginAnim forKey:@"beginAnim"];
     
     [CATransaction begin];
     [CATransaction setDisableActions:YES];
-    _spotShapeLayer.path = blockPath.CGPath;
+    _spotShapeLayer.path = self.blockPath.CGPath;
     [CATransaction commit];
+}
+
+- (void)endCaptureAnimation {
+    CABasicAnimation *beginAnim = [CABasicAnimation animationWithKeyPath:@"path"];
+    
 }
 
 
