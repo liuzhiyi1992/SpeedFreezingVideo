@@ -99,7 +99,16 @@ const CGFloat animationDuration = 0.3f;
 }
 
 - (void)endCaptureAnimation {
-    CABasicAnimation *beginAnim = [CABasicAnimation animationWithKeyPath:@"path"];
+    CABasicAnimation *endAnim = [CABasicAnimation animationWithKeyPath:@"path"];
+    endAnim.fromValue = (__bridge id _Nullable)(_spotShapeLayer.path);
+    endAnim.toValue = (__bridge id _Nullable)(self.spotPath.CGPath);
+    endAnim.duration = animationDuration;
+    [_spotShapeLayer addAnimation:endAnim forKey:@"endAnim"];
+    
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    _spotShapeLayer.path = self.spotPath.CGPath;
+    [CATransaction commit];
     
 }
 

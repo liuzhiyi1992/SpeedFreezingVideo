@@ -11,5 +11,5 @@
 @interface CaptureVideoButton : UIButton
 
 - (void)beginCaptureAnimation;
-
+- (void)endCaptureAnimation;
 @end

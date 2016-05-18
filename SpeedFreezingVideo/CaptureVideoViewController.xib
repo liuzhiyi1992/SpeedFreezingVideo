@@ -34,7 +34,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="aXA-sv-Q0O" firstAttribute="centerY" secondItem="btj-6P-aeP" secondAttribute="centerY" id="4ql-sL-Lv6"/>
                                 <constraint firstItem="aXA-sv-Q0O" firstAttribute="height" secondItem="btj-6P-aeP" secondAttribute="height" multiplier="3:5" id="Ec5-oQ-zNs"/>

@@ -317,7 +317,7 @@
     
     if (_videoCaptureing) {
         //停止
-        
+        [sender endCaptureAnimation];
         self.videoCaptureing = NO;
     } else {
         //开始
