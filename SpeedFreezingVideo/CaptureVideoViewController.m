@@ -154,7 +154,10 @@
     
     //todo 切换时锁定设备，方式同时修改?
     AVCaptureDeviceInput *videoInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeVideo];
+    
+    [_captureSession beginConfiguration];
     [self captureSessionChangeVideoInput:videoInput];
+    [_captureSession commitConfiguration];
 }
 
 //配置媒体输入容错
@@ -193,7 +196,7 @@
         [_captureSession removeInput:_videoInput];
         if ( ![self captureSessionAddInput:input]) {
             if (nil != _videoInput) {
-                [_captureSession addInput:_videoInput];
+//                [_captureSession addInput:_videoInput];
                 NSLog(@"Error: 不能成功切换摄像头");
             }
         }
@@ -326,6 +329,11 @@
     }
     
 }
+
+- (IBAction)clickChangeCameraButton:(id)sender {
+    [self changeCameraDevice];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

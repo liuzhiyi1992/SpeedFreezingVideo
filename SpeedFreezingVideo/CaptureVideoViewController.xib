@@ -42,12 +42,37 @@
                                 <constraint firstItem="aXA-sv-Q0O" firstAttribute="centerX" secondItem="btj-6P-aeP" secondAttribute="centerX" id="VMh-z8-mJq"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJn-jC-AAj">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65U-fO-a4a">
+                                    <rect key="frame" x="564" y="10" width="30" height="30"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="65U-fO-a4a" secondAttribute="height" multiplier="1:1" id="mwG-Y6-n3c"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="clickChangeCameraButton:" destination="-1" eventType="touchUpInside" id="65e-7n-Gl2"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="65U-fO-a4a" firstAttribute="height" secondItem="sJn-jC-AAj" secondAttribute="height" multiplier="0.6:1" id="IEM-Zm-mr5"/>
+                                <constraint firstItem="65U-fO-a4a" firstAttribute="centerY" secondItem="sJn-jC-AAj" secondAttribute="centerY" id="kfc-Vn-txs"/>
+                                <constraint firstAttribute="height" constant="50" id="lCj-hy-Iyn"/>
+                                <constraint firstAttribute="trailing" secondItem="65U-fO-a4a" secondAttribute="trailing" constant="6" id="wgu-cn-zaB"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="sJn-jC-AAj" secondAttribute="trailing" id="Fgu-OG-n2B"/>
                         <constraint firstAttribute="width" secondItem="0xD-Xw-Eom" secondAttribute="height" multiplier="8:15" id="MdO-EA-Ph6"/>
+                        <constraint firstItem="sJn-jC-AAj" firstAttribute="leading" secondItem="0xD-Xw-Eom" secondAttribute="leading" id="TtU-FT-vQ9"/>
                         <constraint firstAttribute="trailing" secondItem="btj-6P-aeP" secondAttribute="trailing" id="kEl-TJ-DGB"/>
                         <constraint firstAttribute="bottom" secondItem="btj-6P-aeP" secondAttribute="bottom" id="kNt-qK-2VP"/>
+                        <constraint firstItem="sJn-jC-AAj" firstAttribute="top" secondItem="0xD-Xw-Eom" secondAttribute="top" id="r74-Zi-vlL"/>
                         <constraint firstItem="btj-6P-aeP" firstAttribute="leading" secondItem="0xD-Xw-Eom" secondAttribute="leading" id="zvR-4a-o7B"/>
                     </constraints>
                     <variation key="default">
