@@ -8,22 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		481467861CE89EE50003C3E0 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481467851CE89EE50003C3E0 /* AVKit.framework */; };
-		481F157D1CEAF33A000E659B /* CapturePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 481F157C1CEAF33A000E659B /* CapturePreviewView.m */; };
 		4848F6411CE73430009C6280 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6401CE73430009C6280 /* main.m */; };
 		4848F6441CE73430009C6280 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6431CE73430009C6280 /* AppDelegate.m */; };
 		4848F6471CE73431009C6280 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6461CE73431009C6280 /* ViewController.m */; };
 		4848F64A1CE73431009C6280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F6481CE73431009C6280 /* Main.storyboard */; };
 		4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64B1CE73431009C6280 /* Assets.xcassets */; };
 		4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64D1CE73431009C6280 /* LaunchScreen.storyboard */; };
-		4848F6591CE73884009C6280 /* CaptureVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6571CE73884009C6280 /* CaptureVideoViewController.m */; };
-		4848F65A1CE73884009C6280 /* CaptureVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */; };
-		4881195E1CEC07D300CA0C7F /* CaptureVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4881195D1CEC07D300CA0C7F /* CaptureVideoButton.m */; };
+		4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */; };
+		4881196D1CEC59BA00CA0C7F /* CaptureVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */; };
+		4881196E1CEC59BA00CA0C7F /* CapturePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119691CEC59BA00CA0C7F /* CapturePreviewView.m */; };
+		4881196F1CEC59BA00CA0C7F /* CaptureVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4881196B1CEC59BA00CA0C7F /* CaptureVideoButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		481467851CE89EE50003C3E0 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
-		481F157B1CEAF33A000E659B /* CapturePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapturePreviewView.h; sourceTree = "<group>"; };
-		481F157C1CEAF33A000E659B /* CapturePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapturePreviewView.m; sourceTree = "<group>"; };
 		4848F63C1CE73430009C6280 /* SpeedFreezingVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedFreezingVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4848F6401CE73430009C6280 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4848F6421CE73430009C6280 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -34,11 +32,13 @@
 		4848F64B1CE73431009C6280 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4848F64E1CE73431009C6280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4848F6501CE73431009C6280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4848F6561CE73884009C6280 /* CaptureVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoViewController.h; sourceTree = "<group>"; };
-		4848F6571CE73884009C6280 /* CaptureVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoViewController.m; sourceTree = "<group>"; };
-		4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureVideoViewController.xib; sourceTree = "<group>"; };
-		4881195C1CEC07D300CA0C7F /* CaptureVideoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoButton.h; sourceTree = "<group>"; };
-		4881195D1CEC07D300CA0C7F /* CaptureVideoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoButton.m; sourceTree = "<group>"; };
+		488119641CEC59BA00CA0C7F /* CaptureVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoViewController.h; sourceTree = "<group>"; };
+		488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoViewController.m; sourceTree = "<group>"; };
+		488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureVideoViewController.xib; sourceTree = "<group>"; };
+		488119681CEC59BA00CA0C7F /* CapturePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapturePreviewView.h; sourceTree = "<group>"; };
+		488119691CEC59BA00CA0C7F /* CapturePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapturePreviewView.m; sourceTree = "<group>"; };
+		4881196A1CEC59BA00CA0C7F /* CaptureVideoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoButton.h; sourceTree = "<group>"; };
+		4881196B1CEC59BA00CA0C7F /* CaptureVideoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +73,7 @@
 		4848F63E1CE73430009C6280 /* SpeedFreezingVideo */ = {
 			isa = PBXGroup;
 			children = (
+				488119621CEC59BA00CA0C7F /* Classes */,
 				4848F6421CE73430009C6280 /* AppDelegate.h */,
 				4848F6431CE73430009C6280 /* AppDelegate.m */,
 				4848F6451CE73430009C6280 /* ViewController.h */,
@@ -82,13 +83,6 @@
 				4848F64D1CE73431009C6280 /* LaunchScreen.storyboard */,
 				4848F6501CE73431009C6280 /* Info.plist */,
 				4848F63F1CE73430009C6280 /* Supporting Files */,
-				4848F6561CE73884009C6280 /* CaptureVideoViewController.h */,
-				4848F6571CE73884009C6280 /* CaptureVideoViewController.m */,
-				4848F6581CE73884009C6280 /* CaptureVideoViewController.xib */,
-				481F157B1CEAF33A000E659B /* CapturePreviewView.h */,
-				481F157C1CEAF33A000E659B /* CapturePreviewView.m */,
-				4881195C1CEC07D300CA0C7F /* CaptureVideoButton.h */,
-				4881195D1CEC07D300CA0C7F /* CaptureVideoButton.m */,
 			);
 			path = SpeedFreezingVideo;
 			sourceTree = "<group>";
@@ -99,6 +93,36 @@
 				4848F6401CE73430009C6280 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		488119621CEC59BA00CA0C7F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				488119631CEC59BA00CA0C7F /* Controller */,
+				488119671CEC59BA00CA0C7F /* View */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		488119631CEC59BA00CA0C7F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				488119641CEC59BA00CA0C7F /* CaptureVideoViewController.h */,
+				488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */,
+				488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		488119671CEC59BA00CA0C7F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				488119681CEC59BA00CA0C7F /* CapturePreviewView.h */,
+				488119691CEC59BA00CA0C7F /* CapturePreviewView.m */,
+				4881196A1CEC59BA00CA0C7F /* CaptureVideoButton.h */,
+				4881196B1CEC59BA00CA0C7F /* CaptureVideoButton.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,7 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */,
-				4848F65A1CE73884009C6280 /* CaptureVideoViewController.xib in Resources */,
+				4881196D1CEC59BA00CA0C7F /* CaptureVideoViewController.xib in Resources */,
 				4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */,
 				4848F64A1CE73431009C6280 /* Main.storyboard in Resources */,
 			);
@@ -173,12 +197,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4881195E1CEC07D300CA0C7F /* CaptureVideoButton.m in Sources */,
+				4881196F1CEC59BA00CA0C7F /* CaptureVideoButton.m in Sources */,
 				4848F6471CE73431009C6280 /* ViewController.m in Sources */,
-				4848F6591CE73884009C6280 /* CaptureVideoViewController.m in Sources */,
+				4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
 				4848F6411CE73430009C6280 /* main.m in Sources */,
-				481F157D1CEAF33A000E659B /* CapturePreviewView.m in Sources */,
+				4881196E1CEC59BA00CA0C7F /* CapturePreviewView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

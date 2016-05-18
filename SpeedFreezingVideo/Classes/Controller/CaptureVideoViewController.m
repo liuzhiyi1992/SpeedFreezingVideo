@@ -98,7 +98,7 @@
     [self captureSessionAddInput:_audioInput mediaType:AVMediaTypeAudio];
     
     
-    //视频输出
+    //todo视频输出
     
     
     
@@ -122,9 +122,6 @@
 //是否有摄像头工作
 - (BOOL)hasMultipleCameraDevices {
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-//    if (devices != nil && [devices count] > 1) {
-//        return YES;
-//    }
     if (devices != nil) {
         return YES;
     }
@@ -234,23 +231,11 @@
 
 - (void)configureVideoPreview {
     
-//    [self.view layoutIfNeeded];
-    
     [self.videoPreviewView setSession:_captureSession];
     self.videoPreviewView.delegate = self;
-//    self.videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
-    
-//    [_videoPreviewLayer setFrame:self.view.layer.bounds];
-    
 //    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     
 //    _videoPreviewLayer.position = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height *0.5);
-//    
-//    
-//    _videoPreviewView.layer.masksToBounds = YES;
-//    [self.view layoutIfNeeded];
-//    
-//    [_videoPreviewView.layer addSublayer:_videoPreviewLayer];
 }
 
 //对焦
@@ -350,14 +335,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
