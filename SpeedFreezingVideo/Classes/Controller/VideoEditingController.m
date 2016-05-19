@@ -75,6 +75,7 @@
     CGFloat sliderWidth = _videoTrimmerHolderView.frame.size.width;
     CGFloat sliderHeight = _videoTrimmerHolderView.frame.size.height;
     self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, 0, sliderWidth, sliderHeight) videoUrl:_assetUrl];
+    [_saVideoRangeSlider setPopoverBubbleSize:0 height:0];
     
     // Purple
     _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.768 green: 0.665 blue: 0.853 alpha: 1];
@@ -82,17 +83,7 @@
     
     _saVideoRangeSlider.delegate = self;
     
-    
-    //add to holder view
-//    _saVideoRangeSlider.translatesAutoresizingMaskIntoConstraints = YES;
-//    NSMutableDictionary *viewsDictionary = [[ NSMutableDictionary alloc] initWithDictionary:
-//                                            @{@"slider":self.saVideoRangeSlider}];
-//    NSDictionary *viewsDict = @{@"slider":self.saVideoRangeSlider};
-    
     [self.videoTrimmerHolderView addSubview:_saVideoRangeSlider];
-    [_saVideoRangeSlider setFrame:CGRectMake(0, 0, 380, 80)];
-//    [self.videoTrimmerHolderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[slider]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
-//    [self.videoTrimmerHolderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[slider]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
 }
 
 - (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
