@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -32,18 +32,31 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-Uf-2zW">
-                    <rect key="frame" x="30" y="357.5" width="540" height="50"/>
+                    <rect key="frame" x="30" y="357" width="540" height="50"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="5r9-6c-T0T"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2O-4e-9dl">
+                    <rect key="frame" x="30" y="437.5" width="30" height="30"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="Tqa-PI-BeA"/>
+                        <constraint firstAttribute="height" constant="30" id="wr0-iq-uKH"/>
+                    </constraints>
+                    <connections>
+                        <action selector="clickPlayButton:" destination="-1" eventType="touchUpInside" id="jWt-Y3-fAN"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="YiP-ZY-FnV" secondAttribute="trailing" id="0jr-KQ-W44"/>
+                <constraint firstItem="D2O-4e-9dl" firstAttribute="top" secondItem="U2e-Uf-2zW" secondAttribute="bottom" constant="30" id="3xJ-sD-MGd"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SeI-nD-OrP"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dk9-Ra-VA1"/>
+                <constraint firstItem="D2O-4e-9dl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="hyZ-eD-qOX"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="top" secondItem="YiP-ZY-FnV" secondAttribute="bottom" constant="20" id="puJ-ep-pZs"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="va9-jG-gCX"/>
                 <constraint firstAttribute="trailing" secondItem="U2e-Uf-2zW" secondAttribute="trailing" constant="30" id="xI9-Hq-3l7"/>

@@ -31,7 +31,6 @@
 #import "SASliderRight.h"
 #import "SAResizibleBubble.h"
 
-
 @protocol SAVideoRangeSliderDelegate;
 
 @interface SAVideoRangeSlider : UIView
@@ -45,6 +44,8 @@
 @property (nonatomic, strong) UIView *bottomBorder;
 @property (nonatomic, assign) NSInteger maxGap;
 @property (nonatomic, assign) NSInteger minGap;
+
+@property (assign, nonatomic) int thumbWidth;
 
 
 - (id)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl;

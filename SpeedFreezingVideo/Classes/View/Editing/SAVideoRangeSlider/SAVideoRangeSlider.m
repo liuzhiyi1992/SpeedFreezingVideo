@@ -53,15 +53,14 @@
         
         _frame_width = frame.size.width;
         
-        int thumbWidth = ceil(frame.size.width*0.05);
+        self.thumbWidth = ceil(frame.size.width*0.05);
         
-        _bgView = [[UIControl alloc] initWithFrame:CGRectMake(thumbWidth-BG_VIEW_BORDERS_SIZE, 0, frame.size.width-(thumbWidth*2)+BG_VIEW_BORDERS_SIZE*2, frame.size.height)];
+        _bgView = [[UIControl alloc] initWithFrame:CGRectMake(_thumbWidth-BG_VIEW_BORDERS_SIZE, 0, frame.size.width- (_thumbWidth*2)+BG_VIEW_BORDERS_SIZE*2, frame.size.height)];
         _bgView.layer.borderColor = [UIColor grayColor].CGColor;
         _bgView.layer.borderWidth = BG_VIEW_BORDERS_SIZE;
         [self addSubview:_bgView];
         
         _videoUrl = videoUrl;
-        
         
         _topBorder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, SLIDER_BORDERS_SIZE)];
         _topBorder.backgroundColor = [UIColor colorWithRed: 0.996 green: 0.951 blue: 0.502 alpha: 1];
@@ -73,7 +72,7 @@
         [self addSubview:_bottomBorder];
         
         
-        _leftThumb = [[SASliderLeft alloc] initWithFrame:CGRectMake(0, 0, thumbWidth, frame.size.height)];
+        _leftThumb = [[SASliderLeft alloc] initWithFrame:CGRectMake(0, 0, _thumbWidth, frame.size.height)];
         _leftThumb.contentMode = UIViewContentModeLeft;
         _leftThumb.userInteractionEnabled = YES;
         _leftThumb.clipsToBounds = YES;
@@ -86,7 +85,7 @@
         [_leftThumb addGestureRecognizer:leftPan];
         
         
-        _rightThumb = [[SASliderRight alloc] initWithFrame:CGRectMake(0, 0, thumbWidth, frame.size.height)];
+        _rightThumb = [[SASliderRight alloc] initWithFrame:CGRectMake(0, 0, _thumbWidth, frame.size.height)];
         
         _rightThumb.contentMode = UIViewContentModeRight;
         _rightThumb.userInteractionEnabled = YES;

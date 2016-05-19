@@ -20,6 +20,7 @@
 		485E56EB1CED9EC700159EC3 /* SASliderLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E51CED9EC700159EC3 /* SASliderLeft.m */; };
 		485E56EC1CED9EC700159EC3 /* SASliderRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E71CED9EC700159EC3 /* SASliderRight.m */; };
 		485E56ED1CED9EC700159EC3 /* SAVideoRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E91CED9EC700159EC3 /* SAVideoRangeSlider.m */; };
+		485E56FF1CEE006300159EC3 /* SpeedFreezesOperatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56FE1CEE006300159EC3 /* SpeedFreezesOperatingView.m */; };
 		4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */; };
 		4881196D1CEC59BA00CA0C7F /* CaptureVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */; };
 		4881196E1CEC59BA00CA0C7F /* CapturePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119691CEC59BA00CA0C7F /* CapturePreviewView.m */; };
@@ -53,6 +54,8 @@
 		485E56E71CED9EC700159EC3 /* SASliderRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASliderRight.m; sourceTree = "<group>"; };
 		485E56E81CED9EC700159EC3 /* SAVideoRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAVideoRangeSlider.h; sourceTree = "<group>"; };
 		485E56E91CED9EC700159EC3 /* SAVideoRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAVideoRangeSlider.m; sourceTree = "<group>"; };
+		485E56FD1CEE006300159EC3 /* SpeedFreezesOperatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedFreezesOperatingView.h; sourceTree = "<group>"; };
+		485E56FE1CEE006300159EC3 /* SpeedFreezesOperatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedFreezesOperatingView.m; sourceTree = "<group>"; };
 		488119641CEC59BA00CA0C7F /* CaptureVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoViewController.h; sourceTree = "<group>"; };
 		488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoViewController.m; sourceTree = "<group>"; };
 		488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureVideoViewController.xib; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 				485E56E11CED9EC700159EC3 /* SAVideoRangeSlider */,
 				485E56DE1CED71A100159EC3 /* VideoTrimmerView.h */,
 				485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */,
+				485E56FD1CEE006300159EC3 /* SpeedFreezesOperatingView.h */,
+				485E56FE1CEE006300159EC3 /* SpeedFreezesOperatingView.m */,
 			);
 			path = Editing;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 				488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
 				485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */,
+				485E56FF1CEE006300159EC3 /* SpeedFreezesOperatingView.m in Sources */,
 				488119731CEC5A5100CA0C7F /* VideoEditingController.m in Sources */,
 				485E56ED1CED9EC700159EC3 /* SAVideoRangeSlider.m in Sources */,
 				4848F6411CE73430009C6280 /* main.m in Sources */,

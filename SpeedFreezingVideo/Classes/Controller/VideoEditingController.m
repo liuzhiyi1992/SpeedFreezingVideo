@@ -10,8 +10,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import "VideoPlayingView.h"
 #import "SAVideoRangeSlider.h"
+#import "SpeedFreezesOperatingView.h"
 
-@interface VideoEditingController () <SAVideoRangeSliderDelegate>
+@interface VideoEditingController () <SAVideoRangeSliderDelegate, SpeedFreezesOperatingViewDelegate>
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayerView;
 @property (weak, nonatomic) IBOutlet UIView *videoTrimmerHolderView;
 
@@ -72,27 +73,61 @@
 }
 
 - (void)readyToTrim {
-    CGFloat sliderWidth = _videoTrimmerHolderView.frame.size.width;
-    CGFloat sliderHeight = _videoTrimmerHolderView.frame.size.height;
-    self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, 0, sliderWidth, sliderHeight) videoUrl:_assetUrl];
-    [_saVideoRangeSlider setPopoverBubbleSize:0 height:0];
+    CGFloat operatingViewWidth = _videoTrimmerHolderView.frame.size.width;
+    CGFloat operatingViewHeight = _videoTrimmerHolderView.frame.size.height;
     
-    // Purple
-    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.768 green: 0.665 blue: 0.853 alpha:1.f];
-    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.535 green: 0.329 blue: 0.707 alpha:1.f];
+    //todo SpeedFreezesOperatingView
+    SpeedFreezesOperatingView *operatingView = [[SpeedFreezesOperatingView alloc] initWithFrame:CGRectMake(0, 0, operatingViewWidth, operatingViewHeight) videoUrl:_assetUrl];
+    operatingView.delegate = self;
+    [self.videoTrimmerHolderView addSubview:operatingView];
     
-    _saVideoRangeSlider.delegate = self;
     
-    [self.videoTrimmerHolderView addSubview:_saVideoRangeSlider];
+    
+//    self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, 0, sliderWidth, sliderHeight) videoUrl:_assetUrl];
+//    [_saVideoRangeSlider setPopoverBubbleSize:0 height:0];
+//    
+//    // Purple
+//    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.768 green: 0.665 blue: 0.853 alpha:1.f];
+//    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.535 green: 0.329 blue: 0.707 alpha:1.f];
+//    
+//    _saVideoRangeSlider.delegate = self;
+//    
+//    [self.videoTrimmerHolderView addSubview:_saVideoRangeSlider];
 }
 
-- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
-    NSLog(@"beigin %.2f -- end %.2f", leftPosition, rightPosition);
-    
+#pragma mark - delegate
+- (void)operatingViewDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
     [_player pause];
     //取消任何seek请求
     [_playerItem cancelPendingSeeks];
     [_player seekToTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+}
+
+- (void)operatingViewDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
+    //设置视频可播放范围
+    [_playerItem setReversePlaybackEndTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC)];
+    [_playerItem setForwardPlaybackEndTime:CMTimeMakeWithSeconds(rightPosition, NSEC_PER_SEC)];
+}
+
+//- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
+//    NSLog(@"beigin %.2f -- end %.2f", leftPosition, rightPosition);
+//    
+//    [_player pause];
+//    //取消任何seek请求
+//    [_playerItem cancelPendingSeeks];
+//    [_player seekToTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+//}
+//
+//- (void)videoRange:(SAVideoRangeSlider *)videoRange didGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
+//    
+//    //设置视频可播放范围
+//    [_playerItem setReversePlaybackEndTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC)];
+//    [_playerItem setForwardPlaybackEndTime:CMTimeMakeWithSeconds(rightPosition, NSEC_PER_SEC)];
+//}
+
+
+- (IBAction)clickPlayButton:(id)sender {
+    [_player play];
 }
 
 - (void)didReceiveMemoryWarning {
