@@ -78,8 +78,8 @@
     [_saVideoRangeSlider setPopoverBubbleSize:0 height:0];
     
     // Purple
-    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.768 green: 0.665 blue: 0.853 alpha: 1];
-    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.535 green: 0.329 blue: 0.707 alpha: 1];
+    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.768 green: 0.665 blue: 0.853 alpha:1.f];
+    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.535 green: 0.329 blue: 0.707 alpha:1.f];
     
     _saVideoRangeSlider.delegate = self;
     
@@ -87,7 +87,12 @@
 }
 
 - (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
-    NSLog(@"change");
+    NSLog(@"beigin %.2f -- end %.2f", leftPosition, rightPosition);
+    
+    [_player pause];
+    //取消任何seek请求
+    [_playerItem cancelPendingSeeks];
+    [_player seekToTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
 }
 
 - (void)didReceiveMemoryWarning {
