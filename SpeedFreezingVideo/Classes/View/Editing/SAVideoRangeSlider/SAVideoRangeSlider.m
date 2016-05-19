@@ -499,7 +499,13 @@
     return _rightPosition * _durationSeconds / _frame_width;
 }
 
+- (CGFloat)leftPositionCoordinates {
+    return _leftPosition;
+}
 
+- (CGFloat)rightPositionCoordinates {
+    return _rightPosition;
+}
 
 
 #pragma mark - Bubble

@@ -47,6 +47,9 @@
 
 @property (assign, nonatomic) int thumbWidth;
 
+@property (assign, nonatomic) CGFloat leftPositionCoordinates;
+@property (assign, nonatomic) CGFloat rightPositionCoordinates;
+
 
 - (id)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl;
 - (void)setPopoverBubbleSize: (CGFloat) width height:(CGFloat)height;
