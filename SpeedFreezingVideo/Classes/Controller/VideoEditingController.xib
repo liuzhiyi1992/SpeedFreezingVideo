@@ -3,11 +3,13 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10117"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoEditingController">
             <connections>
                 <outlet property="videoPlayerView" destination="YiP-ZY-FnV" id="oIo-PM-eyA"/>
+                <outlet property="videoTrimmerHolderView" destination="U2e-Uf-2zW" id="LrJ-gp-pzn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,10 +19,23 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiP-ZY-FnV" customClass="VideoPlayingView">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="337.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="400" id="Krh-2e-mbr"/>
+                        <constraint firstAttribute="width" secondItem="YiP-ZY-FnV" secondAttribute="height" multiplier="16:9" id="lPy-st-4RR"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Krh-2e-mbr"/>
+                        </mask>
+                    </variation>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-Uf-2zW">
+                    <rect key="frame" x="30" y="357.5" width="540" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="5r9-6c-T0T"/>
                     </constraints>
                 </view>
             </subviews>
@@ -29,6 +44,9 @@
                 <constraint firstAttribute="trailing" secondItem="YiP-ZY-FnV" secondAttribute="trailing" id="0jr-KQ-W44"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SeI-nD-OrP"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dk9-Ra-VA1"/>
+                <constraint firstItem="U2e-Uf-2zW" firstAttribute="top" secondItem="YiP-ZY-FnV" secondAttribute="bottom" constant="20" id="puJ-ep-pZs"/>
+                <constraint firstItem="U2e-Uf-2zW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="va9-jG-gCX"/>
+                <constraint firstAttribute="trailing" secondItem="U2e-Uf-2zW" secondAttribute="trailing" constant="30" id="xI9-Hq-3l7"/>
             </constraints>
         </view>
     </objects>

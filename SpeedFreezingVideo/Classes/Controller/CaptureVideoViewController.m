@@ -11,10 +11,11 @@
 #import "CapturePreviewView.h"
 #import "CaptureVideoButton.h"
 #import "VideoEditingController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 //todo 发生某些错误需要停止视频拍摄功能，对策：返回上一页
 
-@interface CaptureVideoViewController () <CapturePreviewViewDelegate, AVCaptureFileOutputRecordingDelegate>
+@interface CaptureVideoViewController () <CapturePreviewViewDelegate, AVCaptureFileOutputRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet CapturePreviewView *videoPreviewView;
 
 @property (strong, nonatomic) AVCaptureDevice *captureDevice;
@@ -128,7 +129,6 @@
     [self configureVideoPreview];
     
     [_captureSession commitConfiguration];
-    
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //启动会话
@@ -401,6 +401,10 @@
     }
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSLog(@"finish select");
+}
+
 #pragma mark - KVO
 //部分版本不支持AutoExposure来持续保持曝光，需用KVO修改成Locked
 /*
@@ -424,7 +428,6 @@
 */
 
 #pragma mark - IBAction
-
 - (IBAction)clickCaptureButton:(CaptureVideoButton *)sender {
     if ([self videoRecording]) {
         //停止
@@ -438,6 +441,19 @@
         });
     }
 }
+
+- (IBAction)clickSelecteAlbum:(id)sender {
+    UIImagePickerController *myImagePickerController = [[UIImagePickerController alloc] init];
+    myImagePickerController.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+    myImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
+    myImagePickerController.delegate = self;
+    myImagePickerController.editing = NO;
+    [self presentViewController:myImagePickerController animated:YES completion:nil];
+    
+    //todo 私有类
+//    PUUIImageViewController *con = [[PUUIImageViewController alloc] init];
+}
+
 
 - (IBAction)clickChangeCameraButton:(id)sender {
     [self changeCameraDevice];

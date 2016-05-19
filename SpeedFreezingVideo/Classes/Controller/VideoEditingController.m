@@ -9,14 +9,18 @@
 #import "VideoEditingController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "VideoPlayingView.h"
+#import "SAVideoRangeSlider.h"
 
-@interface VideoEditingController ()
+@interface VideoEditingController () <SAVideoRangeSliderDelegate>
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayerView;
+@property (weak, nonatomic) IBOutlet UIView *videoTrimmerHolderView;
 
 @property (strong, nonatomic) NSURL *assetUrl;
 @property (strong, nonatomic) AVPlayerItem *playerItem;
 
 @property (strong, nonatomic) AVPlayer *player;
+
+@property (strong, nonatomic) SAVideoRangeSlider *saVideoRangeSlider;
 @end
 
 @implementation VideoEditingController
@@ -48,9 +52,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self readyToPlay];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self readyToTrim];
+    [self readyToPlay];
+}
 
 - (void)readyToPlay {
     if (_playerItem == nil) {
@@ -59,6 +69,34 @@
     self.player = [AVPlayer playerWithPlayerItem:_playerItem];
     [self.videoPlayerView setPlayer:_player];
     [_player play];
+}
+
+- (void)readyToTrim {
+    CGFloat sliderWidth = _videoTrimmerHolderView.frame.size.width;
+    CGFloat sliderHeight = _videoTrimmerHolderView.frame.size.height;
+    self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, 0, sliderWidth, sliderHeight) videoUrl:_assetUrl];
+    
+    // Purple
+    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.768 green: 0.665 blue: 0.853 alpha: 1];
+    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.535 green: 0.329 blue: 0.707 alpha: 1];
+    
+    _saVideoRangeSlider.delegate = self;
+    
+    
+    //add to holder view
+//    _saVideoRangeSlider.translatesAutoresizingMaskIntoConstraints = YES;
+//    NSMutableDictionary *viewsDictionary = [[ NSMutableDictionary alloc] initWithDictionary:
+//                                            @{@"slider":self.saVideoRangeSlider}];
+//    NSDictionary *viewsDict = @{@"slider":self.saVideoRangeSlider};
+    
+    [self.videoTrimmerHolderView addSubview:_saVideoRangeSlider];
+    [_saVideoRangeSlider setFrame:CGRectMake(0, 0, 380, 80)];
+//    [self.videoTrimmerHolderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[slider]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
+//    [self.videoTrimmerHolderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[slider]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:viewsDictionary]];
+}
+
+- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
+    NSLog(@"change");
 }
 
 - (void)didReceiveMemoryWarning {

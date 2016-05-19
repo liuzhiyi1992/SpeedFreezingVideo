@@ -55,10 +55,29 @@
                                         <action selector="clickChangeCameraButton:" destination="-1" eventType="touchUpInside" id="65e-7n-Gl2"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chr-z6-ive">
+                                    <rect key="frame" x="6" y="8" width="34" height="34"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="Chr-z6-ive" secondAttribute="height" multiplier="1:1" id="irx-aQ-Uv7"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="irx-aQ-Uv7"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="clickChangeCameraButton:" destination="-1" eventType="touchUpInside" id="XOz-bv-ABU"/>
+                                        <action selector="clickSelecteAlbum:" destination="-1" eventType="touchUpInside" id="aZI-yt-ndd"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="Chr-z6-ive" firstAttribute="width" secondItem="Chr-z6-ive" secondAttribute="height" multiplier="1:1" id="2lD-IC-5vc"/>
                                 <constraint firstItem="65U-fO-a4a" firstAttribute="height" secondItem="sJn-jC-AAj" secondAttribute="height" multiplier="0.6:1" id="IEM-Zm-mr5"/>
+                                <constraint firstItem="Chr-z6-ive" firstAttribute="centerY" secondItem="sJn-jC-AAj" secondAttribute="centerY" id="SoX-lw-PLy"/>
+                                <constraint firstItem="Chr-z6-ive" firstAttribute="leading" secondItem="sJn-jC-AAj" secondAttribute="leading" constant="6" id="jOw-ZV-3Yj"/>
                                 <constraint firstItem="65U-fO-a4a" firstAttribute="centerY" secondItem="sJn-jC-AAj" secondAttribute="centerY" id="kfc-Vn-txs"/>
                                 <constraint firstAttribute="height" constant="50" id="lCj-hy-Iyn"/>
                                 <constraint firstAttribute="trailing" secondItem="65U-fO-a4a" secondAttribute="trailing" constant="6" id="wgu-cn-zaB"/>

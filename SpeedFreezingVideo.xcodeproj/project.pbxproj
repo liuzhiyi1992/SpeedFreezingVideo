@@ -14,6 +14,12 @@
 		4848F64A1CE73431009C6280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F6481CE73431009C6280 /* Main.storyboard */; };
 		4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64B1CE73431009C6280 /* Assets.xcassets */; };
 		4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64D1CE73431009C6280 /* LaunchScreen.storyboard */; };
+		485E56D91CED68E500159EC3 /* UINavigationController+className.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56D81CED68E500159EC3 /* UINavigationController+className.m */; };
+		485E56E01CED71A100159EC3 /* VideoTrimmerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */; };
+		485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E31CED9EC700159EC3 /* SAResizibleBubble.m */; };
+		485E56EB1CED9EC700159EC3 /* SASliderLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E51CED9EC700159EC3 /* SASliderLeft.m */; };
+		485E56EC1CED9EC700159EC3 /* SASliderRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E71CED9EC700159EC3 /* SASliderRight.m */; };
+		485E56ED1CED9EC700159EC3 /* SAVideoRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E91CED9EC700159EC3 /* SAVideoRangeSlider.m */; };
 		4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */; };
 		4881196D1CEC59BA00CA0C7F /* CaptureVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */; };
 		4881196E1CEC59BA00CA0C7F /* CapturePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119691CEC59BA00CA0C7F /* CapturePreviewView.m */; };
@@ -35,6 +41,18 @@
 		4848F64B1CE73431009C6280 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4848F64E1CE73431009C6280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4848F6501CE73431009C6280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		485E56D71CED68E500159EC3 /* UINavigationController+className.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+className.h"; sourceTree = "<group>"; };
+		485E56D81CED68E500159EC3 /* UINavigationController+className.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+className.m"; sourceTree = "<group>"; };
+		485E56DE1CED71A100159EC3 /* VideoTrimmerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTrimmerView.h; sourceTree = "<group>"; };
+		485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTrimmerView.m; sourceTree = "<group>"; };
+		485E56E21CED9EC700159EC3 /* SAResizibleBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAResizibleBubble.h; sourceTree = "<group>"; };
+		485E56E31CED9EC700159EC3 /* SAResizibleBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAResizibleBubble.m; sourceTree = "<group>"; };
+		485E56E41CED9EC700159EC3 /* SASliderLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASliderLeft.h; sourceTree = "<group>"; };
+		485E56E51CED9EC700159EC3 /* SASliderLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASliderLeft.m; sourceTree = "<group>"; };
+		485E56E61CED9EC700159EC3 /* SASliderRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASliderRight.h; sourceTree = "<group>"; };
+		485E56E71CED9EC700159EC3 /* SASliderRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASliderRight.m; sourceTree = "<group>"; };
+		485E56E81CED9EC700159EC3 /* SAVideoRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAVideoRangeSlider.h; sourceTree = "<group>"; };
+		485E56E91CED9EC700159EC3 /* SAVideoRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAVideoRangeSlider.m; sourceTree = "<group>"; };
 		488119641CEC59BA00CA0C7F /* CaptureVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoViewController.h; sourceTree = "<group>"; };
 		488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoViewController.m; sourceTree = "<group>"; };
 		488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureVideoViewController.xib; sourceTree = "<group>"; };
@@ -103,11 +121,38 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		485E56DD1CED711A00159EC3 /* Editing */ = {
+			isa = PBXGroup;
+			children = (
+				485E56E11CED9EC700159EC3 /* SAVideoRangeSlider */,
+				485E56DE1CED71A100159EC3 /* VideoTrimmerView.h */,
+				485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */,
+			);
+			path = Editing;
+			sourceTree = "<group>";
+		};
+		485E56E11CED9EC700159EC3 /* SAVideoRangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				485E56E21CED9EC700159EC3 /* SAResizibleBubble.h */,
+				485E56E31CED9EC700159EC3 /* SAResizibleBubble.m */,
+				485E56E41CED9EC700159EC3 /* SASliderLeft.h */,
+				485E56E51CED9EC700159EC3 /* SASliderLeft.m */,
+				485E56E61CED9EC700159EC3 /* SASliderRight.h */,
+				485E56E71CED9EC700159EC3 /* SASliderRight.m */,
+				485E56E81CED9EC700159EC3 /* SAVideoRangeSlider.h */,
+				485E56E91CED9EC700159EC3 /* SAVideoRangeSlider.m */,
+			);
+			path = SAVideoRangeSlider;
+			sourceTree = "<group>";
+		};
 		488119621CEC59BA00CA0C7F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				488119631CEC59BA00CA0C7F /* Controller */,
 				488119671CEC59BA00CA0C7F /* View */,
+				485E56D71CED68E500159EC3 /* UINavigationController+className.h */,
+				485E56D81CED68E500159EC3 /* UINavigationController+className.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -128,6 +173,7 @@
 		488119671CEC59BA00CA0C7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				485E56DD1CED711A00159EC3 /* Editing */,
 				488119681CEC59BA00CA0C7F /* CapturePreviewView.h */,
 				488119691CEC59BA00CA0C7F /* CapturePreviewView.m */,
 				4881196A1CEC59BA00CA0C7F /* CaptureVideoButton.h */,
@@ -211,14 +257,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				485E56D91CED68E500159EC3 /* UINavigationController+className.m in Sources */,
 				4881196F1CEC59BA00CA0C7F /* CaptureVideoButton.m in Sources */,
 				4848F6471CE73431009C6280 /* ViewController.m in Sources */,
 				4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */,
 				488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
+				485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */,
 				488119731CEC5A5100CA0C7F /* VideoEditingController.m in Sources */,
+				485E56ED1CED9EC700159EC3 /* SAVideoRangeSlider.m in Sources */,
 				4848F6411CE73430009C6280 /* main.m in Sources */,
 				4881196E1CEC59BA00CA0C7F /* CapturePreviewView.m in Sources */,
+				485E56EC1CED9EC700159EC3 /* SASliderRight.m in Sources */,
+				485E56E01CED71A100159EC3 /* VideoTrimmerView.m in Sources */,
+				485E56EB1CED9EC700159EC3 /* SASliderLeft.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
