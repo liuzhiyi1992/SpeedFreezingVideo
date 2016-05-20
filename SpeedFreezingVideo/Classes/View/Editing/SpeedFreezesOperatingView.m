@@ -107,7 +107,8 @@ const CGFloat speedSliderHeight = 30;
 - (void)handleLeftPan:(UIPanGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
         CGPoint translation = [gesture translationInView:self];
-        if (_leftPositionCoordinates + translation.x >= _saVideoRangeSlider.leftPositionCoordinates + _saVideoRangeSlider.thumbWidth) {
+        if (_leftPositionCoordinates + translation.x >= _saVideoRangeSlider.leftPositionCoordinates + _saVideoRangeSlider.thumbWidth &&
+            _leftPositionCoordinates + translation.x < _rightPositionCoordinates) {
             //在视频有效范围内
             self.leftPositionCoordinates += translation.x;
         }
@@ -125,7 +126,8 @@ const CGFloat speedSliderHeight = 30;
 - (void)handleRightPan:(UIPanGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
         CGPoint translation = [gesture translationInView:self];
-        if (_rightPositionCoordinates + translation.x <= _saVideoRangeSlider.rightPositionCoordinates - _saVideoRangeSlider.thumbWidth) {
+        if (_rightPositionCoordinates + translation.x <= _saVideoRangeSlider.rightPositionCoordinates - _saVideoRangeSlider.thumbWidth &&
+            _rightPositionCoordinates + translation.x > _leftPositionCoordinates) {
             //在视频有效范围内
             self.rightPositionCoordinates += translation.x;
         }
@@ -152,6 +154,12 @@ const CGFloat speedSliderHeight = 30;
         self.rightPositionCoordinates = rightPositionCoordinates - _saVideoRangeSlider.thumbWidth;
         linkaged = YES;
     }
+    
+    //speedSlider左右交叉，关闭这个功能
+    if (_leftPositionCoordinates >= _rightPositionCoordinates) {
+        [self switchSpeedSlider];
+    }
+    
     [self setNeedsLayout];
     if (linkaged) {
         [self speedSliderGestureStateEndedNotification];
@@ -198,7 +206,6 @@ const CGFloat speedSliderHeight = 30;
     if (_isSpeedSliderActive) {
        [self linkageSpeedSliderWithRangeSliderLeft:videoRange.leftPositionCoordinates right:videoRange.rightPositionCoordinates];
     }
-    
 }
 
 
