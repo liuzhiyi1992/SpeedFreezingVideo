@@ -110,7 +110,11 @@
 }
 
 - (void)operatingViewSpeedDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
-    NSLog(@"beigin %.2f -- end %.2f", leftPosition, rightPosition);
+//    NSLog(@"beigin %.2f -- end %.2f", leftPosition, rightPosition);
+    [_player pause];
+    //取消任何seek请求
+    [_playerItem cancelPendingSeeks];
+    [_player seekToTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
 }
 
 - (void)operatingViewSpeedDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
