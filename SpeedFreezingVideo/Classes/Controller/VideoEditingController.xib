@@ -20,7 +20,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiP-ZY-FnV" customClass="VideoPlayingView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="337.5"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="400" id="Krh-2e-mbr"/>
                         <constraint firstAttribute="width" secondItem="YiP-ZY-FnV" secondAttribute="height" multiplier="16:9" id="lPy-st-4RR"/>
@@ -32,14 +32,14 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-Uf-2zW">
-                    <rect key="frame" x="30" y="357" width="540" height="60"/>
+                    <rect key="frame" x="30" y="357" width="540" height="90"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="5r9-6c-T0T"/>
+                        <constraint firstAttribute="height" constant="90" id="5r9-6c-T0T"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2O-4e-9dl">
-                    <rect key="frame" x="30" y="447.5" width="30" height="30"/>
+                    <rect key="frame" x="30" y="477.5" width="30" height="30"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="Tqa-PI-BeA"/>

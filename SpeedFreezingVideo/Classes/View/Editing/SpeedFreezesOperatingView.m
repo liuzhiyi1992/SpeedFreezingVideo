@@ -10,7 +10,7 @@
 #import "SAVideoRangeSlider.h"
 
 const CGFloat speedSliderWidth = 20;
-const CGFloat speedSliderHeight = 20;
+const CGFloat speedSliderHeight = 30;
 
 @interface SpeedFreezesOperatingView () <SAVideoRangeSliderDelegate>
 @property (strong, nonatomic) NSURL *videoUrl;
@@ -39,6 +39,7 @@ const CGFloat speedSliderHeight = 20;
 - (void)layoutSubviews {
     //更新配置水滴的位置
     self.leftSpeedSlider.center = CGPointMake(_leftPositionCoordinates, speedSliderHeight/2);
+    self.rightSpeedSlider.center = CGPointMake(_rightPositionCoordinates, speedSliderHeight/2);
 }
 
 - (void)configureView {
@@ -55,6 +56,7 @@ const CGFloat speedSliderHeight = 20;
     
     //初值
     self.leftPositionCoordinates = _saVideoRangeSlider.thumbWidth;
+    self.rightPositionCoordinates = self.bounds.size.width - _saVideoRangeSlider.thumbWidth;
     //    self.rightPosition =
     
     
@@ -69,8 +71,8 @@ const CGFloat speedSliderHeight = 20;
     [_leftSpeedSlider addGestureRecognizer:leftPan];
     [self addSubview:_leftSpeedSlider];
     
-    //todo frame
-    self.rightSpeedSlider = [[UIImageView alloc] init];
+    
+    self.rightSpeedSlider = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, speedSliderWidth, speedSliderHeight)];
     [_rightSpeedSlider setBackgroundColor:[UIColor redColor]];
     [_rightSpeedSlider setUserInteractionEnabled:YES];
     UIPanGestureRecognizer *rightPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightPan:)];
@@ -98,19 +100,38 @@ const CGFloat speedSliderHeight = 20;
 
 - (void)handleRightPan:(UIPanGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
-//    [self speedSliderChangeNotification];
+        CGPoint translation = [gesture translationInView:self];
+        if (_rightPositionCoordinates + translation.x <= _saVideoRangeSlider.rightPositionCoordinates - _saVideoRangeSlider.thumbWidth) {
+            //在视频有效范围内
+            self.rightPositionCoordinates += translation.x;
+        }
+        if (_rightPositionCoordinates > (self.bounds.size.width - _saVideoRangeSlider.thumbWidth)) {
+            _rightPositionCoordinates = self.bounds.size.width - _saVideoRangeSlider.thumbWidth;
+        }
+        [gesture setTranslation:CGPointZero inView:self];
+        [self setNeedsLayout];
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
-//        [self speedSliderGestureStateEndedNotification];
+        [self speedSliderGestureStateEndedNotification];
     }
 }
 
 - (void)linkageSpeedSliderWithRangeSliderLeft:(CGFloat)leftPositionCoordinates right:(CGFloat)rightPositionCoordinates {
-    //联动 speedSlider只改UI 不作范围改变通知
+    
+    BOOL linkaged = NO;
+    //联动 speedSlider只改UI 不做实时范围改变通知 做手势结束范围改变通知
     if (leftPositionCoordinates + _saVideoRangeSlider.thumbWidth > _leftPositionCoordinates) {
         self.leftPositionCoordinates = leftPositionCoordinates + _saVideoRangeSlider.thumbWidth;
+        linkaged = YES;
     }
     
+    if (rightPositionCoordinates - _saVideoRangeSlider.thumbWidth < _rightPositionCoordinates) {
+        self.rightPositionCoordinates = rightPositionCoordinates - _saVideoRangeSlider.thumbWidth;
+        linkaged = YES;
+    }
     [self setNeedsLayout];
+    if (linkaged) {
+        [self speedSliderGestureStateEndedNotification];
+    }
 }
 
 - (void)speedSliderChangeNotification {
@@ -136,6 +157,7 @@ const CGFloat speedSliderHeight = 20;
 - (CGFloat)speedRightPositionToVideoPosition {
     return [_saVideoRangeSlider videoDurationSeconds] * (_rightPositionCoordinates - _saVideoRangeSlider.thumbWidth) / [self speedSliderEffectiveWidth];
 }
+
 
 #pragma mark - delegate
 - (void)videoRange:(SAVideoRangeSlider *)videoRange didGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
