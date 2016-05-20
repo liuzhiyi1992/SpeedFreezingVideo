@@ -20,8 +20,8 @@ const CGFloat speedSliderHeight = 20;
 @property (strong, nonatomic) UIImageView *leftSpeedSlider;
 @property (strong, nonatomic) UIImageView *rightSpeedSlider;
 
-@property (assign, nonatomic) CGFloat leftPosition;
-@property (assign, nonatomic) CGFloat rightPosition;
+@property (assign, nonatomic) CGFloat leftPositionCoordinates;//leftSpeedSliderCenterCoordinates
+@property (assign, nonatomic) CGFloat rightPositionCoordinates;//rightSpeedSliderCenterCoordinates
 @end
 
 @implementation SpeedFreezesOperatingView
@@ -38,7 +38,7 @@ const CGFloat speedSliderHeight = 20;
 
 - (void)layoutSubviews {
     //更新配置水滴的位置
-    self.leftSpeedSlider.center = CGPointMake(_leftPosition, speedSliderHeight/2);
+    self.leftSpeedSlider.center = CGPointMake(_leftPositionCoordinates, speedSliderHeight/2);
 }
 
 - (void)configureView {
@@ -54,7 +54,7 @@ const CGFloat speedSliderHeight = 20;
     
     
     //初值
-    self.leftPosition = _saVideoRangeSlider.thumbWidth;
+    self.leftPositionCoordinates = _saVideoRangeSlider.thumbWidth;
     //    self.rightPosition =
     
     
@@ -80,38 +80,77 @@ const CGFloat speedSliderHeight = 20;
 
 - (void)handleLeftPan:(UIPanGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
-        NSLog(@"work");
         CGPoint translation = [gesture translationInView:self];
-        
-        if (_leftPosition + translation.x >= _saVideoRangeSlider.leftPositionCoordinates + _saVideoRangeSlider.thumbWidth) {
+        if (_leftPositionCoordinates + translation.x >= _saVideoRangeSlider.leftPositionCoordinates + _saVideoRangeSlider.thumbWidth) {
             //在视频有效范围内
-            self.leftPosition += translation.x;
+            self.leftPositionCoordinates += translation.x;
         }
-        if (_leftPosition < 0) {
-            self.leftPosition = 0;
+        if (_leftPositionCoordinates < 0) {
+            self.leftPositionCoordinates = 0;
         }
-        
         [gesture setTranslation:CGPointZero inView:self];
-        
         [self setNeedsLayout];
+        [self speedSliderChangeNotification];
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+        [self speedSliderGestureStateEndedNotification];
     }
 }
 
 - (void)handleRightPan:(UIPanGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
+//    [self speedSliderChangeNotification];
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+//        [self speedSliderGestureStateEndedNotification];
+    }
+}
+
+- (void)linkageSpeedSliderWithRangeSliderLeft:(CGFloat)leftPositionCoordinates right:(CGFloat)rightPositionCoordinates {
+    //联动 speedSlider只改UI 不作范围改变通知
+    if (leftPositionCoordinates + _saVideoRangeSlider.thumbWidth > _leftPositionCoordinates) {
+        self.leftPositionCoordinates = leftPositionCoordinates + _saVideoRangeSlider.thumbWidth;
+    }
     
+    [self setNeedsLayout];
+}
+
+- (void)speedSliderChangeNotification {
+    if ([_delegate respondsToSelector:@selector(operatingViewSpeedDidChangeLeftPosition:rightPosition:)]) {
+        [_delegate operatingViewSpeedDidChangeLeftPosition:[self speedLeftPositionToVideoPosition] rightPosition:[self speedRightPositionToVideoPosition]];
+    }
+}
+
+- (void)speedSliderGestureStateEndedNotification {
+    if ([_delegate respondsToSelector:@selector(operatingViewSpeedDidGestureStateEndedLeftPosition:rightPosition:)]) {
+        [_delegate operatingViewSpeedDidGestureStateEndedLeftPosition:[self speedLeftPositionToVideoPosition] rightPosition:[self speedRightPositionToVideoPosition]];
+    }
+}
+
+- (CGFloat)speedSliderEffectiveWidth {
+    return self.bounds.size.width - 2*_saVideoRangeSlider.thumbWidth;
+}
+
+- (CGFloat)speedLeftPositionToVideoPosition {
+    return [_saVideoRangeSlider videoDurationSeconds] * (_leftPositionCoordinates - _saVideoRangeSlider.thumbWidth)/ [self speedSliderEffectiveWidth];
+}
+
+- (CGFloat)speedRightPositionToVideoPosition {
+    return [_saVideoRangeSlider videoDurationSeconds] * (_rightPositionCoordinates - _saVideoRangeSlider.thumbWidth) / [self speedSliderEffectiveWidth];
 }
 
 #pragma mark - delegate
 - (void)videoRange:(SAVideoRangeSlider *)videoRange didGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
-    if ([_delegate respondsToSelector:@selector(operatingViewDidGestureStateEndedLeftPosition:rightPosition:)]) {
-        [_delegate operatingViewDidGestureStateEndedLeftPosition:leftPosition rightPosition:rightPosition];
+    if ([_delegate respondsToSelector:@selector(operatingViewRangeDidGestureStateEndedLeftPosition:rightPosition:)]) {
+        [_delegate operatingViewRangeDidGestureStateEndedLeftPosition:leftPosition rightPosition:rightPosition];
     }
 }
 
 - (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
-    if ([_delegate respondsToSelector:@selector(operatingViewDidChangeLeftPosition:rightPosition:)]) {
-        [_delegate operatingViewDidChangeLeftPosition:leftPosition rightPosition:rightPosition];
+    if ([_delegate respondsToSelector:@selector(operatingViewRangeDidChangeLeftPosition:rightPosition:)]) {
+        [_delegate operatingViewRangeDidChangeLeftPosition:leftPosition rightPosition:rightPosition];
     }
+    //联动speedSlider
+    [self linkageSpeedSliderWithRangeSliderLeft:videoRange.leftPositionCoordinates right:videoRange.rightPositionCoordinates];
 }
+
 
 @end

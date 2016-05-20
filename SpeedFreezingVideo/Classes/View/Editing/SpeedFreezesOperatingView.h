@@ -11,8 +11,11 @@
 
 @protocol SpeedFreezesOperatingViewDelegate <NSObject>
 
-- (void)operatingViewDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
-- (void)operatingViewDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
+- (void)operatingViewRangeDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
+- (void)operatingViewRangeDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
+
+- (void)operatingViewSpeedDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
+- (void)operatingViewSpeedDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
 
 @end
 

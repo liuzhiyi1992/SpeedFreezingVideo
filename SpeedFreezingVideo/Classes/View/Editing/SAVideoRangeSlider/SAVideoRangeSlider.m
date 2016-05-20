@@ -177,7 +177,9 @@
     
 }
 
-
+- (double)videoDurationSeconds {
+    return _durationSeconds;
+}
 
 
 #pragma mark - Gestures
@@ -285,7 +287,6 @@
         [self setNeedsLayout];
         
         [self delegateNotification];
-        
     }
     
     _popoverBubble.alpha = 1;
