@@ -23,5 +23,6 @@
 @property (weak ,nonatomic) id<SpeedFreezesOperatingViewDelegate> delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl;
+- (BOOL)switchSpeedSlider;
 
 @end

@@ -22,6 +22,8 @@ const CGFloat speedSliderHeight = 30;
 
 @property (assign, nonatomic) CGFloat leftPositionCoordinates;//leftSpeedSliderCenterCoordinates
 @property (assign, nonatomic) CGFloat rightPositionCoordinates;//rightSpeedSliderCenterCoordinates
+
+@property (assign, nonatomic) BOOL isSpeedSliderActive;
 @end
 
 @implementation SpeedFreezesOperatingView
@@ -53,13 +55,7 @@ const CGFloat speedSliderHeight = 30;
     _saVideoRangeSlider.delegate = self;
     [self addSubview:_saVideoRangeSlider];
     
-    
-    //初值
-    self.leftPositionCoordinates = _saVideoRangeSlider.thumbWidth;
-    self.rightPositionCoordinates = self.bounds.size.width - _saVideoRangeSlider.thumbWidth;
-    //    self.rightPosition =
-    
-    
+    //speedSlider
     [self configureSpeedSlider];
 }
 
@@ -78,6 +74,34 @@ const CGFloat speedSliderHeight = 30;
     UIPanGestureRecognizer *rightPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightPan:)];
     [_rightSpeedSlider addGestureRecognizer:rightPan];
     [self addSubview:_rightSpeedSlider];
+    
+    self.isSpeedSliderActive = YES;
+    [self configureSpeedSliderInitialStatus];
+}
+
+- (void)configureSpeedSliderInitialStatus {
+    //speedSlider初始状态
+    self.leftPositionCoordinates = _saVideoRangeSlider.leftPositionCoordinates + _saVideoRangeSlider.thumbWidth;
+    self.rightPositionCoordinates = _saVideoRangeSlider.rightPositionCoordinates - _saVideoRangeSlider.thumbWidth;
+    [self setNeedsLayout];
+}
+
+- (BOOL)switchSpeedSlider {
+    if (_isSpeedSliderActive) {
+        //关闭
+        _leftSpeedSlider.hidden = YES;
+        _rightSpeedSlider.hidden = YES;
+        
+        self.isSpeedSliderActive = NO;
+    } else {
+        //打开
+        _leftSpeedSlider.hidden = NO;
+        _rightSpeedSlider.hidden = NO;
+        
+        [self configureSpeedSliderInitialStatus];
+        self.isSpeedSliderActive = YES;
+    }
+    return _isSpeedSliderActive;
 }
 
 - (void)handleLeftPan:(UIPanGestureRecognizer *)gesture {
@@ -171,7 +195,10 @@ const CGFloat speedSliderHeight = 30;
         [_delegate operatingViewRangeDidChangeLeftPosition:leftPosition rightPosition:rightPosition];
     }
     //联动speedSlider
-    [self linkageSpeedSliderWithRangeSliderLeft:videoRange.leftPositionCoordinates right:videoRange.rightPositionCoordinates];
+    if (_isSpeedSliderActive) {
+       [self linkageSpeedSliderWithRangeSliderLeft:videoRange.leftPositionCoordinates right:videoRange.rightPositionCoordinates];
+    }
+    
 }
 
 

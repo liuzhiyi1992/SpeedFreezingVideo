@@ -9,10 +9,9 @@
 #import "VideoEditingController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "VideoPlayingView.h"
-#import "SAVideoRangeSlider.h"
 #import "SpeedFreezesOperatingView.h"
 
-@interface VideoEditingController () <SAVideoRangeSliderDelegate, SpeedFreezesOperatingViewDelegate>
+@interface VideoEditingController () <SpeedFreezesOperatingViewDelegate>
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayerView;
 @property (weak, nonatomic) IBOutlet UIView *videoTrimmerHolderView;
 
@@ -21,7 +20,7 @@
 
 @property (strong, nonatomic) AVPlayer *player;
 
-@property (strong, nonatomic) SAVideoRangeSlider *saVideoRangeSlider;
+@property (strong, nonatomic) SpeedFreezesOperatingView *operatingView;
 @end
 
 @implementation VideoEditingController
@@ -51,9 +50,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
     self.navigationController.navigationBar.translucent = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -77,22 +79,13 @@
     CGFloat operatingViewHeight = _videoTrimmerHolderView.frame.size.height;
     
     //todo SpeedFreezesOperatingView
-    SpeedFreezesOperatingView *operatingView = [[SpeedFreezesOperatingView alloc] initWithFrame:CGRectMake(0, 0, operatingViewWidth, operatingViewHeight) videoUrl:_assetUrl];
-    operatingView.delegate = self;
-    [self.videoTrimmerHolderView addSubview:operatingView];
-    
-    
-    
-//    self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, 0, sliderWidth, sliderHeight) videoUrl:_assetUrl];
-//    [_saVideoRangeSlider setPopoverBubbleSize:0 height:0];
-//    
-//    // Purple
-//    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.768 green: 0.665 blue: 0.853 alpha:1.f];
-//    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.535 green: 0.329 blue: 0.707 alpha:1.f];
-//    
-//    _saVideoRangeSlider.delegate = self;
-//    
-//    [self.videoTrimmerHolderView addSubview:_saVideoRangeSlider];
+    self.operatingView = [[SpeedFreezesOperatingView alloc] initWithFrame:CGRectMake(0, 0, operatingViewWidth, operatingViewHeight) videoUrl:_assetUrl];
+    _operatingView.delegate = self;
+    [self.videoTrimmerHolderView addSubview:_operatingView];
+}
+
+- (void)playerItemDidEnd:(NSNotification *)notify {
+    [_player seekToTime:CMTimeMake(0, 1)];
 }
 
 #pragma mark - delegate
@@ -141,6 +134,11 @@
 - (IBAction)clickPlayButton:(id)sender {
     [_player play];
 }
+
+- (IBAction)clickOperatingSpeedButton:(id)sender {
+    [_operatingView switchSpeedSlider];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
