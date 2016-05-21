@@ -25,6 +25,8 @@
 
 #import "SAVideoRangeSlider.h"
 
+const CGFloat FRAME_PIC_WIDTH = 30;
+
 @interface SAVideoRangeSlider ()
 
 @property (nonatomic, strong) AVAssetImageGenerator *imageGenerator;
@@ -337,7 +339,7 @@
         self.imageGenerator.maximumSize = CGSizeMake(_bgView.frame.size.width, _bgView.frame.size.height);
     }
     
-    int picWidth = 20;
+    int picWidth = FRAME_PIC_WIDTH;
     
     // First image
     NSError *error;
