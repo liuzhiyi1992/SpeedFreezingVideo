@@ -12,6 +12,7 @@
 #import "CaptureVideoButton.h"
 #import "VideoEditingController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <CoreMotion/CoreMotion.h>
 
 //todo 发生某些错误需要停止视频拍摄功能，对策：返回上一页
 
@@ -30,10 +31,22 @@
 @property (strong, nonatomic) AVCaptureMovieFileOutput *videoOutput;
 @property (strong, nonatomic) NSURL *videoOutputUrl;
 
-
+@property (strong, nonatomic) CMMotionManager *motionManager;
+@property (assign, nonatomic) AVCaptureVideoOrientation deviceOrientation;
 @end
 
 @implementation CaptureVideoViewController
+
+//- (CMMotionManager *)motionManager {
+//    if (_motionManager == nil) {
+//        _motionManager = [[CMMotionManager alloc] init];
+//    }
+//    return _motionManager;
+//}
+
+- (void)dealloc {
+    [_motionManager stopDeviceMotionUpdates];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -46,7 +59,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [self startMotionManager];
     [self accessAuthorization];
 }
 
@@ -303,7 +316,7 @@
     if (![self videoRecording]) {
         AVCaptureConnection *videoConnection = [_videoOutput connectionWithMediaType:AVMediaTypeVideo];
         if ([videoConnection isVideoOrientationSupported]) {
-            videoConnection.videoOrientation = [self currentVideoOrientation];
+            videoConnection.videoOrientation = _deviceOrientation;
         }
         
         if ([videoConnection isVideoStabilizationSupported]) {
@@ -373,6 +386,46 @@
 
 - (BOOL)videoRecording {
     return [_videoOutput isRecording];
+}
+
+- (void)startMotionManager{
+    if (_motionManager == nil) {
+        _motionManager = [[CMMotionManager alloc] init];
+    }
+    _motionManager.deviceMotionUpdateInterval = 1/2.0;
+    if (_motionManager.deviceMotionAvailable) {
+        NSLog(@"Device Motion Available");
+        [_motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue]
+                                            withHandler: ^(CMDeviceMotion *motion, NSError *error){
+            [self performSelectorOnMainThread:@selector(handleDeviceMotion:) withObject:motion waitUntilDone:YES];
+        }];
+    } else {
+        NSLog(@"No device motion on device.");
+        [self setMotionManager:nil];
+    }
+}
+
+- (void)handleDeviceMotion:(CMDeviceMotion *)deviceMotion {
+    double x = deviceMotion.gravity.x;
+    double y = deviceMotion.gravity.y;
+    if (fabs(y) >= fabs(x)) {
+        if (y >= 0) {
+            // UIDeviceOrientationPortraitUpsideDown;
+            self.deviceOrientation = UIDeviceOrientationPortraitUpsideDown;
+        } else {
+            // UIDeviceOrientationPortrait;
+            self.deviceOrientation = AVCaptureVideoOrientationPortrait;
+        }
+    } else {
+        if (x >= 0) {
+            // UIDeviceOrientationLandscapeRight;
+            self.deviceOrientation = UIDeviceOrientationLandscapeRight;
+        }
+        else {
+            // UIDeviceOrientationLandscapeLeft;
+            self.deviceOrientation = UIDeviceOrientationLandscapeLeft;
+        }
+    }
 }
 
 #pragma mark - delegate
@@ -465,5 +518,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
+}
+//
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
+//
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
 
 @end
