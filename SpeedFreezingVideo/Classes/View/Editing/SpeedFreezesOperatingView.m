@@ -182,14 +182,21 @@ const CGFloat speedSliderHeight = 30;
     return self.bounds.size.width - 2*_saVideoRangeSlider.thumbWidth;
 }
 
-- (CGFloat)speedLeftPositionToVideoPosition {
+- (Float64)speedLeftPositionToVideoPosition {
     return [_saVideoRangeSlider videoDurationSeconds] * (_leftPositionCoordinates - _saVideoRangeSlider.thumbWidth)/ [self speedSliderEffectiveWidth];
 }
 
-- (CGFloat)speedRightPositionToVideoPosition {
+- (Float64)speedRightPositionToVideoPosition {
     return [_saVideoRangeSlider videoDurationSeconds] * (_rightPositionCoordinates - _saVideoRangeSlider.thumbWidth) / [self speedSliderEffectiveWidth];
 }
 
+- (CMTime)speedOperateVideoBeginTime {
+    return CMTimeMakeWithSeconds([self speedLeftPositionToVideoPosition], NSEC_PER_SEC);
+}
+
+- (CMTime)speedOperateVideoEndTime {
+    return CMTimeMakeWithSeconds([self speedRightPositionToVideoPosition], NSEC_PER_SEC);
+}
 
 #pragma mark - delegate
 - (void)videoRange:(SAVideoRangeSlider *)videoRange didGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {

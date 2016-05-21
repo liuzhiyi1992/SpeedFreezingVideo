@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <CoreMedia/CMTime.h>
 
 @protocol SpeedFreezesOperatingViewDelegate <NSObject>
 
@@ -24,5 +24,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl;
 - (BOOL)switchSpeedSlider;
+- (CMTime)speedOperateVideoBeginTime;
+- (CMTime)speedOperateVideoEndTime;
 
 @end
