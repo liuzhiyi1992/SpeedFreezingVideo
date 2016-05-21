@@ -13,13 +13,17 @@
 #import "VideoEditingController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreMotion/CoreMotion.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 //todo 发生某些错误需要停止视频拍摄功能，对策：返回上一页
 
 @interface CaptureVideoViewController () <CapturePreviewViewDelegate, AVCaptureFileOutputRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet CapturePreviewView *videoPreviewView;
 
-@property (strong, nonatomic) AVCaptureDevice *captureDevice;
+@property (weak, nonatomic) IBOutlet UIImageView *assetThumbnailImageView;
+
+
+//@property (strong, nonatomic) AVCaptureDevice *captureDevice;
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 
 @property (strong, nonatomic) AVCaptureDevice *audioDevice;
@@ -33,6 +37,8 @@
 
 @property (strong, nonatomic) CMMotionManager *motionManager;
 @property (assign, nonatomic) AVCaptureVideoOrientation deviceOrientation;
+
+@property (strong, nonatomic) ALAsset *albumLastVideo;
 @end
 
 @implementation CaptureVideoViewController
@@ -50,6 +56,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self selectLastVideoAssetFromAblum];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -59,8 +66,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self startMotionManager];
     [self accessAuthorization];
+    [self configureAlbumLastVideoImageView];
+    [self startMotionManager];
+    
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -92,6 +101,21 @@
         default:
             break;
     }
+}
+
+- (void)configureAlbumLastVideoImageView {
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectLastVideo)];
+    [self.assetThumbnailImageView addGestureRecognizer:tapGesture];
+    [self.assetThumbnailImageView setUserInteractionEnabled:YES];
+}
+
+- (void)selectLastVideo {
+    UIImagePickerController *myImagePickerController = [[UIImagePickerController alloc] init];
+    myImagePickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    myImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
+    myImagePickerController.delegate = self;
+    myImagePickerController.editing = NO;
+    [self presentViewController:myImagePickerController animated:YES completion:nil];
 }
 
 - (void)configureCapture {
@@ -428,6 +452,25 @@
     }
 }
 
+- (void)selectLastVideoAssetFromAblum {
+    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
+    [assetLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        if (group) {
+            [group setAssetsFilter:[ALAssetsFilter allVideos]];
+            [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                if (result) {
+                    self.albumLastVideo = result;
+                    [self.assetThumbnailImageView setImage:[UIImage imageWithCGImage:result.thumbnail]];
+                }
+                *stop = YES;
+            }];
+            *stop = YES;
+        }
+    } failureBlock:^(NSError *error) {
+        ;
+    }];
+}
+
 #pragma mark - delegate
 - (void)previewViewFocusAtCapturePoint:(CGPoint)point {
     
@@ -455,7 +498,13 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSLog(@"finish select");
+    NSString *infoKey = UIImagePickerControllerMediaURL;
+    NSURL *assetUrl = [info objectForKey:infoKey];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        VideoEditingController *editingController = [[VideoEditingController alloc] initWithAssetUrl:assetUrl];
+        [self.navigationController pushViewController:editingController animated:YES];
+    }];
+    
 }
 
 #pragma mark - KVO
@@ -495,17 +544,17 @@
     }
 }
 
-- (IBAction)clickSelecteAlbum:(id)sender {
-    UIImagePickerController *myImagePickerController = [[UIImagePickerController alloc] init];
-    myImagePickerController.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
-    myImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    myImagePickerController.delegate = self;
-    myImagePickerController.editing = NO;
-    [self presentViewController:myImagePickerController animated:YES completion:nil];
-    
-    //todo 私有类
-//    PUUIImageViewController *con = [[PUUIImageViewController alloc] init];
-}
+//- (IBAction)clickSelecteAlbum:(id)sender {
+//    UIImagePickerController *myImagePickerController = [[UIImagePickerController alloc] init];
+//    myImagePickerController.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+//    myImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
+//    myImagePickerController.delegate = self;
+//    myImagePickerController.editing = NO;
+//    [self presentViewController:myImagePickerController animated:YES completion:nil];
+//    
+//    //todo 私有类
+////    PUUIImageViewController *con = [[PUUIImageViewController alloc] init];
+//}
 
 
 - (IBAction)clickChangeCameraButton:(id)sender {
@@ -513,23 +562,36 @@
 }
 
 
+- (IBAction)clickSwitchFlashButton:(id)sender {
+    if ([_videoDevice hasTorch]) {
+        NSError *error;
+        if ([_videoDevice lockForConfiguration:&error]) {
+            if (_videoDevice.torchMode == AVCaptureTorchModeOff) {
+                [_videoDevice setTorchMode:AVCaptureTorchModeOn];
+            } else {
+                [_videoDevice setTorchMode:AVCaptureTorchModeOff];
+            }
+        }
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return YES;
-}
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+//{
+//    return YES;
+//}
 //
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAll;
-}
-//
--(BOOL)shouldAutorotate
-{
-    return YES;
-}
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+//    return UIInterfaceOrientationMaskAll;
+//}
+////
+//-(BOOL)shouldAutorotate
+//{
+//    return YES;
+//}
 
 @end

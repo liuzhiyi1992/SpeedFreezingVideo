@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureVideoViewController">
             <connections>
+                <outlet property="assetThumbnailImageView" destination="tTb-bq-0jy" id="Xxo-RF-bvf"/>
                 <outlet property="videoPreviewView" destination="0xD-Xw-Eom" id="6CJ-9d-BZy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -33,13 +34,23 @@
                                         <action selector="clickCaptureButton:" destination="-1" eventType="touchUpInside" id="3Kb-NA-Dn9"/>
                                     </connections>
                                 </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tTb-bq-0jy">
+                                    <rect key="frame" x="30" y="30" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="hgN-r0-ECe"/>
+                                        <constraint firstAttribute="width" secondItem="tTb-bq-0jy" secondAttribute="height" multiplier="1:1" id="pIh-z2-fZ6"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="aXA-sv-Q0O" firstAttribute="centerY" secondItem="btj-6P-aeP" secondAttribute="centerY" id="4ql-sL-Lv6"/>
                                 <constraint firstItem="aXA-sv-Q0O" firstAttribute="height" secondItem="btj-6P-aeP" secondAttribute="height" multiplier="3:5" id="Ec5-oQ-zNs"/>
                                 <constraint firstAttribute="height" constant="100" id="ITA-Cm-lZy"/>
+                                <constraint firstItem="tTb-bq-0jy" firstAttribute="centerY" secondItem="aXA-sv-Q0O" secondAttribute="centerY" id="V98-H4-AZj"/>
                                 <constraint firstItem="aXA-sv-Q0O" firstAttribute="centerX" secondItem="btj-6P-aeP" secondAttribute="centerX" id="VMh-z8-mJq"/>
+                                <constraint firstItem="tTb-bq-0jy" firstAttribute="leading" secondItem="btj-6P-aeP" secondAttribute="leading" constant="30" id="eWy-wj-8HO"/>
+                                <constraint firstItem="tTb-bq-0jy" firstAttribute="height" secondItem="aXA-sv-Q0O" secondAttribute="height" multiplier="1:1.5" id="qBu-Is-w8K"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJn-jC-AAj">
@@ -67,8 +78,7 @@
                                         </mask>
                                     </variation>
                                     <connections>
-                                        <action selector="clickChangeCameraButton:" destination="-1" eventType="touchUpInside" id="XOz-bv-ABU"/>
-                                        <action selector="clickSelecteAlbum:" destination="-1" eventType="touchUpInside" id="aZI-yt-ndd"/>
+                                        <action selector="clickSwitchFlashButton:" destination="-1" eventType="touchUpInside" id="GVf-l0-88l"/>
                                     </connections>
                                 </button>
                             </subviews>
