@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "VideoPlayingView.h"
 #import "SpeedFreezesOperatingView.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface VideoEditingController () <SpeedFreezesOperatingViewDelegate>
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayerView;
@@ -88,6 +89,171 @@
     [_player seekToTime:CMTimeMake(0, 1)];
 }
 
+- (void)speedFreezingWithAssetUrl:(NSURL *)URl beginTime:(CMTime)beginTime endTime:(CMTime)endTime {
+    AVURLAsset* videoAsset = [AVURLAsset URLAssetWithURL:URl options:nil]; //self.inputAsset;
+    
+    AVAsset *currentAsset = [AVAsset assetWithURL:URl];
+    AVAssetTrack *vdoTrack = [[currentAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+    //create mutable composition
+    AVMutableComposition *mixComposition = [AVMutableComposition composition];
+    
+    AVMutableCompositionTrack *compositionVideoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *compositionAudioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    
+    
+    
+    NSError *videoInsertError = nil;
+    BOOL videoInsertResult = [compositionVideoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration)
+                                                            ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
+                                                             atTime:kCMTimeZero
+                                                              error:&videoInsertError];
+    if (!videoInsertResult || nil != videoInsertError) {
+        //handle error
+        return;
+    }
+    
+    NSError *audioInsertError =nil;
+    BOOL audioInsertResult =[compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration)
+                                                           ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
+                                                            atTime:kCMTimeZero
+                                                             error:&audioInsertError];
+    if (!audioInsertResult || nil != audioInsertError) {
+        //handle error
+        return;
+    }
+    
+    CMTime duration = kCMTimeZero;
+    duration = CMTimeAdd(duration, currentAsset.duration);
+    //slow down whole video by 2.0
+    double videoScaleFactor = 3.0;
+    CMTime videoDuration = videoAsset.duration;
+    
+    //todo 自己加
+//    CMTime beginTime = CMTimeMake(1.5, 1);
+//    CMTime remainDuration = CMTimeMake(2, 1);
+    CMTime remainDuration = CMTimeSubtract(endTime, beginTime);
+    CMTime operatedTime = CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale);
+    CMTime extraTime = CMTimeSubtract(operatedTime, remainDuration);
+    
+    
+    [compositionVideoTrack scaleTimeRange:CMTimeRangeMake(beginTime, remainDuration)
+                               toDuration:CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale)];
+    [compositionAudioTrack scaleTimeRange:CMTimeRangeMake(beginTime, remainDuration)
+                               toDuration:CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale)];
+    
+    
+    //    [compositionVideoTrack scaleTimeRange:CMTimeRangeMake(kCMTimeZero, videoDuration)
+    //                               toDuration:CMTimeMake(videoDuration.value * videoScaleFactor, videoDuration.timescale)];
+    //    [compositionAudioTrack scaleTimeRange:CMTimeRangeMake(kCMTimeZero, videoDuration)
+    //                               toDuration:CMTimeMake(videoDuration.value * videoScaleFactor, videoDuration.timescale)];
+    [compositionVideoTrack setPreferredTransform:vdoTrack.preferredTransform];
+    
+    
+    //---配置outputPath
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    NSString *outputFilePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"slowMotion.mov"]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:outputFilePath])
+        [[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:nil];
+    NSURL *_filePath = [NSURL fileURLWithPath:outputFilePath];
+    
+    //todo 自己加
+    //    AVPlayerItem *playItem = [[AVPlayerItem alloc] initWithAsset:mixComposition];
+    //    [self pushToPlayWithAsset:mixComposition];
+    
+    
+    //todo 稳定后修改下视频质量
+    //export
+    AVAssetExportSession* assetExport = [[AVAssetExportSession alloc] initWithAsset:mixComposition
+                                                                         presetName:AVAssetExportPreset1920x1080];
+    NSLog(@"----%@", assetExport.supportedFileTypes);
+    
+    assetExport.outputURL = _filePath;
+    //todo 改了
+    //    assetExport.outputFileType = AVFileTypeQuickTimeMovie;
+    assetExport.outputFileType = assetExport.supportedFileTypes.firstObject;
+    assetExport.shouldOptimizeForNetworkUse = YES;
+    
+    //trimming
+    CMTime trimmingEndTime = CMTimeAdd(_playerItem.forwardPlaybackEndTime, extraTime);
+    CMTimeRange timeRange = CMTimeRangeMake(_playerItem.reversePlaybackEndTime, trimmingEndTime);
+    assetExport.timeRange = timeRange;
+    
+    
+    [assetExport exportAsynchronouslyWithCompletionHandler:^{
+        
+        switch ([assetExport status]) {
+            case AVAssetExportSessionStatusFailed:
+            {
+                NSLog(@"Export session faiied with error: %@", [assetExport error]);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // completion(nil);
+                });
+            }
+                break;
+            case AVAssetExportSessionStatusCompleted:
+            {
+                NSLog(@"Successful");
+                NSURL *outputURL = assetExport.outputURL;
+                
+                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
+                    
+                    [self writeExportedVideoToAssetsLibrary:outputURL];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // completion(_filePath);
+                });
+                
+            }
+                break;
+            default:
+                
+                break;
+        }
+    }];
+}
+
+- (void)writeExportedVideoToAssetsLibrary :(NSURL *)url {
+    NSURL *exportURL = url;
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:exportURL]) {
+        [library writeVideoAtPathToSavedPhotosAlbum:exportURL completionBlock:^(NSURL *assetURL, NSError *error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription]
+                                                                        message:[error localizedRecoverySuggestion]
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                }
+                if(!error)
+                {
+                    // [activityView setHidden:YES];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sucess"
+                                                                        message:@"video added to gallery successfully"
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    //todo 改了
+                    //                    [alertView show];
+//                    [self pushToPlay:assetURL];
+                    NSLog(@"保存成功");
+                    
+                }
+#if !TARGET_IPHONE_SIMULATOR
+                [[NSFileManager defaultManager] removeItemAtURL:exportURL error:nil];
+#endif
+            });
+        }];
+    } else {
+        NSLog(@"Video could not be exported to assets library.");
+    }
+}
+
+
 #pragma mark - delegate
 - (void)operatingViewRangeDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
     [_player pause];
@@ -130,7 +296,7 @@
 //    [_playerItem setForwardPlaybackEndTime:CMTimeMakeWithSeconds(rightPosition, NSEC_PER_SEC)];
 //}
 
-
+#pragma mark - Action
 - (IBAction)clickPlayButton:(id)sender {
     [_player play];
 }
@@ -139,6 +305,75 @@
     [_operatingView switchSpeedSlider];
 }
 
+- (IBAction)clickFinishButton:(id)sender {
+    //先修改速度
+    [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime]];
+    //再剪辑视频
+    
+}
+
+
+
+
+
+- (void)trimmingVideoWithAsset:(AVAsset *)asset {
+    
+    //配置path
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsDir = [dirPaths objectAtIndex:0];
+    //todo 以上两步为何
+    NSString *outputFilePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"trimmingAsset.mov"]];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:outputFilePath]) {
+        NSError *error;
+        if (![[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:&error]) {
+            NSLog(@"ERROR: 清除旧文件发生错误");
+        }
+    }
+    NSURL *outputUrl = [NSURL fileURLWithPath:outputFilePath];
+    
+    //export
+    AVAsset *trimmingAsset = [AVAsset assetWithURL:_assetUrl];
+    AVAssetExportSession *trimmingExportSession = [[AVAssetExportSession alloc] initWithAsset:trimmingAsset presetName:AVCaptureSessionPresetHigh];
+    trimmingExportSession.outputURL = outputUrl;
+    trimmingExportSession.outputFileType = AVFileTypeMPEG4;
+    trimmingExportSession.shouldOptimizeForNetworkUse = YES;
+    
+    //异步输出
+    [trimmingExportSession exportAsynchronouslyWithCompletionHandler:^{
+        
+        switch ([trimmingExportSession status]) {
+            case AVAssetExportSessionStatusFailed:
+            {
+                NSLog(@"Export session faiied with error: %@", [trimmingExportSession error]);
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // completion(nil);
+                });
+            }
+                break;
+            case AVAssetExportSessionStatusCompleted:
+            {
+                NSLog(@"Successful");
+                NSURL *outputURL = trimmingExportSession.outputURL;
+                
+                
+                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+                if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
+                    
+                    [self writeExportedVideoToAssetsLibrary:outputURL];
+                    
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // completion(_filePath);
+                });
+            }
+                break;
+            default:
+                break;
+        }
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

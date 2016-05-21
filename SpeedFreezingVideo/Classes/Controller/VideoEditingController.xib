@@ -57,11 +57,20 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRl-D0-dYP">
-                    <rect key="frame" x="96" y="477.5" width="72" height="34"/>
+                    <rect key="frame" x="96" y="477" width="72" height="34"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <state key="normal" title="速度控制"/>
                     <connections>
                         <action selector="clickOperatingSpeedButton:" destination="-1" eventType="touchUpInside" id="Nrq-33-vTj"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uiv-C3-P7D">
+                    <rect key="frame" x="210" y="551.5" width="180" height="34"/>
+                    <state key="normal" title="应用编辑并保存到相册">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="clickFinishButton:" destination="-1" eventType="touchUpInside" id="Gfb-YX-0VP"/>
                     </connections>
                 </button>
             </subviews>
@@ -69,10 +78,12 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="YiP-ZY-FnV" secondAttribute="trailing" id="0jr-KQ-W44"/>
                 <constraint firstItem="D2O-4e-9dl" firstAttribute="top" secondItem="U2e-Uf-2zW" secondAttribute="bottom" constant="30" id="3xJ-sD-MGd"/>
+                <constraint firstItem="uiv-C3-P7D" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IsS-JW-vr2"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SeI-nD-OrP"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dk9-Ra-VA1"/>
                 <constraint firstItem="D2O-4e-9dl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="hyZ-eD-qOX"/>
                 <constraint firstItem="fRl-D0-dYP" firstAttribute="leading" secondItem="D2O-4e-9dl" secondAttribute="trailing" constant="30" id="iOW-K4-LAS"/>
+                <constraint firstItem="uiv-C3-P7D" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="40" id="kpx-Ye-d0u"/>
                 <constraint firstItem="fRl-D0-dYP" firstAttribute="top" secondItem="D2O-4e-9dl" secondAttribute="top" id="pgB-5A-rol"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="top" secondItem="YiP-ZY-FnV" secondAttribute="bottom" constant="20" id="puJ-ep-pZs"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="va9-jG-gCX"/>
