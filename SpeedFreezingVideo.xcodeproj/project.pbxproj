@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4810F4601CF1C6DE00550D10 /* SpeedMultipleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4810F45F1CF1C6DE00550D10 /* SpeedMultipleView.m */; };
+		4810F4621CF1C6F600550D10 /* SpeedMultipleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4810F4611CF1C6F600550D10 /* SpeedMultipleView.xib */; };
 		481467861CE89EE50003C3E0 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481467851CE89EE50003C3E0 /* AVKit.framework */; };
 		4848F6411CE73430009C6280 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6401CE73430009C6280 /* main.m */; };
 		4848F6441CE73430009C6280 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6431CE73430009C6280 /* AppDelegate.m */; };
@@ -31,6 +33,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4810F45E1CF1C6DE00550D10 /* SpeedMultipleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedMultipleView.h; sourceTree = "<group>"; };
+		4810F45F1CF1C6DE00550D10 /* SpeedMultipleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedMultipleView.m; sourceTree = "<group>"; };
+		4810F4611CF1C6F600550D10 /* SpeedMultipleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeedMultipleView.xib; sourceTree = "<group>"; };
 		481467851CE89EE50003C3E0 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		4848F63C1CE73430009C6280 /* SpeedFreezingVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedFreezingVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4848F6401CE73430009C6280 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,6 +152,9 @@
 				485E56E71CED9EC700159EC3 /* SASliderRight.m */,
 				485E56E81CED9EC700159EC3 /* SAVideoRangeSlider.h */,
 				485E56E91CED9EC700159EC3 /* SAVideoRangeSlider.m */,
+				4810F45E1CF1C6DE00550D10 /* SpeedMultipleView.h */,
+				4810F45F1CF1C6DE00550D10 /* SpeedMultipleView.m */,
+				4810F4611CF1C6F600550D10 /* SpeedMultipleView.xib */,
 			);
 			path = SAVideoRangeSlider;
 			sourceTree = "<group>";
@@ -247,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4810F4621CF1C6F600550D10 /* SpeedMultipleView.xib in Resources */,
 				488119741CEC5A5100CA0C7F /* VideoEditingController.xib in Resources */,
 				4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */,
 				4881196D1CEC59BA00CA0C7F /* CaptureVideoViewController.xib in Resources */,
@@ -268,6 +277,7 @@
 				4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */,
 				488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
+				4810F4601CF1C6DE00550D10 /* SpeedMultipleView.m in Sources */,
 				485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */,
 				485E56FF1CEE006300159EC3 /* SpeedFreezesOperatingView.m in Sources */,
 				488119731CEC5A5100CA0C7F /* VideoEditingController.m in Sources */,

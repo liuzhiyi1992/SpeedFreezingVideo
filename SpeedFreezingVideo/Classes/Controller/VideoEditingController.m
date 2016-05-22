@@ -11,10 +11,12 @@
 #import "VideoPlayingView.h"
 #import "SpeedFreezesOperatingView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "SpeedMultipleView.h"
 
-@interface VideoEditingController () <SpeedFreezesOperatingViewDelegate>
+@interface VideoEditingController () <SpeedFreezesOperatingViewDelegate, SpeedMultipleViewDelegate>
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayerView;
 @property (weak, nonatomic) IBOutlet UIView *videoTrimmerHolderView;
+@property (weak, nonatomic) IBOutlet UIView *speedMultipleHolderView;
 
 @property (strong, nonatomic) NSURL *assetUrl;
 @property (strong, nonatomic) AVPlayerItem *playerItem;
@@ -22,6 +24,7 @@
 @property (strong, nonatomic) AVPlayer *player;
 
 @property (strong, nonatomic) SpeedFreezesOperatingView *operatingView;
+@property (assign, nonatomic) double speedRate;
 @end
 
 @implementation VideoEditingController
@@ -64,6 +67,8 @@
     
     [self readyToTrim];
     [self readyToPlay];
+    [self configureSpeedMultipleView];
+    
 }
 
 - (void)readyToPlay {
@@ -87,6 +92,16 @@
 
 - (void)playerItemDidEnd:(NSNotification *)notify {
     [_player seekToTime:CMTimeMake(0, 1)];
+}
+
+- (void)configureSpeedMultipleView {
+    SpeedMultipleView *multipleView = [SpeedMultipleView createView];
+    multipleView.delegate = self;
+    NSDictionary *views = NSDictionaryOfVariableBindings(multipleView);
+    [multipleView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.speedMultipleHolderView addSubview:multipleView];
+    [self.speedMultipleHolderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[multipleView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
+    [self.speedMultipleHolderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[multipleView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
 }
 
 - (void)speedFreezingWithAssetUrl:(NSURL *)URl beginTime:(CMTime)beginTime endTime:(CMTime)endTime {
@@ -126,7 +141,8 @@
     CMTime duration = kCMTimeZero;
     duration = CMTimeAdd(duration, currentAsset.duration);
     //slow down whole video by 2.0
-    double videoScaleFactor = 3.0;
+//    double videoScaleFactor = 1/3.0;
+    double videoScaleFactor = _speedRate;
     CMTime videoDuration = videoAsset.duration;
     
     //todo 自己加
@@ -294,6 +310,10 @@
 
 - (void)operatingViewSpeedDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
     
+}
+
+- (void)SpeedMultipleViewDidSelectedSpeedRate:(double)rate {
+    self.speedRate = rate;
 }
 
 //- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
