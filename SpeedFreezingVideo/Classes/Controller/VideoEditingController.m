@@ -255,11 +255,19 @@
 
 
 #pragma mark - delegate
-- (void)operatingViewRangeDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
+- (void)operatingViewRangeDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition sliderMotion:(SliderMotion)motion {
     [_player pause];
     //取消任何seek请求
     [_playerItem cancelPendingSeeks];
-    [_player seekToTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    
+    //seekToTime
+    CGFloat timePosition;
+    if (motion == SliderMotionLeft || motion == SliderMotionBoth) {
+        timePosition = leftPosition;
+    } else if (motion == SliderMotionRight){
+        timePosition = rightPosition;
+    }
+    [_player seekToTime:CMTimeMakeWithSeconds(timePosition, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
 }
 
 - (void)operatingViewRangeDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
@@ -268,12 +276,20 @@
     [_playerItem setForwardPlaybackEndTime:CMTimeMakeWithSeconds(rightPosition, NSEC_PER_SEC)];
 }
 
-- (void)operatingViewSpeedDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
+- (void)operatingViewSpeedDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition sliderMotion:(SliderMotion)motion {
 //    NSLog(@"beigin %.2f -- end %.2f", leftPosition, rightPosition);
     [_player pause];
     //取消任何seek请求
     [_playerItem cancelPendingSeeks];
-    [_player seekToTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    
+    //seekToTime
+    CGFloat timePosition;
+    if (motion == SliderMotionLeft || motion == SliderMotionBoth) {
+        timePosition = leftPosition;
+    } else if (motion == SliderMotionRight){
+        timePosition = rightPosition;
+    }
+    [_player seekToTime:CMTimeMakeWithSeconds(timePosition, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
 }
 
 - (void)operatingViewSpeedDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {

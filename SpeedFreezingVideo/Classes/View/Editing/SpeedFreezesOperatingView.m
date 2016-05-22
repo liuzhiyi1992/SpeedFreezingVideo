@@ -7,7 +7,6 @@
 //
 
 #import "SpeedFreezesOperatingView.h"
-#import "SAVideoRangeSlider.h"
 
 const CGFloat speedSliderWidth = 20;
 const CGFloat speedSliderHeight = 30;
@@ -117,7 +116,7 @@ const CGFloat speedSliderHeight = 30;
         }
         [gesture setTranslation:CGPointZero inView:self];
         [self setNeedsLayout];
-        [self speedSliderChangeNotification];
+        [self speedSliderChangeNotification:SliderMotionLeft];
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
         [self speedSliderGestureStateEndedNotification];
     }
@@ -136,6 +135,7 @@ const CGFloat speedSliderHeight = 30;
         }
         [gesture setTranslation:CGPointZero inView:self];
         [self setNeedsLayout];
+        [self speedSliderChangeNotification:SliderMotionRight];
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
         [self speedSliderGestureStateEndedNotification];
     }
@@ -166,9 +166,9 @@ const CGFloat speedSliderHeight = 30;
     }
 }
 
-- (void)speedSliderChangeNotification {
-    if ([_delegate respondsToSelector:@selector(operatingViewSpeedDidChangeLeftPosition:rightPosition:)]) {
-        [_delegate operatingViewSpeedDidChangeLeftPosition:[self speedLeftPositionToVideoPosition] rightPosition:[self speedRightPositionToVideoPosition]];
+- (void)speedSliderChangeNotification:(SliderMotion)motion {
+    if ([_delegate respondsToSelector:@selector(operatingViewSpeedDidChangeLeftPosition:rightPosition:sliderMotion:)]) {
+        [_delegate operatingViewSpeedDidChangeLeftPosition:[self speedLeftPositionToVideoPosition] rightPosition:[self speedRightPositionToVideoPosition] sliderMotion:motion];
     }
 }
 
@@ -205,9 +205,9 @@ const CGFloat speedSliderHeight = 30;
     }
 }
 
-- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
-    if ([_delegate respondsToSelector:@selector(operatingViewRangeDidChangeLeftPosition:rightPosition:)]) {
-        [_delegate operatingViewRangeDidChangeLeftPosition:leftPosition rightPosition:rightPosition];
+- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition sliderMotion:(SliderMotion)motion {
+    if ([_delegate respondsToSelector:@selector(operatingViewRangeDidChangeLeftPosition:rightPosition:sliderMotion:)]) {
+        [_delegate operatingViewRangeDidChangeLeftPosition:leftPosition rightPosition:rightPosition sliderMotion:motion];
     }
     //联动speedSlider
     if (_isSpeedSliderActive) {
