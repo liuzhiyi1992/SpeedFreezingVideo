@@ -171,10 +171,9 @@ const CGFloat FRAME_PIC_WIDTH = 30;
 }
 
 
-- (void)delegateNotification
-{
-    if ([_delegate respondsToSelector:@selector(videoRange:didChangeLeftPosition:rightPosition:)]){
-        [_delegate videoRange:self didChangeLeftPosition:self.leftPosition rightPosition:self.rightPosition];
+- (void)delegateNotification:(SliderMotion)motion {
+    if ([_delegate respondsToSelector:@selector(videoRange:didChangeLeftPosition:rightPosition:sliderMotion:)]){
+        [_delegate videoRange:self didChangeLeftPosition:self.leftPosition rightPosition:self.rightPosition sliderMotion:motion];
     }
     
 }
@@ -209,7 +208,7 @@ const CGFloat FRAME_PIC_WIDTH = 30;
         
         [self setNeedsLayout];
         
-        [self delegateNotification];
+        [self delegateNotification:SliderMotionLeft];
         
     }
     
@@ -253,7 +252,7 @@ const CGFloat FRAME_PIC_WIDTH = 30;
         
         [self setNeedsLayout];
         
-        [self delegateNotification];
+        [self delegateNotification:SliderMotionRight];
         
     }
     
@@ -288,7 +287,7 @@ const CGFloat FRAME_PIC_WIDTH = 30;
         
         [self setNeedsLayout];
         
-        [self delegateNotification];
+        [self delegateNotification:SliderMotionBoth];
     }
     
     _popoverBubble.alpha = 1;

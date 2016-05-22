@@ -33,8 +33,13 @@
 
 @protocol SAVideoRangeSliderDelegate;
 
-@interface SAVideoRangeSlider : UIView
+typedef enum {
+    SliderMotionLeft,
+    SliderMotionRight,
+    SliderMotionBoth
+} SliderMotion;
 
+@interface SAVideoRangeSlider : UIView
 
 @property (nonatomic, weak) id <SAVideoRangeSliderDelegate> delegate;
 @property (nonatomic) CGFloat leftPosition;
@@ -62,7 +67,7 @@
 
 @optional
 
-- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
+- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition sliderMotion:(SliderMotion)motion;
 
 - (void)videoRange:(SAVideoRangeSlider *)videoRange didGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
 
