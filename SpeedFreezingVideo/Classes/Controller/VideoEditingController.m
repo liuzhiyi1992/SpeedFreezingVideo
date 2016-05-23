@@ -54,12 +54,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.translucent = NO;
+//    self.navigationController.navigationBar.translucent = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    //navigationBar
+    [self modifyNavigationBar];
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -69,6 +75,16 @@
     [self readyToPlay];
     [self configureSpeedMultipleView];
     
+}
+
+- (void)modifyNavigationBar {
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
+//    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:1.f alpha:0.0f]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.2f]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+//    [self.navigationController.navigationBar setBackgroundImage:[self createImageWithColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.7f]] forBarMetrics:UIBarMetricsDefault];
+    NSLog(@"配置navigationController");
 }
 
 - (void)readyToPlay {
@@ -109,6 +125,7 @@
     
     AVAsset *currentAsset = [AVAsset assetWithURL:URl];
     AVAssetTrack *vdoTrack = [[currentAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+    
     //create mutable composition
     AVMutableComposition *mixComposition = [AVMutableComposition composition];
     
@@ -117,7 +134,7 @@
     
     
     
-    
+    //video insert
     NSError *videoInsertError = nil;
     BOOL videoInsertResult = [compositionVideoTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration)
                                                             ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0]
@@ -125,29 +142,31 @@
                                                               error:&videoInsertError];
     if (!videoInsertResult || nil != videoInsertError) {
         //handle error
+        NSLog(@"ERROR: %@", videoInsertError);
         return;
     }
     
-    NSError *audioInsertError =nil;
-    BOOL audioInsertResult =[compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration)
-                                                           ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
-                                                            atTime:kCMTimeZero
-                                                             error:&audioInsertError];
-    if (!audioInsertResult || nil != audioInsertError) {
-        //handle error
-        return;
+    //audio insert
+    //todo 没有音频的视频  处理
+    if ([currentAsset tracksWithMediaType:AVMediaTypeAudio].count > 0) {
+        NSError *audioInsertError =nil;
+        BOOL audioInsertResult =[compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration)
+                                                               ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
+                                                                atTime:kCMTimeZero
+                                                                 error:&audioInsertError];
+        if (!audioInsertResult || nil != audioInsertError) {
+            //handle error
+            NSLog(@"ERROR: %@", audioInsertError);
+            return;
+        }
     }
     
     CMTime duration = kCMTimeZero;
     duration = CMTimeAdd(duration, currentAsset.duration);
     //slow down whole video by 2.0
-//    double videoScaleFactor = 1/3.0;
     double videoScaleFactor = _speedRate;
-    CMTime videoDuration = videoAsset.duration;
+//    CMTime videoDuration = videoAsset.duration;
     
-    //todo 自己加
-//    CMTime beginTime = CMTimeMake(1.5, 1);
-//    CMTime remainDuration = CMTimeMake(2, 1);
     CMTime remainDuration = CMTimeSubtract(endTime, beginTime);
     CMTime operatedTime = CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale);
     CMTime extraTime = CMTimeSubtract(operatedTime, remainDuration);
@@ -158,11 +177,6 @@
     [compositionAudioTrack scaleTimeRange:CMTimeRangeMake(beginTime, remainDuration)
                                toDuration:CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale)];
     
-    
-    //    [compositionVideoTrack scaleTimeRange:CMTimeRangeMake(kCMTimeZero, videoDuration)
-    //                               toDuration:CMTimeMake(videoDuration.value * videoScaleFactor, videoDuration.timescale)];
-    //    [compositionAudioTrack scaleTimeRange:CMTimeRangeMake(kCMTimeZero, videoDuration)
-    //                               toDuration:CMTimeMake(videoDuration.value * videoScaleFactor, videoDuration.timescale)];
     [compositionVideoTrack setPreferredTransform:vdoTrack.preferredTransform];
     
     
@@ -174,17 +188,11 @@
         [[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:nil];
     NSURL *_filePath = [NSURL fileURLWithPath:outputFilePath];
     
-    //todo 自己加
-    //    AVPlayerItem *playItem = [[AVPlayerItem alloc] initWithAsset:mixComposition];
-    //    [self pushToPlayWithAsset:mixComposition];
-    
-    
-    //todo 稳定后修改下视频质量
+    //todo 稳定后修改下视频质量  考虑开放不同质量让用户选择
     //export
     AVAssetExportSession* assetExport = [[AVAssetExportSession alloc] initWithAsset:mixComposition
                                                                          presetName:AVAssetExportPreset1920x1080];
     NSLog(@"----%@", assetExport.supportedFileTypes);
-    
     assetExport.outputURL = _filePath;
     //todo 改了
     //    assetExport.outputFileType = AVFileTypeQuickTimeMovie;
@@ -195,7 +203,6 @@
     CMTime trimmingEndTime = CMTimeAdd(_playerItem.forwardPlaybackEndTime, extraTime);
     CMTimeRange timeRange = CMTimeRangeMake(_playerItem.reversePlaybackEndTime, trimmingEndTime);
     assetExport.timeRange = timeRange;
-    
     
     [assetExport exportAsynchronouslyWithCompletionHandler:^{
         
@@ -215,7 +222,6 @@
                 
                 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
                 if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
-                    
                     [self writeExportedVideoToAssetsLibrary:outputURL];
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -225,7 +231,6 @@
             }
                 break;
             default:
-                
                 break;
         }
     }];
@@ -253,11 +258,8 @@
                                                                        delegate:nil
                                                               cancelButtonTitle:@"OK"
                                                               otherButtonTitles:nil];
-                    //todo 改了
-                    //                    [alertView show];
-//                    [self pushToPlay:assetURL];
+                    [alertView show];
                     NSLog(@"保存成功");
-                    
                 }
 #if !TARGET_IPHONE_SIMULATOR
                 [[NSFileManager defaultManager] removeItemAtURL:exportURL error:nil];
@@ -269,6 +271,17 @@
     }
 }
 
+- (UIImage *)createImageWithColor:(UIColor *) color
+{
+    CGRect rect=CGRectMake(0.0f, 0.0f, 2.0f, 2.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+}
 
 #pragma mark - delegate
 - (void)operatingViewRangeDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition sliderMotion:(SliderMotion)motion {
@@ -293,7 +306,6 @@
 }
 
 - (void)operatingViewSpeedDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition sliderMotion:(SliderMotion)motion {
-//    NSLog(@"beigin %.2f -- end %.2f", leftPosition, rightPosition);
     [_player pause];
     //取消任何seek请求
     [_playerItem cancelPendingSeeks];
@@ -316,22 +328,6 @@
     self.speedRate = rate;
 }
 
-//- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
-//    NSLog(@"beigin %.2f -- end %.2f", leftPosition, rightPosition);
-//    
-//    [_player pause];
-//    //取消任何seek请求
-//    [_playerItem cancelPendingSeeks];
-//    [_player seekToTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
-//}
-//
-//- (void)videoRange:(SAVideoRangeSlider *)videoRange didGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition {
-//    
-//    //设置视频可播放范围
-//    [_playerItem setReversePlaybackEndTime:CMTimeMakeWithSeconds(leftPosition, NSEC_PER_SEC)];
-//    [_playerItem setForwardPlaybackEndTime:CMTimeMakeWithSeconds(rightPosition, NSEC_PER_SEC)];
-//}
-
 #pragma mark - Action
 - (IBAction)clickPlayButton:(id)sender {
     [_player play];
@@ -342,18 +338,11 @@
 }
 
 - (IBAction)clickFinishButton:(id)sender {
-    //先修改速度
+    //修改速度 和 剪辑视频  同时进行
     [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime]];
-    //再剪辑视频
-    
 }
 
-
-
-
-
 - (void)trimmingVideoWithAsset:(AVAsset *)asset {
-    
     //配置path
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
@@ -396,9 +385,7 @@
                 
                 ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
                 if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
-                    
                     [self writeExportedVideoToAssetsLibrary:outputURL];
-                    
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // completion(_filePath);

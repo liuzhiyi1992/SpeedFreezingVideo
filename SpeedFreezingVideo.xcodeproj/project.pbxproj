@@ -16,7 +16,6 @@
 		4848F64A1CE73431009C6280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F6481CE73431009C6280 /* Main.storyboard */; };
 		4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64B1CE73431009C6280 /* Assets.xcassets */; };
 		4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64D1CE73431009C6280 /* LaunchScreen.storyboard */; };
-		485E56D91CED68E500159EC3 /* UINavigationController+className.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56D81CED68E500159EC3 /* UINavigationController+className.m */; };
 		485E56E01CED71A100159EC3 /* VideoTrimmerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */; };
 		485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E31CED9EC700159EC3 /* SAResizibleBubble.m */; };
 		485E56EB1CED9EC700159EC3 /* SASliderLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E51CED9EC700159EC3 /* SASliderLeft.m */; };
@@ -30,6 +29,8 @@
 		488119731CEC5A5100CA0C7F /* VideoEditingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119711CEC5A5100CA0C7F /* VideoEditingController.m */; };
 		488119741CEC5A5100CA0C7F /* VideoEditingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488119721CEC5A5100CA0C7F /* VideoEditingController.xib */; };
 		488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119761CEC5FCA00CA0C7F /* VideoPlayingView.m */; };
+		48FC0BAD1CF2B8AD000D02CB /* UINavigationBar+transparency.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */; };
+		48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,8 +48,6 @@
 		4848F64B1CE73431009C6280 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4848F64E1CE73431009C6280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4848F6501CE73431009C6280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		485E56D71CED68E500159EC3 /* UINavigationController+className.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+className.h"; sourceTree = "<group>"; };
-		485E56D81CED68E500159EC3 /* UINavigationController+className.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+className.m"; sourceTree = "<group>"; };
 		485E56DE1CED71A100159EC3 /* VideoTrimmerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTrimmerView.h; sourceTree = "<group>"; };
 		485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTrimmerView.m; sourceTree = "<group>"; };
 		485E56E21CED9EC700159EC3 /* SAResizibleBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAResizibleBubble.h; sourceTree = "<group>"; };
@@ -73,6 +72,10 @@
 		488119721CEC5A5100CA0C7F /* VideoEditingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoEditingController.xib; sourceTree = "<group>"; };
 		488119751CEC5FCA00CA0C7F /* VideoPlayingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayingView.h; sourceTree = "<group>"; };
 		488119761CEC5FCA00CA0C7F /* VideoPlayingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayingView.m; sourceTree = "<group>"; };
+		48FC0BA91CF2B8AD000D02CB /* UINavigationBar+transparency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+transparency.h"; sourceTree = "<group>"; };
+		48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+transparency.m"; sourceTree = "<group>"; };
+		48FC0BAB1CF2B8AD000D02CB /* UINavigationController+className.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+className.h"; sourceTree = "<group>"; };
+		48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+className.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +167,7 @@
 			children = (
 				488119631CEC59BA00CA0C7F /* Controller */,
 				488119671CEC59BA00CA0C7F /* View */,
-				485E56D71CED68E500159EC3 /* UINavigationController+className.h */,
-				485E56D81CED68E500159EC3 /* UINavigationController+className.m */,
+				48FC0BA81CF2B8AD000D02CB /* Util */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -195,6 +197,17 @@
 				488119761CEC5FCA00CA0C7F /* VideoPlayingView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		48FC0BA81CF2B8AD000D02CB /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				48FC0BA91CF2B8AD000D02CB /* UINavigationBar+transparency.h */,
+				48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */,
+				48FC0BAB1CF2B8AD000D02CB /* UINavigationController+className.h */,
+				48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,14 +284,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				485E56D91CED68E500159EC3 /* UINavigationController+className.m in Sources */,
 				4881196F1CEC59BA00CA0C7F /* CaptureVideoButton.m in Sources */,
+				48FC0BAD1CF2B8AD000D02CB /* UINavigationBar+transparency.m in Sources */,
 				4848F6471CE73431009C6280 /* ViewController.m in Sources */,
 				4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */,
 				488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
 				4810F4601CF1C6DE00550D10 /* SpeedMultipleView.m in Sources */,
 				485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */,
+				48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */,
 				485E56FF1CEE006300159EC3 /* SpeedFreezesOperatingView.m in Sources */,
 				488119731CEC5A5100CA0C7F /* VideoEditingController.m in Sources */,
 				485E56ED1CED9EC700159EC3 /* SAVideoRangeSlider.m in Sources */,

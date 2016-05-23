@@ -17,7 +17,7 @@
 //}
 
 - (void)zy_pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    NSLog(@"zy_push class:%@", [viewController class]);
+//    NSLog(@"zy_push class:%@", [viewController class]);
     [self zy_pushViewController:viewController animated:animated];
 }
 

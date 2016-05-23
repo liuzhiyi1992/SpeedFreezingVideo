@@ -182,7 +182,6 @@ const CGFloat FRAME_PIC_WIDTH = 30;
     return _durationSeconds;
 }
 
-
 #pragma mark - Gestures
 
 - (void)handleLeftPan:(UIPanGestureRecognizer *)gesture

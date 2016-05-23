@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiP-ZY-FnV" customClass="VideoPlayingView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="211"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="400" id="Krh-2e-mbr"/>
@@ -33,32 +33,14 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-Uf-2zW">
-                    <rect key="frame" x="30" y="231" width="315" height="90"/>
+                    <rect key="frame" x="30" y="275" width="315" height="90"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="90" id="5r9-6c-T0T"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2O-4e-9dl">
-                    <rect key="frame" x="30" y="351" width="36" height="34"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="Tqa-PI-BeA"/>
-                        <constraint firstAttribute="height" constant="30" id="wr0-iq-uKH"/>
-                    </constraints>
-                    <state key="normal" title="播放"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="Tqa-PI-BeA"/>
-                            <exclude reference="wr0-iq-uKH"/>
-                        </mask>
-                    </variation>
-                    <connections>
-                        <action selector="clickPlayButton:" destination="-1" eventType="touchUpInside" id="jWt-Y3-fAN"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRl-D0-dYP">
-                    <rect key="frame" x="96" y="351" width="72" height="34"/>
+                    <rect key="frame" x="30" y="395" width="72" height="34"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <state key="normal" title="速度控制"/>
                     <connections>
@@ -66,7 +48,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uiv-C3-P7D">
-                    <rect key="frame" x="97" y="447" width="180" height="34"/>
+                    <rect key="frame" x="97" y="491" width="180" height="34"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <state key="normal" title="应用编辑并保存到相册">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -76,7 +58,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIZ-Lg-RkG">
-                    <rect key="frame" x="30" y="405" width="315" height="2"/>
+                    <rect key="frame" x="30" y="449" width="315" height="2"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="700" constant="2" id="GUv-Oe-H7X"/>
@@ -86,18 +68,16 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="YiP-ZY-FnV" secondAttribute="trailing" id="0jr-KQ-W44"/>
-                <constraint firstItem="D2O-4e-9dl" firstAttribute="top" secondItem="U2e-Uf-2zW" secondAttribute="bottom" constant="30" id="3xJ-sD-MGd"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="top" secondItem="BIZ-Lg-RkG" secondAttribute="bottom" constant="40" id="5CO-fs-lUo"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="trailing" secondItem="U2e-Uf-2zW" secondAttribute="trailing" id="BI4-Ar-J5R"/>
+                <constraint firstItem="fRl-D0-dYP" firstAttribute="leading" secondItem="U2e-Uf-2zW" secondAttribute="leading" id="IiK-cg-CFx"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IsS-JW-vr2"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="leading" secondItem="U2e-Uf-2zW" secondAttribute="leading" id="Qch-OJ-c2y"/>
-                <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SeI-nD-OrP"/>
+                <constraint firstItem="fRl-D0-dYP" firstAttribute="top" secondItem="U2e-Uf-2zW" secondAttribute="bottom" constant="30" id="RIL-Da-30a"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="SeI-nD-OrP"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dk9-Ra-VA1"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="20" id="h2P-fn-4yt"/>
-                <constraint firstItem="D2O-4e-9dl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="hyZ-eD-qOX"/>
-                <constraint firstItem="fRl-D0-dYP" firstAttribute="leading" secondItem="D2O-4e-9dl" secondAttribute="trailing" constant="30" id="iOW-K4-LAS"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="40" id="kpx-Ye-d0u"/>
-                <constraint firstItem="fRl-D0-dYP" firstAttribute="top" secondItem="D2O-4e-9dl" secondAttribute="top" id="pgB-5A-rol"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="top" secondItem="YiP-ZY-FnV" secondAttribute="bottom" constant="20" id="puJ-ep-pZs"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="va9-jG-gCX"/>
                 <constraint firstAttribute="trailing" secondItem="U2e-Uf-2zW" secondAttribute="trailing" constant="30" id="xI9-Hq-3l7"/>
