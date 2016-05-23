@@ -49,8 +49,8 @@ const CGFloat speedSliderHeight = 30;
     self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, speedSliderHeight, sliderWidth, sliderHeight) videoUrl:_videoUrl];
     [_saVideoRangeSlider setPopoverBubbleSize:0 height:0];
     // Purple
-    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.768 green: 0.665 blue: 0.853 alpha:1.f];
-    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.535 green: 0.329 blue: 0.707 alpha:1.f];
+    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
+    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
     _saVideoRangeSlider.delegate = self;
     [self addSubview:_saVideoRangeSlider];
     
