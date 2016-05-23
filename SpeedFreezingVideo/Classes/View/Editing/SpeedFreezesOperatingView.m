@@ -8,13 +8,16 @@
 
 #import "SpeedFreezesOperatingView.h"
 
-const CGFloat speedSliderWidth = 20;
-const CGFloat speedSliderHeight = 30;
+const CGFloat speedSliderWidth = 20.f;
+const CGFloat speedSliderHeight = 30.f;
+const CGFloat speedSliderLigatureHeight = 5.f;
 
 @interface SpeedFreezesOperatingView () <SAVideoRangeSliderDelegate>
 @property (strong, nonatomic) NSURL *videoUrl;
 
 @property (strong, nonatomic) SAVideoRangeSlider *saVideoRangeSlider;
+@property (strong, nonatomic) UIImageView *ligatureImageView;
+@property (strong, nonatomic) CAShapeLayer *ligatureMaskLayer;
 
 @property (strong, nonatomic) UIImageView *leftSpeedSlider;
 @property (strong, nonatomic) UIImageView *rightSpeedSlider;
@@ -41,6 +44,10 @@ const CGFloat speedSliderHeight = 30;
     //更新配置水滴的位置
     self.leftSpeedSlider.center = CGPointMake(_leftPositionCoordinates, speedSliderHeight/2);
     self.rightSpeedSlider.center = CGPointMake(_rightPositionCoordinates, speedSliderHeight/2);
+    //连线
+    CGFloat disSpeedSlider = CGRectGetMinX(_rightSpeedSlider.frame) - CGRectGetMaxX(_leftSpeedSlider.frame);
+    
+    [self.ligatureMaskLayer setPath:[UIBezierPath bezierPathWithRect:CGRectMake(CGRectGetMaxX(_leftSpeedSlider.frame), 0, disSpeedSlider, speedSliderLigatureHeight)].CGPath];
 }
 
 - (void)configureView {
@@ -74,6 +81,16 @@ const CGFloat speedSliderHeight = 30;
     [_rightSpeedSlider addGestureRecognizer:rightPan];
     [self addSubview:_rightSpeedSlider];
     
+    //连线
+    self.ligatureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _leftSpeedSlider.center.y, self.bounds.size.width, speedSliderLigatureHeight)];
+    [_ligatureImageView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:_ligatureImageView];
+    
+    //mask
+    self.ligatureMaskLayer = [[CAShapeLayer alloc] init];
+    [self.ligatureMaskLayer setFillColor:[UIColor whiteColor].CGColor];
+    _ligatureImageView.layer.mask = self.ligatureMaskLayer;
+    
     self.isSpeedSliderActive = YES;
     [self configureSpeedSliderInitialStatus];
 }
@@ -90,12 +107,14 @@ const CGFloat speedSliderHeight = 30;
         //关闭
         _leftSpeedSlider.hidden = YES;
         _rightSpeedSlider.hidden = YES;
+        _ligatureImageView.hidden = YES;
         
         self.isSpeedSliderActive = NO;
     } else {
         //打开
         _leftSpeedSlider.hidden = NO;
         _rightSpeedSlider.hidden = NO;
+        _ligatureImageView.hidden = NO;
         
         [self configureSpeedSliderInitialStatus];
         self.isSpeedSliderActive = YES;

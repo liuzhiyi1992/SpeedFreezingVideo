@@ -80,7 +80,7 @@
 - (void)modifyNavigationBar {
 //    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
 //    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:1.f alpha:0.0f]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.2f]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:1.0f]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
 //    [self.navigationController.navigationBar setBackgroundImage:[self createImageWithColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.7f]] forBarMetrics:UIBarMetricsDefault];

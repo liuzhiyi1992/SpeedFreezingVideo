@@ -44,8 +44,8 @@ const CGFloat FRAME_PIC_WIDTH = 30;
 @implementation SAVideoRangeSlider
 
 
-#define SLIDER_BORDERS_SIZE 6.0f
-#define BG_VIEW_BORDERS_SIZE 3.0f
+#define SLIDER_BORDERS_SIZE 2.0f
+#define BG_VIEW_BORDERS_SIZE 0.0f
 
 
 - (id)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl{

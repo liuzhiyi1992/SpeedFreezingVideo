@@ -478,7 +478,7 @@
     //刷新对焦
     [self focusAtCapturePoint:point];
     //刷新测光
-//    [self exposeAtCapturePoint:point];
+    [self exposeAtCapturePoint:point];
 }
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {

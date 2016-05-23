@@ -12,122 +12,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gc1-QZ-1XO">
-                    <rect key="frame" x="86" y="0.0" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="gRc-Xj-Rz9"/>
-                    </constraints>
-                    <state key="normal" title="-2x">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="15"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="clickSpeedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="wL9-3c-BuS"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSR-hG-jSh">
-                    <rect key="frame" x="145" y="0.0" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="4Qg-jb-5cN"/>
-                    </constraints>
-                    <state key="normal" title="0">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="15"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="clickSpeedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="c7G-Qz-A16"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A89-W4-fCy">
-                    <rect key="frame" x="203" y="0.0" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="J7V-NO-NcY"/>
-                    </constraints>
-                    <state key="normal" title="2x">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="15"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="clickSpeedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="UIa-zi-TYF"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LtN-Re-EqF">
-                    <rect key="frame" x="261" y="0.0" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="Pkl-dg-7ay"/>
-                    </constraints>
-                    <state key="normal" title="3x">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="15"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="clickSpeedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="naR-Ww-o5J"/>
-                    </connections>
-                </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJI-Kb-Mc9">
-                    <rect key="frame" x="58" y="0.0" width="28" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="u6P-Yh-CQX"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrt-z7-pkr">
-                    <rect key="frame" x="0.0" y="0.0" width="28.5" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="ohR-1X-KeA"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNF-Sm-pjm">
-                    <rect key="frame" x="116" y="0.0" width="28.5" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="r9g-xT-JOp"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="104-g8-pfs">
-                    <rect key="frame" x="175" y="0.0" width="28.5" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="zk5-vZ-SZH"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lF6-6e-Do7">
-                    <rect key="frame" x="233" y="0.0" width="28" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="n7d-xR-4ry"/>
-                    </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGI-zv-ThM">
-                    <rect key="frame" x="291" y="0.0" width="28.5" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="10" id="vDn-S1-Cid"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCP-dZ-j18">
-                    <rect key="frame" x="28" y="0.0" width="30" height="30"/>
+                    <rect key="frame" x="28" y="10" width="30" height="30"/>
                     <color key="backgroundColor" red="0.29803921568627451" green="0.29803921568627451" blue="0.29803921568627451" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="xCP-dZ-j18" secondAttribute="height" multiplier="1:1" id="6Rp-bb-JlV"/>
@@ -145,6 +31,120 @@
                         <action selector="clickSpeedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="4Rf-11-uBZ"/>
                     </connections>
                 </button>
+                <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gc1-QZ-1XO">
+                    <rect key="frame" x="86" y="10" width="30" height="30"/>
+                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="gRc-Xj-Rz9"/>
+                    </constraints>
+                    <state key="normal" title="-2x">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="clickSpeedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="wL9-3c-BuS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSR-hG-jSh">
+                    <rect key="frame" x="145" y="10" width="30" height="30"/>
+                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="4Qg-jb-5cN"/>
+                    </constraints>
+                    <state key="normal" title="0">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="clickSpeedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="c7G-Qz-A16"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A89-W4-fCy">
+                    <rect key="frame" x="203" y="10" width="30" height="30"/>
+                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="J7V-NO-NcY"/>
+                    </constraints>
+                    <state key="normal" title="2x">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="clickSpeedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="UIa-zi-TYF"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LtN-Re-EqF">
+                    <rect key="frame" x="261" y="10" width="30" height="30"/>
+                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="Pkl-dg-7ay"/>
+                    </constraints>
+                    <state key="normal" title="3x">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="clickSpeedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="naR-Ww-o5J"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJI-Kb-Mc9">
+                    <rect key="frame" x="58" y="10" width="28" height="10"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="u6P-Yh-CQX"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrt-z7-pkr">
+                    <rect key="frame" x="0.0" y="10" width="28.5" height="10"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="ohR-1X-KeA"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNF-Sm-pjm">
+                    <rect key="frame" x="116" y="10" width="28.5" height="10"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="r9g-xT-JOp"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="104-g8-pfs">
+                    <rect key="frame" x="175" y="10" width="28.5" height="10"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="zk5-vZ-SZH"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lF6-6e-Do7">
+                    <rect key="frame" x="233" y="10" width="28" height="10"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="n7d-xR-4ry"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGI-zv-ThM">
+                    <rect key="frame" x="291" y="10" width="28.5" height="10"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="vDn-S1-Cid"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -154,7 +154,7 @@
                 <constraint firstItem="LtN-Re-EqF" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6Bb-8f-pLJ"/>
                 <constraint firstItem="PSR-hG-jSh" firstAttribute="leading" secondItem="WNF-Sm-pjm" secondAttribute="trailing" id="7kq-OY-LQ6"/>
                 <constraint firstItem="WNF-Sm-pjm" firstAttribute="leading" secondItem="Gc1-QZ-1XO" secondAttribute="trailing" id="ANb-Yf-1WL"/>
-                <constraint firstItem="xCP-dZ-j18" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="APT-gk-19o"/>
+                <constraint firstItem="xCP-dZ-j18" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="APT-gk-19o"/>
                 <constraint firstItem="WNF-Sm-pjm" firstAttribute="top" secondItem="xCP-dZ-j18" secondAttribute="top" id="BDf-om-fmt"/>
                 <constraint firstItem="xCP-dZ-j18" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="CgH-Sy-SO6"/>
                 <constraint firstItem="A89-W4-fCy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Crq-Wk-nEp"/>
@@ -162,7 +162,7 @@
                 <constraint firstItem="DGI-zv-ThM" firstAttribute="width" secondItem="FJI-Kb-Mc9" secondAttribute="width" id="GnF-3u-7DJ"/>
                 <constraint firstItem="lF6-6e-Do7" firstAttribute="width" secondItem="FJI-Kb-Mc9" secondAttribute="width" id="HXw-oi-TP2"/>
                 <constraint firstItem="lF6-6e-Do7" firstAttribute="top" secondItem="xCP-dZ-j18" secondAttribute="top" id="K49-pN-Bqy"/>
-                <constraint firstAttribute="bottom" secondItem="xCP-dZ-j18" secondAttribute="bottom" id="Mgc-pM-q5R"/>
+                <constraint firstAttribute="bottom" secondItem="xCP-dZ-j18" secondAttribute="bottom" constant="10" id="Mgc-pM-q5R"/>
                 <constraint firstItem="LtN-Re-EqF" firstAttribute="top" secondItem="xCP-dZ-j18" secondAttribute="top" id="OOf-Uj-4DQ"/>
                 <constraint firstItem="Gc1-QZ-1XO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="SRh-xw-lX3"/>
                 <constraint firstItem="104-g8-pfs" firstAttribute="width" secondItem="FJI-Kb-Mc9" secondAttribute="width" id="URs-wa-1fH"/>
@@ -193,6 +193,7 @@
                 <outletCollection property="speedButtons" destination="A89-W4-fCy" id="s2p-Hx-2IJ"/>
                 <outletCollection property="speedButtons" destination="LtN-Re-EqF" id="ToT-Rj-f1V"/>
             </connections>
+            <point key="canvasLocation" x="202" y="292"/>
         </view>
     </objects>
 </document>
