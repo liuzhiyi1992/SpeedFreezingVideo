@@ -59,6 +59,10 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
+    
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightTopButton:)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
+    
 //    self.navigationController.navigationBar.translucent = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [self modifyNavigationBar];
@@ -345,9 +349,14 @@
     [_player play];
 }
 
-- (IBAction)clickFinishButton:(id)sender {
+- (void)clickRightTopButton:(UIBarButtonItem *)item {
+    item.enabled = NO;
     //修改速度 和 剪辑视频  同时进行
     [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime]];
+}
+
+- (IBAction)clickFinishButton:(id)sender {
+    
 }
 
 - (IBAction)clickOperatingSpeedButton:(id)sender {
