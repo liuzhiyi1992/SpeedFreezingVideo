@@ -26,5 +26,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SASliderLeft : UIView
-
+@property (strong, nonatomic) UIColor *mainColor;
 @end
