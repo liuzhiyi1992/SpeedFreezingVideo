@@ -31,7 +31,6 @@ const CGFloat speedSliderLigatureHeight = 1.f;
 
 @implementation SpeedFreezesOperatingView
 
-
 - (instancetype)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl {
     self = [super initWithFrame:frame];
     if (self) {
@@ -52,11 +51,12 @@ const CGFloat speedSliderLigatureHeight = 1.f;
 }
 
 - (void)configureView {
+    
     CGFloat sliderWidth = self.bounds.size.width;
     CGFloat sliderHeight = self.bounds.size.height - speedSliderHeight - speedSliderBottomSpace;
     self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, speedSliderHeight + speedSliderBottomSpace, sliderWidth, sliderHeight) videoUrl:_videoUrl];
     [_saVideoRangeSlider setPopoverBubbleSize:0 height:0];
-    // Purple
+    
     _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
     _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
     _saVideoRangeSlider.delegate = self;
@@ -218,6 +218,35 @@ const CGFloat speedSliderLigatureHeight = 1.f;
 
 - (CMTime)speedOperateVideoEndTime {
     return CMTimeMakeWithSeconds([self speedRightPositionToVideoPosition], NSEC_PER_SEC);
+}
+
+- (void)speedEditing {
+    //todo 用一个标志区分两种编辑  优化
+    //speed
+    [_leftSpeedSlider setImage:[UIImage imageNamed:@"vernier_yellow"]];
+    [_rightSpeedSlider setImage:[UIImage imageNamed:@"vernier_yellow"]];
+    _ligatureImageView.hidden = NO;
+    //range
+    [_saVideoRangeSlider changeMainColor:SPEED_FREEZING_COLOR_WHITE];
+    
+    //delegate button
+    if ([_delegate respondsToSelector:@selector(operatingViewSpeedBeginEditing)]) {
+        [_delegate operatingViewSpeedBeginEditing];
+    }
+}
+
+- (void)rangeEditing {
+    //speed
+    [_leftSpeedSlider setImage:[UIImage imageNamed:@"vernier_white"]];
+    [_rightSpeedSlider setImage:[UIImage imageNamed:@"vernier_white"]];
+    _ligatureImageView.hidden = YES;
+    //range
+    [_saVideoRangeSlider changeMainColor:SPEED_FREEZING_COLOR_YELLOW];
+    
+    //delegate button
+    if ([_delegate respondsToSelector:@selector(operatingViewRangeBeginEditing)]) {
+        [_delegate operatingViewRangeBeginEditing];
+    }
 }
 
 #pragma mark - delegate

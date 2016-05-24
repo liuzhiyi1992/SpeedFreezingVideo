@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreMedia/CMTime.h>
 #import "SAVideoRangeSlider.h"
+#import "UIColor+hexColor.h"
+
+#define SPEED_FREEZING_COLOR_YELLOW [UIColor hexColor:@"fff100"]
+#define SPEED_FREEZING_COLOR_WHITE [UIColor whiteColor]
 
 @protocol SpeedFreezesOperatingViewDelegate <NSObject>
 
@@ -17,6 +21,9 @@
 
 - (void)operatingViewSpeedDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition sliderMotion:(SliderMotion)motion;
 - (void)operatingViewSpeedDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
+
+- (void)operatingViewSpeedBeginEditing;
+- (void)operatingViewRangeBeginEditing;
 
 @end
 

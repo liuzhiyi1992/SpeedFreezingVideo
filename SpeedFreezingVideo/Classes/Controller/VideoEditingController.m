@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayerView;
 @property (weak, nonatomic) IBOutlet UIView *videoTrimmerHolderView;
 @property (weak, nonatomic) IBOutlet UIView *speedMultipleHolderView;
+@property (weak, nonatomic) IBOutlet UIButton *videoRangeButton;
+@property (weak, nonatomic) IBOutlet UIButton *videoSpeedButton;
 
 @property (strong, nonatomic) NSURL *assetUrl;
 @property (strong, nonatomic) AVPlayerItem *playerItem;
@@ -100,7 +102,6 @@
     CGFloat operatingViewWidth = _videoTrimmerHolderView.frame.size.width;
     CGFloat operatingViewHeight = _videoTrimmerHolderView.frame.size.height;
     
-    //todo SpeedFreezesOperatingView
     self.operatingView = [[SpeedFreezesOperatingView alloc] initWithFrame:CGRectMake(0, 0, operatingViewWidth, operatingViewHeight) videoUrl:_assetUrl];
     _operatingView.delegate = self;
     [self.videoTrimmerHolderView addSubview:_operatingView];
@@ -324,6 +325,16 @@
     
 }
 
+- (void)operatingViewSpeedBeginEditing {
+    [_videoRangeButton setTitleColor:SPEED_FREEZING_COLOR_WHITE forState:UIControlStateNormal];
+    [_videoSpeedButton setTitleColor:SPEED_FREEZING_COLOR_YELLOW forState:UIControlStateNormal];
+}
+
+- (void)operatingViewRangeBeginEditing {
+    [_videoRangeButton setTitleColor:SPEED_FREEZING_COLOR_YELLOW forState:UIControlStateNormal];
+    [_videoSpeedButton setTitleColor:SPEED_FREEZING_COLOR_WHITE forState:UIControlStateNormal];
+}
+
 - (void)SpeedMultipleViewDidSelectedSpeedRate:(double)rate {
     self.speedRate = rate;
 }
@@ -341,6 +352,15 @@
     //修改速度 和 剪辑视频  同时进行
     [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime]];
 }
+
+- (IBAction)clickVideoRangeButton:(id)sender {
+    
+}
+
+- (IBAction)clickVideoSpeedButton:(id)sender {
+}
+
+
 
 - (void)trimmingVideoWithAsset:(AVAsset *)asset {
     //配置path

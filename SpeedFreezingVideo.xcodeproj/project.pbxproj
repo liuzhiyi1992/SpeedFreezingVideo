@@ -29,6 +29,7 @@
 		488119731CEC5A5100CA0C7F /* VideoEditingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119711CEC5A5100CA0C7F /* VideoEditingController.m */; };
 		488119741CEC5A5100CA0C7F /* VideoEditingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488119721CEC5A5100CA0C7F /* VideoEditingController.xib */; };
 		488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119761CEC5FCA00CA0C7F /* VideoPlayingView.m */; };
+		48B824BD1CF45B3D005E565C /* UIColor+hexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B824BC1CF45B3D005E565C /* UIColor+hexColor.m */; };
 		48FC0BAD1CF2B8AD000D02CB /* UINavigationBar+transparency.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */; };
 		48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,8 @@
 		488119721CEC5A5100CA0C7F /* VideoEditingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoEditingController.xib; sourceTree = "<group>"; };
 		488119751CEC5FCA00CA0C7F /* VideoPlayingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayingView.h; sourceTree = "<group>"; };
 		488119761CEC5FCA00CA0C7F /* VideoPlayingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayingView.m; sourceTree = "<group>"; };
+		48B824BB1CF45B3D005E565C /* UIColor+hexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+hexColor.h"; sourceTree = "<group>"; };
+		48B824BC1CF45B3D005E565C /* UIColor+hexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+hexColor.m"; sourceTree = "<group>"; };
 		48FC0BA91CF2B8AD000D02CB /* UINavigationBar+transparency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+transparency.h"; sourceTree = "<group>"; };
 		48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+transparency.m"; sourceTree = "<group>"; };
 		48FC0BAB1CF2B8AD000D02CB /* UINavigationController+className.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+className.h"; sourceTree = "<group>"; };
@@ -206,6 +209,8 @@
 				48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */,
 				48FC0BAB1CF2B8AD000D02CB /* UINavigationController+className.h */,
 				48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */,
+				48B824BB1CF45B3D005E565C /* UIColor+hexColor.h */,
+				48B824BC1CF45B3D005E565C /* UIColor+hexColor.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
 				4810F4601CF1C6DE00550D10 /* SpeedMultipleView.m in Sources */,
+				48B824BD1CF45B3D005E565C /* UIColor+hexColor.m in Sources */,
 				485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */,
 				48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */,
 				485E56FF1CEE006300159EC3 /* SpeedFreezesOperatingView.m in Sources */,
