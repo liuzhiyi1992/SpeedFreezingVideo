@@ -126,41 +126,72 @@ const CGFloat speedSliderLigatureHeight = 1.f;
 }
 
 - (void)handleLeftPan:(UIPanGestureRecognizer *)gesture {
-    if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
-        CGPoint translation = [gesture translationInView:self];
-        if (_leftPositionCoordinates + translation.x >= _saVideoRangeSlider.leftPositionCoordinates + _saVideoRangeSlider.thumbWidth &&
-            _leftPositionCoordinates + translation.x < _rightPositionCoordinates) {
-            //在视频有效范围内
-            self.leftPositionCoordinates += translation.x;
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:
+            [self speedEditing];
+        case UIGestureRecognizerStateChanged:
+        {
+            CGPoint translation = [gesture translationInView:self];
+            if (_leftPositionCoordinates + translation.x >= _saVideoRangeSlider.leftPositionCoordinates + _saVideoRangeSlider.thumbWidth &&
+                _leftPositionCoordinates + translation.x < _rightPositionCoordinates) {
+                //在视频有效范围内
+                self.leftPositionCoordinates += translation.x;
+            }
+            if (_leftPositionCoordinates < 0) {
+                self.leftPositionCoordinates = 0;
+            }
+            [gesture setTranslation:CGPointZero inView:self];
+            [self setNeedsLayout];
+            [self speedSliderChangeNotification:SliderMotionLeft];
         }
-        if (_leftPositionCoordinates < 0) {
-            self.leftPositionCoordinates = 0;
-        }
-        [gesture setTranslation:CGPointZero inView:self];
-        [self setNeedsLayout];
-        [self speedSliderChangeNotification:SliderMotionLeft];
-    } else if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self speedSliderGestureStateEndedNotification];
+            break;
+        case UIGestureRecognizerStateEnded:
+            [self speedSliderGestureStateEndedNotification];
+            break;
+        default:
+            break;
     }
+    
+    
+//    if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
+//        
+//    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+//        
+//    }
 }
 
 - (void)handleRightPan:(UIPanGestureRecognizer *)gesture {
-    if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
-        CGPoint translation = [gesture translationInView:self];
-        if (_rightPositionCoordinates + translation.x <= _saVideoRangeSlider.rightPositionCoordinates - _saVideoRangeSlider.thumbWidth &&
-            _rightPositionCoordinates + translation.x > _leftPositionCoordinates) {
-            //在视频有效范围内
-            self.rightPositionCoordinates += translation.x;
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:
+            [self speedEditing];
+        case UIGestureRecognizerStateChanged:
+        {
+            CGPoint translation = [gesture translationInView:self];
+            if (_rightPositionCoordinates + translation.x <= _saVideoRangeSlider.rightPositionCoordinates - _saVideoRangeSlider.thumbWidth &&
+                _rightPositionCoordinates + translation.x > _leftPositionCoordinates) {
+                //在视频有效范围内
+                self.rightPositionCoordinates += translation.x;
+            }
+            if (_rightPositionCoordinates > (self.bounds.size.width - _saVideoRangeSlider.thumbWidth)) {
+                _rightPositionCoordinates = self.bounds.size.width - _saVideoRangeSlider.thumbWidth;
+            }
+            [gesture setTranslation:CGPointZero inView:self];
+            [self setNeedsLayout];
+            [self speedSliderChangeNotification:SliderMotionRight];
         }
-        if (_rightPositionCoordinates > (self.bounds.size.width - _saVideoRangeSlider.thumbWidth)) {
-            _rightPositionCoordinates = self.bounds.size.width - _saVideoRangeSlider.thumbWidth;
-        }
-        [gesture setTranslation:CGPointZero inView:self];
-        [self setNeedsLayout];
-        [self speedSliderChangeNotification:SliderMotionRight];
-    } else if (gesture.state == UIGestureRecognizerStateEnded) {
-        [self speedSliderGestureStateEndedNotification];
+            break;
+        case UIGestureRecognizerStateEnded:
+            [self speedSliderGestureStateEndedNotification];
+            break;
+        default:
+            break;
     }
+    
+//    if (gesture.state == UIGestureRecognizerStateBegan || gesture.state == UIGestureRecognizerStateChanged) {
+//        
+//    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+//        
+//    }
 }
 
 - (void)linkageSpeedSliderWithRangeSliderLeft:(CGFloat)leftPositionCoordinates right:(CGFloat)rightPositionCoordinates {
@@ -257,6 +288,7 @@ const CGFloat speedSliderLigatureHeight = 1.f;
 }
 
 - (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition sliderMotion:(SliderMotion)motion {
+    [self rangeEditing];
     if ([_delegate respondsToSelector:@selector(operatingViewRangeDidChangeLeftPosition:rightPosition:sliderMotion:)]) {
         [_delegate operatingViewRangeDidChangeLeftPosition:leftPosition rightPosition:rightPosition sliderMotion:motion];
     }

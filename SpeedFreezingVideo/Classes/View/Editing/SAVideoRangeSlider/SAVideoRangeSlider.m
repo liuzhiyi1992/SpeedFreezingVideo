@@ -323,8 +323,10 @@ const CGFloat FRAME_PIC_WIDTH = 30;
 
 
 - (void)changeMainColor:(UIColor *)color {
-    [_leftThumb setMainColor:color];
-    [_rightThumb setMainColor:color];
+    _leftThumb.mainColor = color;
+    [_leftThumb setNeedsDisplay];
+    _rightThumb.mainColor = color;
+    [_rightThumb setNeedsDisplay];
     [_topBorder setBackgroundColor:color];
     [_bottomBorder setBackgroundColor:color];
 }
