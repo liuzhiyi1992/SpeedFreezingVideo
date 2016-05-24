@@ -15,7 +15,6 @@
 #define SPEED_FREEZING_COLOR_WHITE [UIColor whiteColor]
 
 @protocol SpeedFreezesOperatingViewDelegate <NSObject>
-
 - (void)operatingViewRangeDidChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition sliderMotion:(SliderMotion)motion;
 - (void)operatingViewRangeDidGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
 
@@ -24,15 +23,21 @@
 
 - (void)operatingViewSpeedBeginEditing;
 - (void)operatingViewRangeBeginEditing;
-
 @end
+
+typedef enum {
+    EditingTypeSpeed,
+    EditingTypeRange
+} EditingType;
 
 @interface SpeedFreezesOperatingView : UIView
 @property (weak ,nonatomic) id<SpeedFreezesOperatingViewDelegate> delegate;
-
+@property (assign, nonatomic) EditingType editingType;
 - (instancetype)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl;
 - (BOOL)switchSpeedSlider;
 - (CMTime)speedOperateVideoBeginTime;
 - (CMTime)speedOperateVideoEndTime;
+- (void)speedEditing;
+- (void)rangeEditing;
 
 @end

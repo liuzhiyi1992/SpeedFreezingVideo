@@ -328,11 +328,13 @@
 - (void)operatingViewSpeedBeginEditing {
     [_videoRangeButton setTitleColor:SPEED_FREEZING_COLOR_WHITE forState:UIControlStateNormal];
     [_videoSpeedButton setTitleColor:SPEED_FREEZING_COLOR_YELLOW forState:UIControlStateNormal];
+    _speedMultipleHolderView.hidden = NO;
 }
 
 - (void)operatingViewRangeBeginEditing {
     [_videoRangeButton setTitleColor:SPEED_FREEZING_COLOR_YELLOW forState:UIControlStateNormal];
     [_videoSpeedButton setTitleColor:SPEED_FREEZING_COLOR_WHITE forState:UIControlStateNormal];
+    _speedMultipleHolderView.hidden = YES;
 }
 
 - (void)SpeedMultipleViewDidSelectedSpeedRate:(double)rate {
@@ -344,22 +346,23 @@
     [_player play];
 }
 
-- (IBAction)clickOperatingSpeedButton:(id)sender {
-    [_operatingView switchSpeedSlider];
-}
-
 - (IBAction)clickFinishButton:(id)sender {
     //修改速度 和 剪辑视频  同时进行
     [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime]];
 }
 
-- (IBAction)clickVideoRangeButton:(id)sender {
-    
+- (IBAction)clickOperatingSpeedButton:(id)sender {
+    if (_operatingView.editingType == EditingTypeRange) {
+        [_operatingView speedEditing];
+    } else if (_operatingView.editingType == EditingTypeSpeed){
+        BOOL speedOperatingWork = [_operatingView switchSpeedSlider];
+        _speedMultipleHolderView.hidden = !speedOperatingWork;
+    }
 }
 
-- (IBAction)clickVideoSpeedButton:(id)sender {
+- (IBAction)clickOperatingRangeButton:(id)sender {
+    [_operatingView rangeEditing];
 }
-
 
 
 - (void)trimmingVideoWithAsset:(AVAsset *)asset {

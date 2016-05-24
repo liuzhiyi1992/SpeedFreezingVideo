@@ -64,7 +64,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="裁剪视频"/>
                     <connections>
-                        <action selector="clickVideoRangeButton:" destination="-1" eventType="touchUpInside" id="5nL-zl-dXg"/>
+                        <action selector="clickOperatingRangeButton:" destination="-1" eventType="touchUpInside" id="biC-P2-Pym"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRl-D0-dYP">
@@ -74,7 +74,6 @@
                     <state key="normal" title="速度控制"/>
                     <connections>
                         <action selector="clickOperatingSpeedButton:" destination="-1" eventType="touchUpInside" id="Nrq-33-vTj"/>
-                        <action selector="clickVideoSpeedButton:" destination="-1" eventType="touchUpInside" id="vxn-l1-4ft"/>
                     </connections>
                 </button>
             </subviews>

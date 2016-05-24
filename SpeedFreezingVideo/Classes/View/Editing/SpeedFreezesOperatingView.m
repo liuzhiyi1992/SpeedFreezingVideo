@@ -35,6 +35,7 @@ const CGFloat speedSliderLigatureHeight = 1.f;
     self = [super initWithFrame:frame];
     if (self) {
         _videoUrl = videoUrl;
+        _editingType = EditingTypeSpeed;
         [self configureView];
     }
     return self;
@@ -91,7 +92,6 @@ const CGFloat speedSliderLigatureHeight = 1.f;
     
     //mask
     self.ligatureMaskLayer = [[CAShapeLayer alloc] init];
-    [self.ligatureMaskLayer setFillColor:[UIColor whiteColor].CGColor];
     _ligatureImageView.layer.mask = self.ligatureMaskLayer;
     
     self.isSpeedSliderActive = YES;
@@ -110,14 +110,15 @@ const CGFloat speedSliderLigatureHeight = 1.f;
         //关闭
         _leftSpeedSlider.hidden = YES;
         _rightSpeedSlider.hidden = YES;
-        _ligatureImageView.hidden = YES;
+        [_ligatureImageView removeFromSuperview];
         
         self.isSpeedSliderActive = NO;
+        [self rangeEditing];
     } else {
         //打开
         _leftSpeedSlider.hidden = NO;
         _rightSpeedSlider.hidden = NO;
-        _ligatureImageView.hidden = NO;
+        [self addSubview:_ligatureImageView];
         
         [self configureSpeedSliderInitialStatus];
         self.isSpeedSliderActive = YES;
@@ -252,7 +253,13 @@ const CGFloat speedSliderLigatureHeight = 1.f;
 }
 
 - (void)speedEditing {
-    //todo 用一个标志区分两种编辑  优化
+    if (_editingType == EditingTypeSpeed) {
+        return;
+    }
+    //若被关闭，先打开
+    if (!_isSpeedSliderActive) {
+        [self switchSpeedSlider];
+    }
     //speed
     [_leftSpeedSlider setImage:[UIImage imageNamed:@"vernier_yellow"]];
     [_rightSpeedSlider setImage:[UIImage imageNamed:@"vernier_yellow"]];
@@ -264,20 +271,27 @@ const CGFloat speedSliderLigatureHeight = 1.f;
     if ([_delegate respondsToSelector:@selector(operatingViewSpeedBeginEditing)]) {
         [_delegate operatingViewSpeedBeginEditing];
     }
+    //EditingType
+    self.editingType = EditingTypeSpeed;
+    
 }
 
 - (void)rangeEditing {
+    if (_editingType == EditingTypeRange) {
+        return;
+    }
     //speed
     [_leftSpeedSlider setImage:[UIImage imageNamed:@"vernier_white"]];
     [_rightSpeedSlider setImage:[UIImage imageNamed:@"vernier_white"]];
     _ligatureImageView.hidden = YES;
     //range
     [_saVideoRangeSlider changeMainColor:SPEED_FREEZING_COLOR_YELLOW];
-    
     //delegate button
     if ([_delegate respondsToSelector:@selector(operatingViewRangeBeginEditing)]) {
         [_delegate operatingViewRangeBeginEditing];
     }
+    //EditingType
+    self.editingType = EditingTypeRange;
 }
 
 #pragma mark - delegate
