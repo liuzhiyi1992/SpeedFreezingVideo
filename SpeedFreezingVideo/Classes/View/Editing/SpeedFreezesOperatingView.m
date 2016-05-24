@@ -52,14 +52,14 @@ const CGFloat speedSliderLigatureHeight = 1.f;
 }
 
 - (void)configureView {
-    
     CGFloat sliderWidth = self.bounds.size.width;
     CGFloat sliderHeight = self.bounds.size.height - speedSliderHeight - speedSliderBottomSpace;
     self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, speedSliderHeight + speedSliderBottomSpace, sliderWidth, sliderHeight) videoUrl:_videoUrl];
     [_saVideoRangeSlider setPopoverBubbleSize:0 height:0];
+    [_saVideoRangeSlider changeMainColor:SPEED_FREEZING_COLOR_WHITE];
     
-    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
-    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
+//    _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
+//    _saVideoRangeSlider.bottomBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
     _saVideoRangeSlider.delegate = self;
     [self addSubview:_saVideoRangeSlider];
     
