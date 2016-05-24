@@ -40,6 +40,11 @@
                                         <constraint firstAttribute="width" constant="40" id="hgN-r0-ECe"/>
                                         <constraint firstAttribute="width" secondItem="tTb-bq-0jy" secondAttribute="height" multiplier="1:1" id="pIh-z2-fZ6"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="hgN-r0-ECe"/>
+                                        </mask>
+                                    </variation>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>

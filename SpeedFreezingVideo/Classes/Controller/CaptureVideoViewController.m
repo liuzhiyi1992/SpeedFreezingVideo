@@ -273,6 +273,17 @@
     [self.videoPreviewView setSession:_captureSession];
     self.videoPreviewView.delegate = self;
 //    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    
+    //Gesture
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    [_videoPreviewView addGestureRecognizer:panGesture];
+}
+
+- (void)handlePanGesture:(UIPanGestureRecognizer *)gesture {
+    CGPoint translate = [gesture translationInView:self.view];
+    if (translate.x > 150) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 //对焦
@@ -451,8 +462,7 @@
 
 #pragma mark - delegate
 - (void)previewViewFocusAtCapturePoint:(CGPoint)point {
-    
-    NSLog(@"focus mode -- %ld , exposure mode --- %ld", (long)[_videoDevice focusMode], (long)[_videoDevice exposureMode]);
+//    NSLog(@"focus mode -- %ld , exposure mode --- %ld", (long)[_videoDevice focusMode], (long)[_videoDevice exposureMode]);
     //刷新对焦
     [self focusAtCapturePoint:point];
     //刷新测光
