@@ -58,7 +58,6 @@
     [super viewDidLoad];
 //    self.navigationController.navigationBar.translucent = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    //navigationBar
     [self modifyNavigationBar];
 }
 
@@ -80,13 +79,11 @@
 }
 
 - (void)modifyNavigationBar {
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
 //    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:1.f alpha:0.0f]];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:1.0f]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
 //    [self.navigationController.navigationBar setBackgroundImage:[self createImageWithColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.7f]] forBarMetrics:UIBarMetricsDefault];
-    NSLog(@"配置navigationController");
 }
 
 - (void)readyToPlay {
@@ -132,7 +129,6 @@
     
     AVMutableCompositionTrack *compositionVideoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     AVMutableCompositionTrack *compositionAudioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
-    
     
     
     //video insert

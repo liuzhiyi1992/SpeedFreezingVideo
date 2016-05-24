@@ -154,7 +154,6 @@
         //启动会话
         [_captureSession startRunning];
     });
-    
 }
 
 - (void)configureVideoOutput {
