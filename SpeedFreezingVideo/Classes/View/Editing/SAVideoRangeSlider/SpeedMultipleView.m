@@ -11,7 +11,7 @@
 
 @interface SpeedMultipleView()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *speedButtons;
-@property (strong, nonatomic) UIColor *originalColor;
+//@property (strong, nonatomic) UIColor *originalColor;
 @property (weak, nonatomic) IBOutlet UIButton *originalSpeedRateButton;
 
 
@@ -21,19 +21,36 @@
 
 + (SpeedMultipleView *)createView {
     SpeedMultipleView *multipleView = [[NSBundle mainBundle] loadNibNamed:@"SpeedMultipleView" owner:nil options:nil][0];
-    UIButton *tmpButton = multipleView.speedButtons[0];
-    multipleView.originalColor = tmpButton.backgroundColor;
-    [multipleView clickSpeedButton:multipleView.originalSpeedRateButton];
+    
+    
+//    UIButton *tmpButton = multipleView.speedButtons[0];
+//    multipleView.originalColor = tmpButton.backgroundColor;
+    
+    
+    [multipleView configureView];
+    
     return multipleView;
+}
+
+- (void)configureView{
+    for (UIButton *btn in _speedButtons) {
+        btn.layer.borderWidth = 0.5f;
+        btn.layer.borderColor = [UIColor whiteColor].CGColor;
+    }
+    [self clickSpeedButton:_originalSpeedRateButton];
 }
 
 - (IBAction)clickSpeedButton:(UIButton *)sender {
     for (UIButton *btn in _speedButtons) {
         if (btn != sender) {
-            [btn setBackgroundColor:_originalColor];
+            [btn setBackgroundColor:[UIColor blackColor]];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            btn.layer.borderColor = [UIColor whiteColor].CGColor;
         }
     }
-    [sender setBackgroundColor:[UIColor blackColor]];
+    [sender setBackgroundColor:[UIColor yellowColor]];
+    [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    sender.layer.borderColor = [UIColor yellowColor].CGColor;
     
     double speedRate = 1.f;
     switch (sender.tag) {

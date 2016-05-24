@@ -14,12 +14,13 @@
             <subviews>
                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xCP-dZ-j18">
                     <rect key="frame" x="28" y="10" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.29803921568627451" green="0.29803921568627451" blue="0.29803921568627451" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="xCP-dZ-j18" secondAttribute="height" multiplier="1:1" id="6Rp-bb-JlV"/>
                         <constraint firstAttribute="width" constant="30" id="aAx-jz-RaC"/>
                     </constraints>
-                    <state key="normal" title="-3x">
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="-3X">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -33,11 +34,13 @@
                 </button>
                 <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gc1-QZ-1XO">
                     <rect key="frame" x="86" y="10" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="width" secondItem="Gc1-QZ-1XO" secondAttribute="height" multiplier="1:1" id="KwB-eN-GpE"/>
                         <constraint firstAttribute="width" constant="30" id="gRc-Xj-Rz9"/>
                     </constraints>
-                    <state key="normal" title="-2x">
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="-2X">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -51,10 +54,12 @@
                 </button>
                 <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSR-hG-jSh">
                     <rect key="frame" x="145" y="10" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="4Qg-jb-5cN"/>
+                        <constraint firstAttribute="width" secondItem="PSR-hG-jSh" secondAttribute="height" multiplier="1:1" id="VVm-su-YCh"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal" title="0">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -69,11 +74,13 @@
                 </button>
                 <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A89-W4-fCy">
                     <rect key="frame" x="203" y="10" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="J7V-NO-NcY"/>
+                        <constraint firstAttribute="width" secondItem="A89-W4-fCy" secondAttribute="height" multiplier="1:1" id="uyt-t3-sy9"/>
                     </constraints>
-                    <state key="normal" title="2x">
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="2X">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -87,11 +94,13 @@
                 </button>
                 <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LtN-Re-EqF">
                     <rect key="frame" x="261" y="10" width="30" height="30"/>
-                    <color key="backgroundColor" red="0.29615385608795364" green="0.29615385608795364" blue="0.29615385608795364" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="Pkl-dg-7ay"/>
+                        <constraint firstAttribute="width" secondItem="LtN-Re-EqF" secondAttribute="height" multiplier="1:1" id="qEj-Qu-Ueo"/>
                     </constraints>
-                    <state key="normal" title="3x">
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="3X">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -105,48 +114,48 @@
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJI-Kb-Mc9">
                     <rect key="frame" x="58" y="10" width="28" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="u6P-Yh-CQX"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrt-z7-pkr">
                     <rect key="frame" x="0.0" y="10" width="28.5" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="ohR-1X-KeA"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNF-Sm-pjm">
                     <rect key="frame" x="116" y="10" width="28.5" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="r9g-xT-JOp"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="104-g8-pfs">
                     <rect key="frame" x="175" y="10" width="28.5" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="zk5-vZ-SZH"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lF6-6e-Do7">
                     <rect key="frame" x="233" y="10" width="28" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="n7d-xR-4ry"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGI-zv-ThM">
                     <rect key="frame" x="291" y="10" width="28.5" height="10"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="vDn-S1-Cid"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Gc1-QZ-1XO" firstAttribute="leading" secondItem="FJI-Kb-Mc9" secondAttribute="trailing" id="0XG-ui-1u3"/>
                 <constraint firstItem="FJI-Kb-Mc9" firstAttribute="top" secondItem="xCP-dZ-j18" secondAttribute="top" id="3te-GY-OLJ"/>

@@ -40,15 +40,16 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRl-D0-dYP">
-                    <rect key="frame" x="263" y="450" width="72" height="34"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="275" y="445" width="60" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="速度控制"/>
                     <connections>
                         <action selector="clickOperatingSpeedButton:" destination="-1" eventType="touchUpInside" id="Nrq-33-vTj"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uiv-C3-P7D">
-                    <rect key="frame" x="97" y="546" width="180" height="34"/>
+                    <rect key="frame" x="97" y="537" width="180" height="34"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <state key="normal" title="应用编辑并保存到相册">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -58,16 +59,17 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIZ-Lg-RkG">
-                    <rect key="frame" x="30" y="504" width="315" height="2"/>
+                    <rect key="frame" x="30" y="495" width="315" height="2"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="700" constant="2" id="GUv-Oe-H7X"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc8-dq-2JP">
-                    <rect key="frame" x="40" y="450" width="72" height="34"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="视频剪辑"/>
+                    <rect key="frame" x="40" y="445" width="60" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="裁剪视频"/>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -79,7 +81,7 @@
                 <constraint firstItem="fRl-D0-dYP" firstAttribute="leading" secondItem="U2e-Uf-2zW" secondAttribute="leading" id="IiK-cg-CFx"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IsS-JW-vr2"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="leading" secondItem="U2e-Uf-2zW" secondAttribute="leading" id="Qch-OJ-c2y"/>
-                <constraint firstItem="fRl-D0-dYP" firstAttribute="top" secondItem="U2e-Uf-2zW" secondAttribute="bottom" constant="45" id="RIL-Da-30a"/>
+                <constraint firstItem="fRl-D0-dYP" firstAttribute="top" secondItem="U2e-Uf-2zW" secondAttribute="bottom" constant="40" id="RIL-Da-30a"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="SeI-nD-OrP"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dk9-Ra-VA1"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="20" id="h2P-fn-4yt"/>

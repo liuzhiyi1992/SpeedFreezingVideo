@@ -8,9 +8,10 @@
 
 #import "SpeedFreezesOperatingView.h"
 
-const CGFloat speedSliderWidth = 20.f;
-const CGFloat speedSliderHeight = 30.f;
-const CGFloat speedSliderLigatureHeight = 5.f;
+const CGFloat speedSliderWidth = 17.f;
+const CGFloat speedSliderHeight = 17.f;
+const CGFloat speedSliderBottomSpace = 14.f;
+const CGFloat speedSliderLigatureHeight = 1.f;
 
 @interface SpeedFreezesOperatingView () <SAVideoRangeSliderDelegate>
 @property (strong, nonatomic) NSURL *videoUrl;
@@ -52,8 +53,8 @@ const CGFloat speedSliderLigatureHeight = 5.f;
 
 - (void)configureView {
     CGFloat sliderWidth = self.bounds.size.width;
-    CGFloat sliderHeight = self.bounds.size.height - speedSliderHeight;
-    self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, speedSliderHeight, sliderWidth, sliderHeight) videoUrl:_videoUrl];
+    CGFloat sliderHeight = self.bounds.size.height - speedSliderHeight - speedSliderBottomSpace;
+    self.saVideoRangeSlider = [[SAVideoRangeSlider alloc] initWithFrame:CGRectMake(0, speedSliderHeight + speedSliderBottomSpace, sliderWidth, sliderHeight) videoUrl:_videoUrl];
     [_saVideoRangeSlider setPopoverBubbleSize:0 height:0];
     // Purple
     _saVideoRangeSlider.topBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
@@ -66,16 +67,17 @@ const CGFloat speedSliderLigatureHeight = 5.f;
 }
 
 - (void)configureSpeedSlider {
+    //左游标
     self.leftSpeedSlider = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, speedSliderWidth, speedSliderHeight)];
-    [_leftSpeedSlider setBackgroundColor:[UIColor redColor]];
+    [_leftSpeedSlider setImage:[UIImage imageNamed:@"vernier_yellow"]];
     [_leftSpeedSlider setUserInteractionEnabled:YES];
     UIPanGestureRecognizer *leftPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftPan:)];
     [_leftSpeedSlider addGestureRecognizer:leftPan];
     [self addSubview:_leftSpeedSlider];
     
-    
+    //右游标
     self.rightSpeedSlider = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, speedSliderWidth, speedSliderHeight)];
-    [_rightSpeedSlider setBackgroundColor:[UIColor redColor]];
+    [_rightSpeedSlider setImage:[UIImage imageNamed:@"vernier_yellow"]];
     [_rightSpeedSlider setUserInteractionEnabled:YES];
     UIPanGestureRecognizer *rightPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightPan:)];
     [_rightSpeedSlider addGestureRecognizer:rightPan];
@@ -83,7 +85,8 @@ const CGFloat speedSliderLigatureHeight = 5.f;
     
     //连线
     self.ligatureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, _leftSpeedSlider.center.y, self.bounds.size.width, speedSliderLigatureHeight)];
-    [_ligatureImageView setBackgroundColor:[UIColor whiteColor]];
+    [_ligatureImageView setImage:[UIImage imageNamed:@"vernier_ligature"]];
+//    [_ligatureImageView setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:_ligatureImageView];
     
     //mask
