@@ -22,8 +22,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *assetThumbnailImageView;
 
-
-//@property (strong, nonatomic) AVCaptureDevice *captureDevice;
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 
 @property (strong, nonatomic) AVCaptureDevice *audioDevice;
@@ -42,13 +40,6 @@
 @end
 
 @implementation CaptureVideoViewController
-
-//- (CMMotionManager *)motionManager {
-//    if (_motionManager == nil) {
-//        _motionManager = [[CMMotionManager alloc] init];
-//    }
-//    return _motionManager;
-//}
 
 - (void)dealloc {
     [_motionManager stopDeviceMotionUpdates];
@@ -69,7 +60,6 @@
     [self accessAuthorization];
     [self configureAlbumLastVideoImageView];
     [self startMotionManager];
-    
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -119,8 +109,6 @@
 }
 
 - (void)configureCapture {
-    //开始配置安装
-    
     //session
     self.captureSession = [[AVCaptureSession alloc] init];
     if ([_captureSession canSetSessionPreset:AVCaptureSessionPresetHigh]) {
@@ -128,7 +116,6 @@
     } else {
         NSLog(@"Can not set AVCaptureSession sessionPreset, using default %@", _captureSession.sessionPreset);
     }
-    
     
     [_captureSession beginConfiguration];
     
@@ -144,13 +131,12 @@
     self.audioInput = [self createMediaInputWithDevice:_audioDevice mediaType:AVMediaTypeAudio];
     [self captureSessionAddInput:_audioInput mediaType:AVMediaTypeAudio];
     
-    //todo视频输出
+    //视频输出
     self.videoOutput = [[AVCaptureMovieFileOutput alloc] init];
     if (![_captureSession canAddOutput:_videoOutput]) {
         NSLog(@"ERROR: 配置视频输出出错");
     } else {
         [_captureSession addOutput:_videoOutput];
-        
         //todo 这些有用?
         AVCaptureConnection *captureConnection = [_videoOutput connectionWithMediaType:AVMediaTypeVideo];
         if ([captureConnection isVideoStabilizationSupported]) {
@@ -161,12 +147,9 @@
         }
     }
     
-    
     //配置预览view
     [self configureVideoPreview];
-    
     [_captureSession commitConfiguration];
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //启动会话
         [_captureSession startRunning];
@@ -269,7 +252,6 @@
     } else {
         NSLog(@"ERROR: 获取视频输入设备错误");
     }
-    
 }
 
 //获取指定摄像头
@@ -289,12 +271,9 @@
 }
 
 - (void)configureVideoPreview {
-    
     [self.videoPreviewView setSession:_captureSession];
     self.videoPreviewView.delegate = self;
 //    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    
-//    _videoPreviewLayer.position = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height *0.5);
 }
 
 //对焦
@@ -544,23 +523,9 @@
     }
 }
 
-//- (IBAction)clickSelecteAlbum:(id)sender {
-//    UIImagePickerController *myImagePickerController = [[UIImagePickerController alloc] init];
-//    myImagePickerController.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
-//    myImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-//    myImagePickerController.delegate = self;
-//    myImagePickerController.editing = NO;
-//    [self presentViewController:myImagePickerController animated:YES completion:nil];
-//    
-//    //todo 私有类
-////    PUUIImageViewController *con = [[PUUIImageViewController alloc] init];
-//}
-
-
 - (IBAction)clickChangeCameraButton:(id)sender {
     [self changeCameraDevice];
 }
-
 
 - (IBAction)clickSwitchFlashButton:(id)sender {
     if ([_videoDevice hasTorch]) {
@@ -579,19 +544,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-//{
-//    return YES;
-//}
-//
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskAll;
-//}
-////
-//-(BOOL)shouldAutorotate
-//{
-//    return YES;
-//}
 
 @end
