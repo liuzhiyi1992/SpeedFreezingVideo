@@ -322,6 +322,12 @@ const CGFloat FRAME_PIC_WIDTH = 30;
 }
 
 
+- (void)changeMainColor:(UIColor *)color {
+    [_leftThumb setMainColor:color];
+    [_rightThumb setMainColor:color];
+    [_topBorder setBackgroundColor:color];
+    [_bottomBorder setBackgroundColor:color];
+}
 
 
 #pragma mark - Video
