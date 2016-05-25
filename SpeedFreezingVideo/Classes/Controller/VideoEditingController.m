@@ -56,24 +56,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //禁用右滑返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
-    
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightTopButton:)];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
-    
-//    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.translucent = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [self modifyNavigationBar];
+    [self modifyStatusBar];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -82,15 +80,22 @@
     [self readyToTrim];
     [self readyToPlay];
     [self configureSpeedMultipleView];
-    
 }
 
 - (void)modifyNavigationBar {
-//    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:1.f green:1.f blue:1.f alpha:0.0f]];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:1.0f]];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightTopButton:)];
+    self.navigationItem.rightBarButtonItem = rightBarButton;
     
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:1.0f]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 //    [self.navigationController.navigationBar setBackgroundImage:[self createImageWithColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.7f]] forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)modifyStatusBar {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)readyToPlay {

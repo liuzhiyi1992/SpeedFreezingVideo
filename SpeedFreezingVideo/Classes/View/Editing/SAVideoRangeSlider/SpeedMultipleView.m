@@ -7,6 +7,7 @@
 //
 
 #import "SpeedMultipleView.h"
+#import "SpeedFreezesOperatingView.h"
 
 
 @interface SpeedMultipleView()
@@ -48,9 +49,9 @@
             btn.layer.borderColor = [UIColor whiteColor].CGColor;
         }
     }
-    [sender setBackgroundColor:[UIColor yellowColor]];
+    [sender setBackgroundColor:SPEED_FREEZING_COLOR_YELLOW];
     [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    sender.layer.borderColor = [UIColor yellowColor].CGColor;
+    sender.layer.borderColor = SPEED_FREEZING_COLOR_YELLOW.CGColor;
     
     double speedRate = 1.f;
     switch (sender.tag) {

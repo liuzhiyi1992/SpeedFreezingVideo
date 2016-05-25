@@ -60,6 +60,8 @@
     [self accessAuthorization];
     [self configureAlbumLastVideoImageView];
     [self startMotionManager];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 - (BOOL)prefersStatusBarHidden {

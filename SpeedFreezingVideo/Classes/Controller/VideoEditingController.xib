@@ -22,10 +22,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiP-ZY-FnV" customClass="VideoPlayingView">
-                    <rect key="frame" x="0.0" y="44" width="375" height="211"/>
+                    <rect key="frame" x="-34.5" y="0.0" width="444" height="250"/>
                     <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="400" id="Krh-2e-mbr"/>
+                        <constraint firstAttribute="height" constant="250" id="LkD-FA-1v6"/>
                         <constraint firstAttribute="width" secondItem="YiP-ZY-FnV" secondAttribute="height" multiplier="16:9" id="lPy-st-4RR"/>
                     </constraints>
                     <variation key="default">
@@ -35,40 +36,48 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-Uf-2zW">
-                    <rect key="frame" x="20" y="315" width="335" height="90"/>
+                    <rect key="frame" x="20" y="310" width="335" height="89"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="90" id="5r9-6c-T0T"/>
+                        <constraint firstAttribute="height" constant="89" id="5r9-6c-T0T"/>
                     </constraints>
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uiv-C3-P7D">
-                    <rect key="frame" x="97" y="537" width="180" height="34"/>
+                    <rect key="frame" x="97" y="519" width="180" height="34"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <state key="normal" title="应用编辑并保存到相册">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIZ-Lg-RkG">
-                    <rect key="frame" x="20" y="495" width="335" height="2"/>
+                    <rect key="frame" x="20" y="477" width="335" height="2"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="700" constant="2" id="GUv-Oe-H7X"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc8-dq-2JP">
-                    <rect key="frame" x="40" y="445" width="60" height="30"/>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc8-dq-2JP">
+                    <rect key="frame" x="40" y="439" width="100" height="18"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="Lqi-FP-RLe"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="裁剪视频"/>
+                    <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="裁剪视频" image="rangeEditing_white"/>
                     <connections>
                         <action selector="clickOperatingRangeButton:" destination="-1" eventType="touchUpInside" id="biC-P2-Pym"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRl-D0-dYP">
-                    <rect key="frame" x="275" y="445" width="60" height="30"/>
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRl-D0-dYP">
+                    <rect key="frame" x="235" y="439" width="100" height="18"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="X78-Y7-dp7"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="速度控制">
+                    <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="速度控制" image="speedEditing_yellow">
                         <color key="titleColor" red="1" green="0.94509803921568625" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -86,12 +95,13 @@
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IsS-JW-vr2"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="leading" secondItem="U2e-Uf-2zW" secondAttribute="leading" id="Qch-OJ-c2y"/>
                 <constraint firstItem="fRl-D0-dYP" firstAttribute="top" secondItem="U2e-Uf-2zW" secondAttribute="bottom" constant="40" id="RIL-Da-30a"/>
-                <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="SeI-nD-OrP"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SeI-nD-OrP"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dk9-Ra-VA1"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="20" id="h2P-fn-4yt"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="40" id="kpx-Ye-d0u"/>
                 <constraint firstAttribute="trailing" secondItem="fRl-D0-dYP" secondAttribute="trailing" constant="40" id="mYb-8S-c4t"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="top" secondItem="YiP-ZY-FnV" secondAttribute="bottom" constant="60" id="puJ-ep-pZs"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vGE-vi-N3L"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="va9-jG-gCX"/>
                 <constraint firstAttribute="trailing" secondItem="U2e-Uf-2zW" secondAttribute="trailing" constant="20" id="xI9-Hq-3l7"/>
                 <constraint firstItem="Qc8-dq-2JP" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="top" id="zDp-Gq-IOK"/>
@@ -99,10 +109,16 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="0jr-KQ-W44"/>
+                    <exclude reference="dk9-Ra-VA1"/>
                     <exclude reference="IiK-cg-CFx"/>
                     <exclude reference="kpx-Ye-d0u"/>
                 </mask>
             </variation>
         </view>
     </objects>
+    <resources>
+        <image name="rangeEditing_white" width="27" height="18"/>
+        <image name="speedEditing_yellow" width="27" height="18"/>
+    </resources>
 </document>
