@@ -482,6 +482,8 @@
     } else {
         //这里可以考虑保存相册
         VideoEditingController *editingController = [[VideoEditingController alloc] initWithAssetUrl:outputFileURL];
+        //绑定视频方向
+        objc_setAssociatedObject(outputFileURL, &kOrientation, @(_deviceOrientation), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         [self.navigationController pushViewController:editingController animated:YES];
 //        [self dismissViewControllerAnimated:YES completion:nil];
     }

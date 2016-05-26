@@ -16,6 +16,7 @@
 		4848F64A1CE73431009C6280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F6481CE73431009C6280 /* Main.storyboard */; };
 		4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64B1CE73431009C6280 /* Assets.xcassets */; };
 		4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64D1CE73431009C6280 /* LaunchScreen.storyboard */; };
+		485142201CF6AB3400258B1A /* FrameMaskingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4851421F1CF6AB3400258B1A /* FrameMaskingLayer.m */; };
 		485E56E01CED71A100159EC3 /* VideoTrimmerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */; };
 		485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E31CED9EC700159EC3 /* SAResizibleBubble.m */; };
 		485E56EB1CED9EC700159EC3 /* SASliderLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E51CED9EC700159EC3 /* SASliderLeft.m */; };
@@ -49,6 +50,8 @@
 		4848F64B1CE73431009C6280 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4848F64E1CE73431009C6280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4848F6501CE73431009C6280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4851421E1CF6AB3400258B1A /* FrameMaskingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameMaskingLayer.h; sourceTree = "<group>"; };
+		4851421F1CF6AB3400258B1A /* FrameMaskingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameMaskingLayer.m; sourceTree = "<group>"; };
 		485E56DE1CED71A100159EC3 /* VideoTrimmerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTrimmerView.h; sourceTree = "<group>"; };
 		485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTrimmerView.m; sourceTree = "<group>"; };
 		485E56E21CED9EC700159EC3 /* SAResizibleBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAResizibleBubble.h; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 				485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */,
 				485E56FD1CEE006300159EC3 /* SpeedFreezesOperatingView.h */,
 				485E56FE1CEE006300159EC3 /* SpeedFreezesOperatingView.m */,
+				4851421E1CF6AB3400258B1A /* FrameMaskingLayer.h */,
+				4851421F1CF6AB3400258B1A /* FrameMaskingLayer.m */,
 			);
 			path = Editing;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 				488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
 				4810F4601CF1C6DE00550D10 /* SpeedMultipleView.m in Sources */,
+				485142201CF6AB3400258B1A /* FrameMaskingLayer.m in Sources */,
 				48B824BD1CF45B3D005E565C /* UIColor+hexColor.m in Sources */,
 				485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */,
 				48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */,
@@ -372,7 +378,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "a6c948ed-7c57-4911-988b-1644d201ea33";
+				PROVISIONING_PROFILE = "6108632a-36f6-4234-b3f4-2088a6bb4457";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -410,7 +416,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "a6c948ed-7c57-4911-988b-1644d201ea33";
+				PROVISIONING_PROFILE = "6108632a-36f6-4234-b3f4-2088a6bb4457";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -425,7 +431,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiuhaodong.sport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a6c948ed-7c57-4911-988b-1644d201ea33";
+				PROVISIONING_PROFILE = "6108632a-36f6-4234-b3f4-2088a6bb4457";
 			};
 			name = Debug;
 		};
@@ -438,7 +444,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiuhaodong.sport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a6c948ed-7c57-4911-988b-1644d201ea33";
+				PROVISIONING_PROFILE = "6108632a-36f6-4234-b3f4-2088a6bb4457";
 			};
 			name = Release;
 		};
