@@ -12,4 +12,6 @@
 @interface VideoPlayingView : UIView
 
 - (void)setPlayer:(AVPlayer *)player;
+- (void)setVideoGravity:(NSString *)videoGravity;
+
 @end

@@ -23,6 +23,11 @@
     //填充
     ((AVPlayerLayer *)self.layer).videoGravity = AVLayerVideoGravityResizeAspect;
 }
+//todo 可能没用了
+- (void)setVideoGravity:(NSString *)videoGravity {
+    ((AVPlayerLayer *)self.layer).videoGravity = videoGravity;
+    
+}
 
 - (void)setPlayer:(AVPlayer *)player {
     [(AVPlayerLayer *)self.layer setPlayer:player];

@@ -4,12 +4,14 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoEditingController">
             <connections>
                 <outlet property="speedMultipleHolderView" destination="BIZ-Lg-RkG" id="a2H-BX-sXG"/>
                 <outlet property="videoPlayerView" destination="YiP-ZY-FnV" id="oIo-PM-eyA"/>
+                <outlet property="videoPlayerViewWidthConstraint" destination="zok-q8-H4A" id="lGA-DQ-v6Q"/>
                 <outlet property="videoRangeButton" destination="Qc8-dq-2JP" id="ZiF-XG-lIF"/>
                 <outlet property="videoSpeedButton" destination="fRl-D0-dYP" id="sD0-4a-HYE"/>
                 <outlet property="videoTrimmerHolderView" destination="U2e-Uf-2zW" id="LrJ-gp-pzn"/>
@@ -21,22 +23,33 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiP-ZY-FnV" customClass="VideoPlayingView">
-                    <rect key="frame" x="-34.5" y="0.0" width="444" height="250"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZ8-vg-LZG">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
                     <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="250" id="wFx-f5-gVP"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiP-ZY-FnV" customClass="VideoPlayingView">
+                    <rect key="frame" x="40" y="0.0" width="295" height="250"/>
+                    <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="600" constant="20" id="ERr-d3-Rg9"/>
                         <constraint firstAttribute="height" constant="400" id="Krh-2e-mbr"/>
                         <constraint firstAttribute="height" constant="250" id="LkD-FA-1v6"/>
                         <constraint firstAttribute="width" secondItem="YiP-ZY-FnV" secondAttribute="height" multiplier="16:9" id="lPy-st-4RR"/>
+                        <constraint firstAttribute="width" constant="295" id="zok-q8-H4A"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="ERr-d3-Rg9"/>
                             <exclude reference="Krh-2e-mbr"/>
+                            <exclude reference="lPy-st-4RR"/>
                         </mask>
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-Uf-2zW">
-                    <rect key="frame" x="20" y="310" width="335" height="89"/>
+                    <rect key="frame" x="15" y="310" width="345" height="89"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="89" id="5r9-6c-T0T"/>
@@ -50,7 +63,7 @@
                     </state>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIZ-Lg-RkG">
-                    <rect key="frame" x="20" y="477" width="335" height="2"/>
+                    <rect key="frame" x="15" y="477" width="345" height="2"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="700" constant="2" id="GUv-Oe-H7X"/>
@@ -87,30 +100,52 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="YiP-ZY-FnV" secondAttribute="trailing" id="082-tf-IaP"/>
                 <constraint firstAttribute="trailing" secondItem="YiP-ZY-FnV" secondAttribute="trailing" id="0jr-KQ-W44"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="top" secondItem="BIZ-Lg-RkG" secondAttribute="bottom" constant="40" id="5CO-fs-lUo"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="centerX" secondItem="dZ8-vg-LZG" secondAttribute="centerX" id="6Q0-tL-Rib"/>
+                <constraint firstItem="dZ8-vg-LZG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6po-JA-rNb"/>
+                <constraint firstAttribute="trailing" secondItem="dZ8-vg-LZG" secondAttribute="trailing" id="ATW-QE-Q7c"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="trailing" secondItem="U2e-Uf-2zW" secondAttribute="trailing" id="BI4-Ar-J5R"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" relation="lessThanOrEqual" secondItem="dZ8-vg-LZG" secondAttribute="leading" constant="60" id="ClP-AS-Gtc"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DG2-He-hR0"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" priority="700" constant="40" id="EhH-wf-IFd"/>
+                <constraint firstItem="dZ8-vg-LZG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="El2-M1-ayU"/>
                 <constraint firstItem="Qc8-dq-2JP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="40" id="GS1-KC-Nvz"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dZ8-vg-LZG" secondAttribute="leading" constant="30" id="HXF-Zd-NUh"/>
                 <constraint firstItem="fRl-D0-dYP" firstAttribute="leading" secondItem="U2e-Uf-2zW" secondAttribute="leading" id="IiK-cg-CFx"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IsS-JW-vr2"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="leading" secondItem="U2e-Uf-2zW" secondAttribute="leading" id="Qch-OJ-c2y"/>
                 <constraint firstItem="fRl-D0-dYP" firstAttribute="top" secondItem="U2e-Uf-2zW" secondAttribute="bottom" constant="40" id="RIL-Da-30a"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="trailing" secondItem="dZ8-vg-LZG" secondAttribute="trailing" constant="-30" id="RRK-no-Zus"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SeI-nD-OrP"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="width" secondItem="dZ8-vg-LZG" secondAttribute="width" multiplier="0.3:1" priority="600" id="UXZ-em-iQc"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dZ8-vg-LZG" secondAttribute="leading" constant="20" id="Zbb-nS-2Hl"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dk9-Ra-VA1"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="20" id="h2P-fn-4yt"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="40" id="kpx-Ye-d0u"/>
                 <constraint firstAttribute="trailing" secondItem="fRl-D0-dYP" secondAttribute="trailing" constant="40" id="mYb-8S-c4t"/>
+                <constraint firstItem="YiP-ZY-FnV" firstAttribute="trailing" secondItem="dZ8-vg-LZG" secondAttribute="trailing" constant="-30" id="o8m-SD-gMn"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="top" secondItem="YiP-ZY-FnV" secondAttribute="bottom" constant="60" id="puJ-ep-pZs"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vGE-vi-N3L"/>
-                <constraint firstItem="U2e-Uf-2zW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="va9-jG-gCX"/>
-                <constraint firstAttribute="trailing" secondItem="U2e-Uf-2zW" secondAttribute="trailing" constant="20" id="xI9-Hq-3l7"/>
+                <constraint firstItem="U2e-Uf-2zW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="va9-jG-gCX"/>
+                <constraint firstAttribute="trailing" secondItem="U2e-Uf-2zW" secondAttribute="trailing" constant="15" id="xI9-Hq-3l7"/>
                 <constraint firstItem="Qc8-dq-2JP" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="top" id="zDp-Gq-IOK"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="082-tf-IaP"/>
                     <exclude reference="0jr-KQ-W44"/>
+                    <exclude reference="ClP-AS-Gtc"/>
+                    <exclude reference="DG2-He-hR0"/>
+                    <exclude reference="HXF-Zd-NUh"/>
+                    <exclude reference="RRK-no-Zus"/>
+                    <exclude reference="UXZ-em-iQc"/>
+                    <exclude reference="Zbb-nS-2Hl"/>
                     <exclude reference="dk9-Ra-VA1"/>
+                    <exclude reference="o8m-SD-gMn"/>
+                    <exclude reference="vGE-vi-N3L"/>
                     <exclude reference="IiK-cg-CFx"/>
                     <exclude reference="kpx-Ye-d0u"/>
                 </mask>

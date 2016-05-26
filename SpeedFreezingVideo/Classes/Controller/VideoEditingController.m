@@ -13,12 +13,16 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SpeedMultipleView.h"
 
+const char kOrientation;
+
 @interface VideoEditingController () <SpeedFreezesOperatingViewDelegate, SpeedMultipleViewDelegate>
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayerView;
 @property (weak, nonatomic) IBOutlet UIView *videoTrimmerHolderView;
 @property (weak, nonatomic) IBOutlet UIView *speedMultipleHolderView;
 @property (weak, nonatomic) IBOutlet UIButton *videoRangeButton;
 @property (weak, nonatomic) IBOutlet UIButton *videoSpeedButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoPlayerViewWidthConstraint;
+
 
 @property (strong, nonatomic) NSURL *assetUrl;
 @property (strong, nonatomic) AVPlayerItem *playerItem;
@@ -64,6 +68,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [self modifyNavigationBar];
     [self modifyStatusBar];
+    
+    //Orientation
+    AVCaptureVideoOrientation videoOrientation = [objc_getAssociatedObject(self.assetUrl, &kOrientation) integerValue];
+    if (videoOrientation == AVCaptureVideoOrientationPortrait) {
+//        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspect];
+//        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        self.videoPlayerViewWidthConstraint.constant = [UIScreen mainScreen].bounds.size.width * 0.4;
+    } else if (videoOrientation == AVCaptureVideoOrientationLandscapeLeft || videoOrientation == AVCaptureVideoOrientationLandscapeRight) {
+//        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        self.videoPlayerViewWidthConstraint.constant = [UIScreen mainScreen].bounds.size.width * 0.8;
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -86,10 +101,18 @@
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightTopButton:)];
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:1.0f]];
+//    NSDictionary *barItemAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14.f], NSFontAttributeName, nil];
+//    [rightBarButton setTitleTextAttributes:barItemAttributes forState:UIControlStateNormal];
+//    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:barItemAttributes forState:UIControlStateNormal];
+//    [self.navigationItem.backBarButtonItem setTitleTextAttributes:barItemAttributes forState:UIControlStateNormal];
+    
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 //    [self.navigationController.navigationBar setBackgroundImage:[self createImageWithColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.7f]] forBarMetrics:UIBarMetricsDefault];
+    
+    //textAttr
+//    UIFont systemFontOfSize:12.f
+    
 }
 
 - (void)modifyStatusBar {
@@ -103,7 +126,7 @@
         NSLog(@"ERROR: 读取播放资源错误");
     }
     self.player = [AVPlayer playerWithPlayerItem:_playerItem];
-    [self.videoPlayerView setPlayer:_player];
+    [_videoPlayerView setPlayer:_player];
     [_player play];
 }
 
@@ -336,12 +359,18 @@
 - (void)operatingViewSpeedBeginEditing {
     [_videoRangeButton setTitleColor:SPEED_FREEZING_COLOR_WHITE forState:UIControlStateNormal];
     [_videoSpeedButton setTitleColor:SPEED_FREEZING_COLOR_YELLOW forState:UIControlStateNormal];
+    [_videoRangeButton setImage:[UIImage imageNamed:@"rangeEditing_white"] forState:UIControlStateNormal];
+    [_videoSpeedButton setImage:[UIImage imageNamed:@"speedEditing_yellow"] forState:UIControlStateNormal];
+    
     _speedMultipleHolderView.hidden = NO;
 }
 
 - (void)operatingViewRangeBeginEditing {
     [_videoRangeButton setTitleColor:SPEED_FREEZING_COLOR_YELLOW forState:UIControlStateNormal];
     [_videoSpeedButton setTitleColor:SPEED_FREEZING_COLOR_WHITE forState:UIControlStateNormal];
+    [_videoRangeButton setImage:[UIImage imageNamed:@"rangeEditing_yellow"] forState:UIControlStateNormal];
+    [_videoSpeedButton setImage:[UIImage imageNamed:@"speedEditing_white"] forState:UIControlStateNormal];
+    
     _speedMultipleHolderView.hidden = YES;
 }
 

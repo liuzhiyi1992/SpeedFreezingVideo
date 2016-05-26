@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <objc/runtime.h>
+
+extern const char kOrientation;
 
 @class AVPlayerItem;
 @interface VideoEditingController : UIViewController
