@@ -94,7 +94,7 @@
     bezier3Path.miterLimit = 19;
     
     [color6 setFill];
-    [bezier3Path fill];
+//    [bezier3Path fill];
     
     
     //// Bezier Drawing
@@ -108,7 +108,7 @@
     bezierPath.miterLimit = 19;
     
     [color6 setFill];
-    [bezierPath fill];
+//    [bezierPath fill];
     
     
     //// Cleanup

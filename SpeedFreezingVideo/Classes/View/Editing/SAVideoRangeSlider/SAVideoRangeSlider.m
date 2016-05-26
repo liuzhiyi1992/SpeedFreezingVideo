@@ -24,6 +24,7 @@
 // THE SOFTWARE.
 
 #import "SAVideoRangeSlider.h"
+#import "FrameMaskingLayer.h"
 
 const CGFloat FRAME_PIC_WIDTH = 30;
 
@@ -38,7 +39,7 @@ const CGFloat FRAME_PIC_WIDTH = 30;
 @property (nonatomic) CGFloat frame_width;
 @property (nonatomic) Float64 durationSeconds;
 @property (nonatomic, strong) SAResizibleBubble *popoverBubble;
-
+@property (strong, nonatomic) FrameMaskingLayer *frameMaskingLayer;
 @end
 
 @implementation SAVideoRangeSlider
@@ -75,25 +76,34 @@ const CGFloat FRAME_PIC_WIDTH = 30;
         
         
         _leftThumb = [[SASliderLeft alloc] initWithFrame:CGRectMake(0, 0, _thumbWidth, frame.size.height)];
+        
         _leftThumb.contentMode = UIViewContentModeLeft;
         _leftThumb.userInteractionEnabled = YES;
         _leftThumb.clipsToBounds = YES;
         _leftThumb.backgroundColor = [UIColor clearColor];
         _leftThumb.layer.borderWidth = 0;
         [self addSubview:_leftThumb];
-        
+        //左箭头
+        UIImageView *leftImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"leftArrowhead"]];
+        [leftImageView setFrame:CGRectMake(0, 0, 9, 14)];
+        leftImageView.center = _leftThumb.center;
+        [_leftThumb addSubview:leftImageView];
         
         UIPanGestureRecognizer *leftPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftPan:)];
         [_leftThumb addGestureRecognizer:leftPan];
-        
+
         
         _rightThumb = [[SASliderRight alloc] initWithFrame:CGRectMake(0, 0, _thumbWidth, frame.size.height)];
-        
         _rightThumb.contentMode = UIViewContentModeRight;
         _rightThumb.userInteractionEnabled = YES;
         _rightThumb.clipsToBounds = YES;
         _rightThumb.backgroundColor = [UIColor clearColor];
         [self addSubview:_rightThumb];
+        //右箭头
+        UIImageView *rightImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightArrowhead"]];
+        [rightImageView setFrame:CGRectMake(0, 0, 9, 14)];
+        rightImageView.center = _rightThumb.center;
+        [_rightThumb addSubview:rightImageView];
         
         UIPanGestureRecognizer *rightPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightPan:)];
         [_rightThumb addGestureRecognizer:rightPan];
@@ -128,6 +138,13 @@ const CGFloat FRAME_PIC_WIDTH = 30;
         
         [self getMovieFrame];
     }
+    
+    //todo 整理
+    self.frameMaskingLayer = [[FrameMaskingLayer alloc] init];
+    [_frameMaskingLayer setFrame:self.bounds];
+    [self.layer addSublayer:_frameMaskingLayer];
+    [_frameMaskingLayer setNeedsDisplay];
+    
     
     return self;
 }
@@ -176,6 +193,13 @@ const CGFloat FRAME_PIC_WIDTH = 30;
         [_delegate videoRange:self didChangeLeftPosition:self.leftPosition rightPosition:self.rightPosition sliderMotion:motion];
     }
     
+//    [self.frameMaskingLayer addRemovePath:_centerView.layer.accessibilityPath];
+//    [self.frameMaskingLayer addRemovePath:_leftThumb.layer.accessibilityPath];
+    UIBezierPath *removePath = [UIBezierPath bezierPathWithRect:_centerView.frame];
+    [removePath appendPath:[UIBezierPath bezierPathWithRect:_leftThumb.frame]];
+    [removePath appendPath:[UIBezierPath bezierPathWithRect:_rightThumb.frame]];
+    [self.frameMaskingLayer addRemovePath:removePath];
+    //todo
 }
 
 - (double)videoDurationSeconds {
