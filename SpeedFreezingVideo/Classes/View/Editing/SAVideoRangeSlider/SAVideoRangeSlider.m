@@ -67,11 +67,13 @@ const CGFloat FRAME_PIC_WIDTH = 20;
         self.thumbWidth = ceil(frame.size.width*0.05);
         
         _bgView = [[UIControl alloc] initWithFrame:CGRectMake(BACKGROUND_VIEW_OFFSET-BG_VIEW_BORDERS_SIZE, 0, frame.size.width- (BACKGROUND_VIEW_OFFSET*2)+BG_VIEW_BORDERS_SIZE*2, frame.size.height)];
+        _bgView.layer.masksToBounds = YES;
         _bgView.layer.borderColor = [UIColor grayColor].CGColor;
         _bgView.layer.borderWidth = BG_VIEW_BORDERS_SIZE;
         [self addSubview:_bgView];
         
         _colorlessView = [[UIControl alloc] initWithFrame:CGRectMake(_bgView.frame.origin.x, 0, _bgView.frame.size.width, _bgView.frame.size.height)];
+        _colorlessView.layer.masksToBounds = YES;
         [self addSubview:_colorlessView];
         [self sendSubviewToBack:_colorlessView];
         
@@ -391,7 +393,7 @@ const CGFloat FRAME_PIC_WIDTH = 20;
     
     AVAsset *myAsset = [[AVURLAsset alloc] initWithURL:_videoUrl options:nil];
     self.imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:myAsset];
-    
+    self.imageGenerator.appliesPreferredTrackTransform = YES;//跟踪视屏方向变换
     
     if ([self isRetina]){
         self.imageGenerator.maximumSize = CGSizeMake(_bgView.frame.size.width*2, _bgView.frame.size.height*2);
@@ -414,16 +416,17 @@ const CGFloat FRAME_PIC_WIDTH = 20;
         }
         UIImageView *tmp = [[UIImageView alloc] initWithImage:videoScreen];
         tmp.contentMode = FRAME_IMAGEVIEW_CONTENT_MODE;
-        CGRect rect=tmp.frame;
-        rect.size.width=picWidth;
-        tmp.frame=rect;
-        
-        //todo 修改
-        [_bgView addSubview:tmp];
+        tmp.layer.masksToBounds = YES;
         UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
-        colorlessImageView.frame = rect;
+//        colorlessImageView.frame = rect;
+        
+//        CGRect rect=tmp.frame;
+//        rect.size.width=picWidth;
+//        tmp.frame=rect;
+        
+        [_bgView addSubview:tmp];
         [_colorlessView addSubview:colorlessImageView];
-        picWidth = tmp.frame.size.width;
+//        picWidth = tmp.frame.size.width;
         CGImageRelease(halfWayImage);
     }
     
@@ -448,7 +451,7 @@ const CGFloat FRAME_PIC_WIDTH = 20;
             
             
             CGImageRef halfWayImage = [self.imageGenerator copyCGImageAtTime:timeFrame actualTime:&actualTime error:&error];
-            
+
             UIImage *videoScreen;
             if ([self isRetina]){
                 videoScreen = [[UIImage alloc] initWithCGImage:halfWayImage scale:2.0 orientation:UIImageOrientationUp];
@@ -457,21 +460,27 @@ const CGFloat FRAME_PIC_WIDTH = 20;
             }
             
             
-            
             UIImageView *tmp = [[UIImageView alloc] initWithImage:videoScreen];
             tmp.contentMode = FRAME_IMAGEVIEW_CONTENT_MODE;
+            tmp.layer.masksToBounds = YES;
             
-            
+            //frame
             CGRect currentFrame = tmp.frame;
+            
             currentFrame.origin.x = ii*picWidth;
-
-            currentFrame.size.width=picWidth;
+//同步视频的尺寸，不需要改width
+//            currentFrame.size.width=picWidth;
             prefreWidth+=currentFrame.size.width;
             
             if( i == picsCnt-1){
                 currentFrame.size.width-=6;
             }
             tmp.frame = currentFrame;
+            
+            //colorless image
+            UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
+            colorlessImageView.frame = currentFrame;
+            
             int all = (ii+1)*tmp.frame.size.width;
 
             if (all > _bgView.frame.size.width){
@@ -483,8 +492,6 @@ const CGFloat FRAME_PIC_WIDTH = 20;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_bgView addSubview:tmp];
-                UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
-                colorlessImageView.frame = currentFrame;
                 [_colorlessView addSubview:colorlessImageView];
             });
             
@@ -541,10 +548,11 @@ const CGFloat FRAME_PIC_WIDTH = 20;
                                                       tmp.frame = currentFrame;
                                                       i++;
                                                       
+                                                      UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
+                                                      colorlessImageView.frame = currentFrame;
+                                                      
                                                       dispatch_async(dispatch_get_main_queue(), ^{
                                                           [_bgView addSubview:tmp];
-                                                          UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
-                                                          colorlessImageView.frame = currentFrame;
                                                           [_colorlessView addSubview:colorlessImageView];
                                                       });
                                                       
