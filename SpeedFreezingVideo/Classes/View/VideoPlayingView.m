@@ -21,7 +21,7 @@
 
 - (void)configureView {
     //填充
-    ((AVPlayerLayer *)self.layer).videoGravity = AVLayerVideoGravityResizeAspect;
+    ((AVPlayerLayer *)self.layer).videoGravity = AVLayerVideoGravityResizeAspectFill;
 }
 //todo 可能没用了
 - (void)setVideoGravity:(NSString *)videoGravity {
