@@ -25,13 +25,15 @@
 
 #import "SAVideoRangeSlider.h"
 #import "FrameMaskingLayer.h"
+#import "UIImage+colorless.h"
 
-const CGFloat FRAME_PIC_WIDTH = 30;
+const CGFloat FRAME_PIC_WIDTH = 20;
 
 @interface SAVideoRangeSlider ()
 
 @property (nonatomic, strong) AVAssetImageGenerator *imageGenerator;
 @property (nonatomic, strong) UIView *bgView;
+@property (strong, nonatomic) UIView *colorlessView;
 @property (nonatomic, strong) UIView *centerView;
 @property (nonatomic, strong) NSURL *videoUrl;
 @property (nonatomic, strong) SASliderLeft *leftThumb;
@@ -40,6 +42,7 @@ const CGFloat FRAME_PIC_WIDTH = 30;
 @property (nonatomic) Float64 durationSeconds;
 @property (nonatomic, strong) SAResizibleBubble *popoverBubble;
 @property (strong, nonatomic) FrameMaskingLayer *frameMaskingLayer;
+@property (strong, nonatomic) CAShapeLayer *backgroundMaskLayer;
 @end
 
 @implementation SAVideoRangeSlider
@@ -47,6 +50,11 @@ const CGFloat FRAME_PIC_WIDTH = 30;
 
 #define SLIDER_BORDERS_SIZE 1.0f
 #define BG_VIEW_BORDERS_SIZE 0.0f
+
+#define BACKGROUND_VIEW_OFFSET 5.f
+#define BACKGROUND_VIEW_MASK_OFFSET 5.f
+
+#define FRAME_IMAGEVIEW_CONTENT_MODE UIViewContentModeScaleAspectFill
 
 
 - (id)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl{
@@ -58,10 +66,15 @@ const CGFloat FRAME_PIC_WIDTH = 30;
         
         self.thumbWidth = ceil(frame.size.width*0.05);
         
-        _bgView = [[UIControl alloc] initWithFrame:CGRectMake(_thumbWidth-BG_VIEW_BORDERS_SIZE, 0, frame.size.width- (_thumbWidth*2)+BG_VIEW_BORDERS_SIZE*2, frame.size.height)];
+        _bgView = [[UIControl alloc] initWithFrame:CGRectMake(BACKGROUND_VIEW_OFFSET-BG_VIEW_BORDERS_SIZE, 0, frame.size.width- (BACKGROUND_VIEW_OFFSET*2)+BG_VIEW_BORDERS_SIZE*2, frame.size.height)];
         _bgView.layer.borderColor = [UIColor grayColor].CGColor;
         _bgView.layer.borderWidth = BG_VIEW_BORDERS_SIZE;
         [self addSubview:_bgView];
+        
+        _colorlessView = [[UIControl alloc] initWithFrame:CGRectMake(_bgView.frame.origin.x, 0, _bgView.frame.size.width, _bgView.frame.size.height)];
+        [self addSubview:_colorlessView];
+        [self sendSubviewToBack:_colorlessView];
+        
         
         _videoUrl = videoUrl;
         
@@ -140,12 +153,11 @@ const CGFloat FRAME_PIC_WIDTH = 30;
     }
     
     //todo 整理
-    self.frameMaskingLayer = [[FrameMaskingLayer alloc] init];
-    [_frameMaskingLayer setFrame:self.bounds];
-    [self.layer addSublayer:_frameMaskingLayer];
-    [_frameMaskingLayer setNeedsDisplay];
-    
-    
+//    self.frameMaskingLayer = [[FrameMaskingLayer alloc] init];
+//    [_frameMaskingLayer setFrame:self.bounds];
+//    [self.layer addSublayer:_frameMaskingLayer];
+//    [_frameMaskingLayer setNeedsDisplay];
+    self.backgroundMaskLayer = [CAShapeLayer layer];
     return self;
 }
 
@@ -193,13 +205,20 @@ const CGFloat FRAME_PIC_WIDTH = 30;
         [_delegate videoRange:self didChangeLeftPosition:self.leftPosition rightPosition:self.rightPosition sliderMotion:motion];
     }
     
-//    [self.frameMaskingLayer addRemovePath:_centerView.layer.accessibilityPath];
-//    [self.frameMaskingLayer addRemovePath:_leftThumb.layer.accessibilityPath];
-    UIBezierPath *removePath = [UIBezierPath bezierPathWithRect:_centerView.frame];
-    [removePath appendPath:[UIBezierPath bezierPathWithRect:_leftThumb.frame]];
-    [removePath appendPath:[UIBezierPath bezierPathWithRect:_rightThumb.frame]];
-    [self.frameMaskingLayer addRemovePath:removePath];
-    //todo
+    //todo maskLayer
+//    UIBezierPath *removePath = [UIBezierPath bezierPathWithRect:_centerView.frame];
+//    [removePath appendPath:[UIBezierPath bezierPathWithRect:_leftThumb.frame]];
+//    [removePath appendPath:[UIBezierPath bezierPathWithRect:_rightThumb.frame]];
+//    [self.frameMaskingLayer addRemovePath:removePath];
+    
+//    CGFloat backgroundViewOffset = _thumbWidth;
+//    CGFloat originX = CGRectGetMinX(_leftThumb.frame) - backgroundViewOffset;
+//    CGFloat distanceX = CGRectGetMaxX(_rightThumb.frame) - backgroundViewOffset;
+//    CGFloat maskWidth = distanceX - originX;
+//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRect:CGRectMake(originX, 0, maskWidth, _leftThumb.frame.size.height)];
+//    [self.backgroundMaskLayer setPath:maskPath.CGPath];
+//    _bgView.layer.mask = _backgroundMaskLayer;
+    
 }
 
 - (double)videoDurationSeconds {
@@ -343,6 +362,15 @@ const CGFloat FRAME_PIC_WIDTH = 30;
     CGRect frame = _popoverBubble.frame;
     frame.origin.x = _centerView.frame.origin.x+_centerView.frame.size.width/2-frame.size.width/2;
     _popoverBubble.frame = frame;
+    
+    //todo 整理
+    CGFloat backgroundViewOffset = _bgView.frame.origin.x;
+    CGFloat originX = CGRectGetMinX(_leftThumb.frame) - backgroundViewOffset + BACKGROUND_VIEW_MASK_OFFSET;
+    CGFloat distanceX = CGRectGetMaxX(_rightThumb.frame) - backgroundViewOffset - BACKGROUND_VIEW_MASK_OFFSET;
+    CGFloat maskWidth = distanceX - originX;
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRect:CGRectMake(originX, 0, maskWidth, _leftThumb.frame.size.height)];
+    [self.backgroundMaskLayer setPath:maskPath.CGPath];
+    _bgView.layer.mask = _backgroundMaskLayer;
 }
 
 
@@ -364,6 +392,7 @@ const CGFloat FRAME_PIC_WIDTH = 30;
     AVAsset *myAsset = [[AVURLAsset alloc] initWithURL:_videoUrl options:nil];
     self.imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:myAsset];
     
+    
     if ([self isRetina]){
         self.imageGenerator.maximumSize = CGSizeMake(_bgView.frame.size.width*2, _bgView.frame.size.height*2);
     } else {
@@ -384,10 +413,16 @@ const CGFloat FRAME_PIC_WIDTH = 30;
             videoScreen = [[UIImage alloc] initWithCGImage:halfWayImage];
         }
         UIImageView *tmp = [[UIImageView alloc] initWithImage:videoScreen];
+        tmp.contentMode = FRAME_IMAGEVIEW_CONTENT_MODE;
         CGRect rect=tmp.frame;
         rect.size.width=picWidth;
         tmp.frame=rect;
+        
+        //todo 修改
         [_bgView addSubview:tmp];
+        UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
+        colorlessImageView.frame = rect;
+        [_colorlessView addSubview:colorlessImageView];
         picWidth = tmp.frame.size.width;
         CGImageRelease(halfWayImage);
     }
@@ -424,7 +459,7 @@ const CGFloat FRAME_PIC_WIDTH = 30;
             
             
             UIImageView *tmp = [[UIImageView alloc] initWithImage:videoScreen];
-            
+            tmp.contentMode = FRAME_IMAGEVIEW_CONTENT_MODE;
             
             
             CGRect currentFrame = tmp.frame;
@@ -448,6 +483,9 @@ const CGFloat FRAME_PIC_WIDTH = 30;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_bgView addSubview:tmp];
+                UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
+                colorlessImageView.frame = currentFrame;
+                [_colorlessView addSubview:colorlessImageView];
             });
             
             
@@ -489,6 +527,7 @@ const CGFloat FRAME_PIC_WIDTH = 30;
                                                       
                                                       
                                                       UIImageView *tmp = [[UIImageView alloc] initWithImage:videoScreen];
+                                                      tmp.contentMode = FRAME_IMAGEVIEW_CONTENT_MODE;
                                                       
                                                       int all = (i+1)*tmp.frame.size.width;
                                                       
@@ -504,6 +543,9 @@ const CGFloat FRAME_PIC_WIDTH = 30;
                                                       
                                                       dispatch_async(dispatch_get_main_queue(), ^{
                                                           [_bgView addSubview:tmp];
+                                                          UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
+                                                          colorlessImageView.frame = currentFrame;
+                                                          [_colorlessView addSubview:colorlessImageView];
                                                       });
                                                       
                                                   }

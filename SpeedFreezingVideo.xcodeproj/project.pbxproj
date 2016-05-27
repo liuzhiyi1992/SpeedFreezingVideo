@@ -23,6 +23,7 @@
 		485E56EC1CED9EC700159EC3 /* SASliderRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E71CED9EC700159EC3 /* SASliderRight.m */; };
 		485E56ED1CED9EC700159EC3 /* SAVideoRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E91CED9EC700159EC3 /* SAVideoRangeSlider.m */; };
 		485E56FF1CEE006300159EC3 /* SpeedFreezesOperatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56FE1CEE006300159EC3 /* SpeedFreezesOperatingView.m */; };
+		4879E0681CF83BB30004CFAC /* UIImage+colorless.m in Sources */ = {isa = PBXBuildFile; fileRef = 4879E0671CF83BB30004CFAC /* UIImage+colorless.m */; };
 		4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */; };
 		4881196D1CEC59BA00CA0C7F /* CaptureVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */; };
 		4881196E1CEC59BA00CA0C7F /* CapturePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119691CEC59BA00CA0C7F /* CapturePreviewView.m */; };
@@ -64,6 +65,8 @@
 		485E56E91CED9EC700159EC3 /* SAVideoRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAVideoRangeSlider.m; sourceTree = "<group>"; };
 		485E56FD1CEE006300159EC3 /* SpeedFreezesOperatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedFreezesOperatingView.h; sourceTree = "<group>"; };
 		485E56FE1CEE006300159EC3 /* SpeedFreezesOperatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedFreezesOperatingView.m; sourceTree = "<group>"; };
+		4879E0661CF83BB30004CFAC /* UIImage+colorless.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+colorless.h"; sourceTree = "<group>"; };
+		4879E0671CF83BB30004CFAC /* UIImage+colorless.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+colorless.m"; sourceTree = "<group>"; };
 		488119641CEC59BA00CA0C7F /* CaptureVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoViewController.h; sourceTree = "<group>"; };
 		488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoViewController.m; sourceTree = "<group>"; };
 		488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureVideoViewController.xib; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */,
 				48B824BB1CF45B3D005E565C /* UIColor+hexColor.h */,
 				48B824BC1CF45B3D005E565C /* UIColor+hexColor.m */,
+				4879E0661CF83BB30004CFAC /* UIImage+colorless.h */,
+				4879E0671CF83BB30004CFAC /* UIImage+colorless.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4879E0681CF83BB30004CFAC /* UIImage+colorless.m in Sources */,
 				4881196F1CEC59BA00CA0C7F /* CaptureVideoButton.m in Sources */,
 				48FC0BAD1CF2B8AD000D02CB /* UINavigationBar+transparency.m in Sources */,
 				4848F6471CE73431009C6280 /* ViewController.m in Sources */,
