@@ -154,11 +154,7 @@ const CGFloat FRAME_PIC_WIDTH = 20;
         [self getMovieFrame];
     }
     
-    //todo 整理
-//    self.frameMaskingLayer = [[FrameMaskingLayer alloc] init];
-//    [_frameMaskingLayer setFrame:self.bounds];
-//    [self.layer addSublayer:_frameMaskingLayer];
-//    [_frameMaskingLayer setNeedsDisplay];
+    //mask the frame images
     self.backgroundMaskLayer = [CAShapeLayer layer];
     return self;
 }
@@ -206,21 +202,6 @@ const CGFloat FRAME_PIC_WIDTH = 20;
     if ([_delegate respondsToSelector:@selector(videoRange:didChangeLeftPosition:rightPosition:sliderMotion:)]){
         [_delegate videoRange:self didChangeLeftPosition:self.leftPosition rightPosition:self.rightPosition sliderMotion:motion];
     }
-    
-    //todo maskLayer
-//    UIBezierPath *removePath = [UIBezierPath bezierPathWithRect:_centerView.frame];
-//    [removePath appendPath:[UIBezierPath bezierPathWithRect:_leftThumb.frame]];
-//    [removePath appendPath:[UIBezierPath bezierPathWithRect:_rightThumb.frame]];
-//    [self.frameMaskingLayer addRemovePath:removePath];
-    
-//    CGFloat backgroundViewOffset = _thumbWidth;
-//    CGFloat originX = CGRectGetMinX(_leftThumb.frame) - backgroundViewOffset;
-//    CGFloat distanceX = CGRectGetMaxX(_rightThumb.frame) - backgroundViewOffset;
-//    CGFloat maskWidth = distanceX - originX;
-//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRect:CGRectMake(originX, 0, maskWidth, _leftThumb.frame.size.height)];
-//    [self.backgroundMaskLayer setPath:maskPath.CGPath];
-//    _bgView.layer.mask = _backgroundMaskLayer;
-    
 }
 
 - (double)videoDurationSeconds {
@@ -418,15 +399,9 @@ const CGFloat FRAME_PIC_WIDTH = 20;
         tmp.contentMode = FRAME_IMAGEVIEW_CONTENT_MODE;
         tmp.layer.masksToBounds = YES;
         UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
-//        colorlessImageView.frame = rect;
-        
-//        CGRect rect=tmp.frame;
-//        rect.size.width=picWidth;
-//        tmp.frame=rect;
         
         [_bgView addSubview:tmp];
         [_colorlessView addSubview:colorlessImageView];
-//        picWidth = tmp.frame.size.width;
         CGImageRelease(halfWayImage);
     }
     
@@ -468,8 +443,6 @@ const CGFloat FRAME_PIC_WIDTH = 20;
             CGRect currentFrame = tmp.frame;
             
             currentFrame.origin.x = ii*picWidth;
-//同步视频的尺寸，不需要改width
-//            currentFrame.size.width=picWidth;
             prefreWidth+=currentFrame.size.width;
             
             if( i == picsCnt-1){
