@@ -20,13 +20,12 @@
 }
 
 - (void)configureView {
-    //填充
+    //默认填充 用autoLayout约束限制横竖屏的视频播放Layer size
     ((AVPlayerLayer *)self.layer).videoGravity = AVLayerVideoGravityResizeAspectFill;
 }
-//todo 可能没用了
+
 - (void)setVideoGravity:(NSString *)videoGravity {
     ((AVPlayerLayer *)self.layer).videoGravity = videoGravity;
-    
 }
 
 - (void)setPlayer:(AVPlayer *)player {

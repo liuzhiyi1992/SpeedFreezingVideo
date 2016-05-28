@@ -72,7 +72,6 @@ const char kOrientation;
     //Orientation
     AVCaptureVideoOrientation videoOrientation = [objc_getAssociatedObject(self.assetUrl, &kOrientation) integerValue];
     if (videoOrientation == AVCaptureVideoOrientationPortrait) {
-//        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspect];
 //        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspectFill];
         self.videoPlayerViewWidthConstraint.constant = [UIScreen mainScreen].bounds.size.width * 0.4;
     } else if (videoOrientation == AVCaptureVideoOrientationLandscapeLeft || videoOrientation == AVCaptureVideoOrientationLandscapeRight) {
@@ -101,18 +100,8 @@ const char kOrientation;
     UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightTopButton:)];
     self.navigationItem.rightBarButtonItem = rightBarButton;
     
-//    NSDictionary *barItemAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14.f], NSFontAttributeName, nil];
-//    [rightBarButton setTitleTextAttributes:barItemAttributes forState:UIControlStateNormal];
-//    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:barItemAttributes forState:UIControlStateNormal];
-//    [self.navigationItem.backBarButtonItem setTitleTextAttributes:barItemAttributes forState:UIControlStateNormal];
-    
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-//    [self.navigationController.navigationBar setBackgroundImage:[self createImageWithColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:0.7f]] forBarMetrics:UIBarMetricsDefault];
-    
-    //textAttr
-//    UIFont systemFontOfSize:12.f
-    
 }
 
 - (void)modifyStatusBar {
@@ -179,7 +168,7 @@ const char kOrientation;
     }
     
     //audio insert
-    //todo 没有音频的视频  处理
+    //无音频情况处理
     if ([currentAsset tracksWithMediaType:AVMediaTypeAudio].count > 0) {
         NSError *audioInsertError =nil;
         BOOL audioInsertResult =[compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration)
@@ -197,7 +186,6 @@ const char kOrientation;
     duration = CMTimeAdd(duration, currentAsset.duration);
     //slow down whole video by 2.0
     double videoScaleFactor = _speedRate;
-//    CMTime videoDuration = videoAsset.duration;
     
     CMTime remainDuration = CMTimeSubtract(endTime, beginTime);
     CMTime operatedTime = CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale);
