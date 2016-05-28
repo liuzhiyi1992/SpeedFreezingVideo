@@ -22,6 +22,7 @@ const char kOrientation;
 @property (weak, nonatomic) IBOutlet UIButton *videoRangeButton;
 @property (weak, nonatomic) IBOutlet UIButton *videoSpeedButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoPlayerViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIView *prepareMaskView;
 
 
 @property (strong, nonatomic) NSURL *assetUrl;
@@ -52,6 +53,22 @@ const char kOrientation;
     return self;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self readyToTrim];
+    [self readyToPlay];
+    [self configureSpeedMultipleView];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [_player pause];
@@ -60,6 +77,7 @@ const char kOrientation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _prepareMaskView.hidden = NO;
     //禁用右滑返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -78,22 +96,6 @@ const char kOrientation;
 //        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspectFill];
         self.videoPlayerViewWidthConstraint.constant = [UIScreen mainScreen].bounds.size.width * 0.8;
     }
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self readyToTrim];
-    [self readyToPlay];
-    [self configureSpeedMultipleView];
 }
 
 - (void)modifyNavigationBar {
@@ -117,6 +119,8 @@ const char kOrientation;
     self.player = [AVPlayer playerWithPlayerItem:_playerItem];
     [_videoPlayerView setPlayer:_player];
     [_player play];
+    
+    self.prepareMaskView.hidden = YES;
 }
 
 - (void)readyToTrim {

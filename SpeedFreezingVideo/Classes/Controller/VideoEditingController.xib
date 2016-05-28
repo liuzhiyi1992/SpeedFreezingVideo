@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoEditingController">
             <connections>
+                <outlet property="prepareMaskView" destination="eCJ-4b-cgn" id="LF6-s2-3hg"/>
                 <outlet property="speedMultipleHolderView" destination="BIZ-Lg-RkG" id="a2H-BX-sXG"/>
                 <outlet property="videoPlayerView" destination="YiP-ZY-FnV" id="oIo-PM-eyA"/>
                 <outlet property="videoPlayerViewWidthConstraint" destination="zok-q8-H4A" id="lGA-DQ-v6Q"/>
@@ -97,11 +98,16 @@
                         <action selector="clickOperatingSpeedButton:" destination="-1" eventType="touchUpInside" id="Nrq-33-vTj"/>
                     </connections>
                 </button>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCJ-4b-cgn">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="YiP-ZY-FnV" secondAttribute="trailing" id="082-tf-IaP"/>
                 <constraint firstAttribute="trailing" secondItem="YiP-ZY-FnV" secondAttribute="trailing" id="0jr-KQ-W44"/>
+                <constraint firstAttribute="bottom" secondItem="eCJ-4b-cgn" secondAttribute="bottom" id="3x8-ki-9XS"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="top" secondItem="BIZ-Lg-RkG" secondAttribute="bottom" constant="40" id="5CO-fs-lUo"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="centerX" secondItem="dZ8-vg-LZG" secondAttribute="centerX" id="6Q0-tL-Rib"/>
                 <constraint firstItem="dZ8-vg-LZG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6po-JA-rNb"/>
@@ -120,10 +126,13 @@
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="trailing" secondItem="dZ8-vg-LZG" secondAttribute="trailing" constant="-30" id="RRK-no-Zus"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SeI-nD-OrP"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="width" secondItem="dZ8-vg-LZG" secondAttribute="width" multiplier="0.3:1" priority="600" id="UXZ-em-iQc"/>
+                <constraint firstAttribute="trailing" secondItem="eCJ-4b-cgn" secondAttribute="trailing" id="UyL-Nz-xlg"/>
+                <constraint firstItem="eCJ-4b-cgn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Z9L-Gi-6AB"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dZ8-vg-LZG" secondAttribute="leading" constant="20" id="Zbb-nS-2Hl"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dk9-Ra-VA1"/>
                 <constraint firstItem="BIZ-Lg-RkG" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="20" id="h2P-fn-4yt"/>
                 <constraint firstItem="uiv-C3-P7D" firstAttribute="top" secondItem="fRl-D0-dYP" secondAttribute="bottom" constant="40" id="kpx-Ye-d0u"/>
+                <constraint firstItem="eCJ-4b-cgn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mHB-OG-25B"/>
                 <constraint firstAttribute="trailing" secondItem="fRl-D0-dYP" secondAttribute="trailing" constant="40" id="mYb-8S-c4t"/>
                 <constraint firstItem="YiP-ZY-FnV" firstAttribute="trailing" secondItem="dZ8-vg-LZG" secondAttribute="trailing" constant="-30" id="o8m-SD-gMn"/>
                 <constraint firstItem="U2e-Uf-2zW" firstAttribute="top" secondItem="YiP-ZY-FnV" secondAttribute="bottom" constant="60" id="puJ-ep-pZs"/>
