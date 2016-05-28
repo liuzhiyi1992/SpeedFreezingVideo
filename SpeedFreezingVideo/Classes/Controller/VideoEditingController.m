@@ -142,17 +142,25 @@ const char kOrientation;
     [self.speedMultipleHolderView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[multipleView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views]];
 }
 
-- (void)speedFreezingWithAssetUrl:(NSURL *)URl beginTime:(CMTime)beginTime endTime:(CMTime)endTime {
+- (void)speedFreezingWithAssetUrl:(NSURL *)URl beginTime:(CMTime)beginTime endTime:(CMTime)endTime replaceSoundEffect:(AVAsset *)replaceSoundEffect {
     AVURLAsset* videoAsset = [AVURLAsset URLAssetWithURL:URl options:nil]; //self.inputAsset;
     
-    AVAsset *currentAsset = [AVAsset assetWithURL:URl];
-    AVAssetTrack *vdoTrack = [[currentAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
+//    AVAsset *currentAsset = [AVAsset assetWithURL:URl];
+    AVAssetTrack *vdoTrack = [[videoAsset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
     
     //create mutable composition
     AVMutableComposition *mixComposition = [AVMutableComposition composition];
     
     AVMutableCompositionTrack *compositionVideoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     AVMutableCompositionTrack *compositionAudioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    
+    //slow down whole video by 2.0
+    double videoScaleFactor = _speedRate;
+    
+    CMTime remainDuration = CMTimeSubtract(endTime, beginTime);
+    CMTime operatedTime = CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale);
+    CMTime extraTime = CMTimeSubtract(operatedTime, remainDuration);
     
     
     //video insert
@@ -166,37 +174,43 @@ const char kOrientation;
         NSLog(@"ERROR: %@", videoInsertError);
         return;
     }
+    [compositionVideoTrack scaleTimeRange:CMTimeRangeMake(beginTime, remainDuration)
+                               toDuration:CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale)];
+    [compositionVideoTrack setPreferredTransform:vdoTrack.preferredTransform];
     
     //audio insert (无音频情况处理)
-    if ([currentAsset tracksWithMediaType:AVMediaTypeAudio].count > 0) {
+    if ([videoAsset tracksWithMediaType:AVMediaTypeAudio].count > 0) {
+        
+        /*
+        //todo测试音频(todo提出去)
+        NSString *audioPath = [[NSBundle mainBundle] pathForResource:@"慢快-数钱" ofType:@"mp4"];
+        NSURL *audioUrl = [NSURL fileURLWithPath:audioPath];
+        AVURLAsset *audioAsset = [AVURLAsset URLAssetWithURL:audioUrl options:nil];
+        */
+        
         NSError *audioInsertError =nil;
         BOOL audioInsertResult =[compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration)
-                                                               ofTrack:[[currentAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
+                                                               ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
                                                                 atTime:kCMTimeZero
                                                                  error:&audioInsertError];
+        
+        
+        //todo 替换效果音(提出去)
+//        CMTime editedDuration = CMTimeMultiply(remainDuration, videoScaleFactor);
+//        [compositionAudioTrack removeTimeRange:CMTimeRangeMake(beginTime, remainDuration)];
+//        audioInsertResult =[compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, editedDuration)
+//                                                          ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
+//                                                           atTime:beginTime
+//                                                            error:&audioInsertError];
         if (!audioInsertResult || nil != audioInsertError) {
             //handle error
             NSLog(@"ERROR: %@", audioInsertError);
             return;
         }
+        [compositionAudioTrack scaleTimeRange:CMTimeRangeMake(beginTime, remainDuration)
+                                   toDuration:CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale)];
     }
     
-    CMTime duration = kCMTimeZero;
-    duration = CMTimeAdd(duration, currentAsset.duration);
-    //slow down whole video by 2.0
-    double videoScaleFactor = _speedRate;
-    
-    CMTime remainDuration = CMTimeSubtract(endTime, beginTime);
-    CMTime operatedTime = CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale);
-    CMTime extraTime = CMTimeSubtract(operatedTime, remainDuration);
-    
-    
-    [compositionVideoTrack scaleTimeRange:CMTimeRangeMake(beginTime, remainDuration)
-                               toDuration:CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale)];
-    [compositionAudioTrack scaleTimeRange:CMTimeRangeMake(beginTime, remainDuration)
-                               toDuration:CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale)];
-    
-    [compositionVideoTrack setPreferredTransform:vdoTrack.preferredTransform];
     
     
     //---配置outputPath
@@ -373,7 +387,7 @@ const char kOrientation;
 - (void)clickRightTopButton:(UIBarButtonItem *)item {
     item.enabled = NO;
     //修改速度 和 剪辑视频  同时进行
-    [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime]];
+    [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime] replaceSoundEffect:nil];
 }
 
 - (IBAction)clickOperatingSpeedButton:(id)sender {
