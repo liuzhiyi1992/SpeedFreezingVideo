@@ -167,8 +167,7 @@ const char kOrientation;
         return;
     }
     
-    //audio insert
-    //无音频情况处理
+    //audio insert (无音频情况处理)
     if ([currentAsset tracksWithMediaType:AVMediaTypeAudio].count > 0) {
         NSError *audioInsertError =nil;
         BOOL audioInsertResult =[compositionAudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, videoAsset.duration)
@@ -375,10 +374,6 @@ const char kOrientation;
     item.enabled = NO;
     //修改速度 和 剪辑视频  同时进行
     [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime]];
-}
-
-- (IBAction)clickFinishButton:(id)sender {
-    
 }
 
 - (IBAction)clickOperatingSpeedButton:(id)sender {
