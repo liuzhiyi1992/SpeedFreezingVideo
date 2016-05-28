@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet CapturePreviewView *videoPreviewView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *assetThumbnailImageView;
+@property (weak, nonatomic) IBOutlet UIView *prepareMaskView;
+
 
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 
@@ -37,6 +39,8 @@
 @property (assign, nonatomic) AVCaptureVideoOrientation deviceOrientation;
 
 @property (strong, nonatomic) ALAsset *albumLastVideo;
+
+@property (assign, nonatomic) BOOL isCaptureSessionPrepared;
 @end
 
 @implementation CaptureVideoViewController
@@ -47,6 +51,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self rebootCapture];
     [self selectLastVideoAssetFromAblum];
 }
 
@@ -57,6 +62,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _prepareMaskView.hidden = NO;
     [self accessAuthorization];
     [self configureAlbumLastVideoImageView];
     [self startMotionManager];
@@ -152,14 +158,28 @@
     //配置预览view
     [self configureVideoPreview];
     [_captureSession commitConfiguration];
+    //准备好了
+    self.isCaptureSessionPrepared = YES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //启动会话
         [_captureSession startRunning];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _prepareMaskView.hidden = YES;
+        });
     });
 }
 
+
 - (void)configureVideoOutput {
     self.videoOutput = [[AVCaptureMovieFileOutput alloc] init];
+}
+
+- (void)rebootCapture {
+    if (_isCaptureSessionPrepared) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [_captureSession startRunning];
+        });
+    }
 }
 
 //是否有摄像头工作
@@ -377,6 +397,9 @@
 - (void)stopRecording {
     if ([self videoRecording]) {
         [_videoOutput stopRecording];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [_captureSession stopRunning];
+        });
     }
 }
 
@@ -425,19 +448,15 @@
     double y = deviceMotion.gravity.y;
     if (fabs(y) >= fabs(x)) {
         if (y >= 0) {
-            // UIDeviceOrientationPortraitUpsideDown;
             self.deviceOrientation = UIDeviceOrientationPortraitUpsideDown;
         } else {
-            // UIDeviceOrientationPortrait;
             self.deviceOrientation = AVCaptureVideoOrientationPortrait;
         }
     } else {
         if (x >= 0) {
-            // UIDeviceOrientationLandscapeRight;
             self.deviceOrientation = UIDeviceOrientationLandscapeRight;
         }
         else {
-            // UIDeviceOrientationLandscapeLeft;
             self.deviceOrientation = UIDeviceOrientationLandscapeLeft;
         }
     }

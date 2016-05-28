@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureVideoViewController">
             <connections>
                 <outlet property="assetThumbnailImageView" destination="tTb-bq-0jy" id="Xxo-RF-bvf"/>
+                <outlet property="prepareMaskView" destination="I1K-Vp-A3Z" id="PSa-wf-dtQ"/>
                 <outlet property="videoPreviewView" destination="0xD-Xw-Eom" id="6CJ-9d-BZy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,6 +23,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xD-Xw-Eom" customClass="CapturePreviewView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1K-Vp-A3Z">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btj-6P-aeP">
                             <rect key="frame" x="0.0" y="500" width="600" height="100"/>
                             <subviews>
@@ -103,15 +108,23 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="sJn-jC-AAj" secondAttribute="trailing" id="Fgu-OG-n2B"/>
                         <constraint firstAttribute="width" secondItem="0xD-Xw-Eom" secondAttribute="height" multiplier="8:15" id="MdO-EA-Ph6"/>
+                        <constraint firstItem="I1K-Vp-A3Z" firstAttribute="top" secondItem="0xD-Xw-Eom" secondAttribute="top" id="Qip-pP-PhR"/>
+                        <constraint firstAttribute="bottom" secondItem="I1K-Vp-A3Z" secondAttribute="bottom" id="SYe-ec-0Cx"/>
                         <constraint firstItem="sJn-jC-AAj" firstAttribute="leading" secondItem="0xD-Xw-Eom" secondAttribute="leading" id="TtU-FT-vQ9"/>
+                        <constraint firstItem="btj-6P-aeP" firstAttribute="top" secondItem="I1K-Vp-A3Z" secondAttribute="bottom" id="b88-To-C1R"/>
+                        <constraint firstItem="I1K-Vp-A3Z" firstAttribute="top" secondItem="sJn-jC-AAj" secondAttribute="bottom" id="g2A-CD-TdW"/>
                         <constraint firstAttribute="trailing" secondItem="btj-6P-aeP" secondAttribute="trailing" id="kEl-TJ-DGB"/>
                         <constraint firstAttribute="bottom" secondItem="btj-6P-aeP" secondAttribute="bottom" id="kNt-qK-2VP"/>
+                        <constraint firstItem="I1K-Vp-A3Z" firstAttribute="leading" secondItem="0xD-Xw-Eom" secondAttribute="leading" id="pKw-Ot-8At"/>
                         <constraint firstItem="sJn-jC-AAj" firstAttribute="top" secondItem="0xD-Xw-Eom" secondAttribute="top" id="r74-Zi-vlL"/>
+                        <constraint firstAttribute="trailing" secondItem="I1K-Vp-A3Z" secondAttribute="trailing" id="zfn-LG-ECN"/>
                         <constraint firstItem="btj-6P-aeP" firstAttribute="leading" secondItem="0xD-Xw-Eom" secondAttribute="leading" id="zvR-4a-o7B"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="MdO-EA-Ph6"/>
+                            <exclude reference="g2A-CD-TdW"/>
+                            <exclude reference="b88-To-C1R"/>
                         </mask>
                     </variation>
                 </view>
