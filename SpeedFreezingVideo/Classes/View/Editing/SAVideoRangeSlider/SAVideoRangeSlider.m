@@ -376,11 +376,8 @@ const CGFloat FRAME_PIC_WIDTH = 20;
     self.imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:myAsset];
     self.imageGenerator.appliesPreferredTrackTransform = YES;//跟踪视屏方向变换
     
-    if ([self isRetina]){
-        self.imageGenerator.maximumSize = CGSizeMake(_bgView.frame.size.width*2, _bgView.frame.size.height*2);
-    } else {
-        self.imageGenerator.maximumSize = CGSizeMake(_bgView.frame.size.width, _bgView.frame.size.height);
-    }
+    CGFloat scale = [[UIScreen mainScreen] scale];
+    self.imageGenerator.maximumSize = CGSizeMake(_bgView.frame.size.width*scale, _bgView.frame.size.height*scale);
     
     int picWidth = FRAME_PIC_WIDTH;
     
@@ -390,18 +387,20 @@ const CGFloat FRAME_PIC_WIDTH = 20;
     CGImageRef halfWayImage = [self.imageGenerator copyCGImageAtTime:kCMTimeZero actualTime:&actualTime error:&error];
     if (halfWayImage != NULL) {
         UIImage *videoScreen;
-        if ([self isRetina]){
-            videoScreen = [[UIImage alloc] initWithCGImage:halfWayImage scale:2.0 orientation:UIImageOrientationUp];
-        } else {
-            videoScreen = [[UIImage alloc] initWithCGImage:halfWayImage];
-        }
+        videoScreen = [[UIImage alloc] initWithCGImage:halfWayImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
+
         UIImageView *tmp = [[UIImageView alloc] initWithImage:videoScreen];
         tmp.contentMode = FRAME_IMAGEVIEW_CONTENT_MODE;
         tmp.layer.masksToBounds = YES;
-        UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
         
-        [_bgView addSubview:tmp];
-        [_colorlessView addSubview:colorlessImageView];
+        UIImageView *colorlessImageView = [[UIImageView alloc] initWithImage:[tmp.image filterToColorless]];
+        colorlessImageView.frame = tmp.frame;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_bgView addSubview:tmp];
+            [_colorlessView addSubview:colorlessImageView];
+        });
+                       
         CGImageRelease(halfWayImage);
     }
     
@@ -428,12 +427,7 @@ const CGFloat FRAME_PIC_WIDTH = 20;
             CGImageRef halfWayImage = [self.imageGenerator copyCGImageAtTime:timeFrame actualTime:&actualTime error:&error];
 
             UIImage *videoScreen;
-            if ([self isRetina]){
-                videoScreen = [[UIImage alloc] initWithCGImage:halfWayImage scale:2.0 orientation:UIImageOrientationUp];
-            } else {
-                videoScreen = [[UIImage alloc] initWithCGImage:halfWayImage];
-            }
-            
+            videoScreen = [[UIImage alloc] initWithCGImage:halfWayImage scale:[UIScreen mainScreen].scale orientation:UIImageOrientationUp];
             
             UIImageView *tmp = [[UIImageView alloc] initWithImage:videoScreen];
             tmp.contentMode = FRAME_IMAGEVIEW_CONTENT_MODE;
@@ -467,15 +461,8 @@ const CGFloat FRAME_PIC_WIDTH = 20;
                 [_bgView addSubview:tmp];
                 [_colorlessView addSubview:colorlessImageView];
             });
-            
-            
-            
-            
             CGImageRelease(halfWayImage);
-            
         }
-        
-        
         return;
     }
     
