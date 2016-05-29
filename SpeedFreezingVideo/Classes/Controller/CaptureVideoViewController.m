@@ -50,6 +50,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self rebootCapture];
     [self selectLastVideoAssetFromAblum];
@@ -66,8 +67,6 @@
     [self accessAuthorization];
     [self configureAlbumLastVideoImageView];
     [self startMotionManager];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 - (BOOL)prefersStatusBarHidden {

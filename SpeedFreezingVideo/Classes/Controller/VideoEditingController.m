@@ -12,6 +12,7 @@
 #import "SpeedFreezesOperatingView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SpeedMultipleView.h"
+#import "FullScreemDisplayController.h"
 
 const char kOrientation;
 
@@ -72,7 +73,8 @@ const char kOrientation;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [_player pause];
-    _player = nil;
+    //考虑到要重新返回使用，不至nil
+//    _player = nil;
 }
 
 - (void)viewDidLoad {
@@ -116,8 +118,10 @@ const char kOrientation;
     if (_playerItem == nil) {
         NSLog(@"ERROR: 读取播放资源错误");
     }
-    self.player = [AVPlayer playerWithPlayerItem:_playerItem];
-    [_videoPlayerView setPlayer:_player];
+    if (nil == _player) {
+        self.player = [AVPlayer playerWithPlayerItem:_playerItem];
+        [_videoPlayerView setPlayer:_player];
+    }
     [_player play];
     
     self.prepareMaskView.hidden = YES;
@@ -158,14 +162,12 @@ const char kOrientation;
     AVMutableCompositionTrack *compositionVideoTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     AVMutableCompositionTrack *compositionAudioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
     
-    
     //slow down whole video by 2.0
     double videoScaleFactor = _speedRate;
     
     CMTime remainDuration = CMTimeSubtract(endTime, beginTime);
     CMTime operatedTime = CMTimeMake(remainDuration.value * videoScaleFactor, remainDuration.timescale);
     CMTime extraTime = CMTimeSubtract(operatedTime, remainDuration);
-    
     
     //video insert
     NSError *videoInsertError = nil;
@@ -197,8 +199,6 @@ const char kOrientation;
                                                                ofTrack:[[videoAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0]
                                                                 atTime:kCMTimeZero
                                                                  error:&audioInsertError];
-        
-        
         //todo 替换效果音(提出去)
 //        CMTime editedDuration = CMTimeMultiply(remainDuration, videoScaleFactor);
 //        [compositionAudioTrack removeTimeRange:CMTimeRangeMake(beginTime, remainDuration)];
@@ -389,9 +389,13 @@ const char kOrientation;
 }
 
 - (void)clickRightTopButton:(UIBarButtonItem *)item {
-    item.enabled = NO;
+//    item.enabled = NO;
     //修改速度 和 剪辑视频  同时进行
-    [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime] replaceSoundEffect:nil];
+//    [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime] replaceSoundEffect:nil];
+    
+    AVCaptureVideoOrientation videoOrientation = [objc_getAssociatedObject(self.assetUrl, &kOrientation) integerValue];
+    FullScreemDisplayController *controller = [[FullScreemDisplayController alloc] initWithPlayer:_player videoOrientation:videoOrientation];
+    [self.navigationController presentViewController:controller animated:YES completion:nil];
 }
 
 - (IBAction)clickOperatingSpeedButton:(id)sender {
