@@ -327,7 +327,8 @@ const char kOrientation;
 - (void)fullScreemDisplayWithOutputUrl:(NSURL *)url {
     _rightTopButton.enabled = YES;
     AVCaptureVideoOrientation videoOrientation = [objc_getAssociatedObject(self.assetUrl, &kOrientation) integerValue];
-    FullScreemDisplayController *controller = [[FullScreemDisplayController alloc] initWithPlayer:[AVPlayer playerWithURL:url] videoOrientation:videoOrientation];
+    FullScreemDisplayController *controller = [[FullScreemDisplayController alloc] initWithAssetUrl:url videoOrientation:videoOrientation];
+//    FullScreemDisplayController *controller = [[FullScreemDisplayController alloc] initWithPlayer:[AVPlayer playerWithURL:url] videoOrientation:videoOrientation];
     [self.navigationController presentViewController:controller animated:YES completion:nil];
 }
 

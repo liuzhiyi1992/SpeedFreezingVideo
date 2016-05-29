@@ -109,7 +109,7 @@
 }
 
 - (void)saveToAlbum {
-    
+    [self writeExportedVideoToAssetsLibrary:_assetUrl];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
