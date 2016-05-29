@@ -24,6 +24,7 @@ const char kOrientation;
 @property (weak, nonatomic) IBOutlet UIButton *videoSpeedButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoPlayerViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet UIView *prepareMaskView;
+@property (strong, nonatomic) UIBarButtonItem *rightTopButton;
 
 
 @property (strong, nonatomic) NSURL *assetUrl;
@@ -62,12 +63,25 @@ const char kOrientation;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
+- (void)registerNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self modifyStatusBar];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     [self readyToTrim];
-    [self readyToPlay];
-    [self configureSpeedMultipleView];
+    if (_player != nil) {
+        [_player play];
+    }
+    //不提前显示两个BarButtonItem
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    self.prepareMaskView.hidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -80,14 +94,10 @@ const char kOrientation;
 - (void)viewDidLoad {
     [super viewDidLoad];
     _prepareMaskView.hidden = NO;
-    //禁用右滑返回手势
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
-    self.navigationController.navigationBar.translucent = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [self registerNotification];
     [self modifyNavigationBar];
-    [self modifyStatusBar];
+    [self configureSpeedMultipleView];
+    [self readyToPlay];
     
     //Orientation
     AVCaptureVideoOrientation videoOrientation = [objc_getAssociatedObject(self.assetUrl, &kOrientation) integerValue];
@@ -101,8 +111,13 @@ const char kOrientation;
 }
 
 - (void)modifyNavigationBar {
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightTopButton:)];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
+    //禁用右滑返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    self.navigationController.navigationBar.translucent = NO;
+    self.rightTopButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightTopButton:)];
+    self.navigationItem.rightBarButtonItem = _rightTopButton;
     
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
@@ -118,16 +133,15 @@ const char kOrientation;
     if (_playerItem == nil) {
         NSLog(@"ERROR: 读取播放资源错误");
     }
-    if (nil == _player) {
-        self.player = [AVPlayer playerWithPlayerItem:_playerItem];
-        [_videoPlayerView setPlayer:_player];
-    }
-    [_player play];
-    
-    self.prepareMaskView.hidden = YES;
+    self.player = [AVPlayer playerWithPlayerItem:_playerItem];
+    [_videoPlayerView setPlayer:_player];
 }
 
 - (void)readyToTrim {
+    //放在autoLayout计算后执行
+    if (nil != _operatingView) {
+        return;
+    }
     CGFloat operatingViewWidth = _videoTrimmerHolderView.frame.size.width;
     CGFloat operatingViewHeight = _videoTrimmerHolderView.frame.size.height;
     
@@ -220,6 +234,7 @@ const char kOrientation;
     //---配置outputPath
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsDir = [dirPaths objectAtIndex:0];
+    //todo 视频名字要改
     NSString *outputFilePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"slowMotion.mov"]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:outputFilePath])
         [[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:nil];
@@ -231,7 +246,6 @@ const char kOrientation;
                                                                          presetName:AVAssetExportPreset1920x1080];
     NSLog(@"----%@", assetExport.supportedFileTypes);
     assetExport.outputURL = _filePath;
-    //todo 改了
     //    assetExport.outputFileType = AVFileTypeQuickTimeMovie;
     assetExport.outputFileType = assetExport.supportedFileTypes.firstObject;
     assetExport.shouldOptimizeForNetworkUse = YES;
@@ -257,12 +271,14 @@ const char kOrientation;
                 NSLog(@"Successful");
                 NSURL *outputURL = assetExport.outputURL;
                 
-                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-                if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
-                    [self writeExportedVideoToAssetsLibrary:outputURL];
-                }
+                //todo 这里先不保存到相册
+//                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+//                if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
+//                    [self writeExportedVideoToAssetsLibrary:outputURL];
+//                }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // completion(_filePath);
+                    [self fullScreemDisplayWithOutputUrl:outputURL];
                 });
                 
             }
@@ -273,7 +289,7 @@ const char kOrientation;
     }];
 }
 
-- (void)writeExportedVideoToAssetsLibrary :(NSURL *)url {
+- (void)writeExportedVideoToAssetsLibrary:(NSURL *)url {
     NSURL *exportURL = url;
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:exportURL]) {
@@ -308,8 +324,14 @@ const char kOrientation;
     }
 }
 
-- (UIImage *)createImageWithColor:(UIColor *) color
-{
+- (void)fullScreemDisplayWithOutputUrl:(NSURL *)url {
+    _rightTopButton.enabled = YES;
+    AVCaptureVideoOrientation videoOrientation = [objc_getAssociatedObject(self.assetUrl, &kOrientation) integerValue];
+    FullScreemDisplayController *controller = [[FullScreemDisplayController alloc] initWithPlayer:[AVPlayer playerWithURL:url] videoOrientation:videoOrientation];
+    [self.navigationController presentViewController:controller animated:YES completion:nil];
+}
+
+- (UIImage *)createImageWithColor:(UIColor *) color {
     CGRect rect=CGRectMake(0.0f, 0.0f, 2.0f, 2.0f);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -389,13 +411,9 @@ const char kOrientation;
 }
 
 - (void)clickRightTopButton:(UIBarButtonItem *)item {
-//    item.enabled = NO;
+    item.enabled = NO;
     //修改速度 和 剪辑视频  同时进行
-//    [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime] replaceSoundEffect:nil];
-    
-    AVCaptureVideoOrientation videoOrientation = [objc_getAssociatedObject(self.assetUrl, &kOrientation) integerValue];
-    FullScreemDisplayController *controller = [[FullScreemDisplayController alloc] initWithPlayer:_player videoOrientation:videoOrientation];
-    [self.navigationController presentViewController:controller animated:YES completion:nil];
+    [self speedFreezingWithAssetUrl:_assetUrl beginTime:[_operatingView speedOperateVideoBeginTime] endTime:[_operatingView speedOperateVideoEndTime] replaceSoundEffect:nil];
 }
 
 - (IBAction)clickOperatingSpeedButton:(id)sender {
@@ -412,61 +430,62 @@ const char kOrientation;
 }
 
 
-- (void)trimmingVideoWithAsset:(AVAsset *)asset {
-    //配置path
-    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docsDir = [dirPaths objectAtIndex:0];
-    //todo 以上两步为何
-    NSString *outputFilePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"trimmingAsset.mov"]];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:outputFilePath]) {
-        NSError *error;
-        if (![[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:&error]) {
-            NSLog(@"ERROR: 清除旧文件发生错误");
-        }
-    }
-    NSURL *outputUrl = [NSURL fileURLWithPath:outputFilePath];
-    
-    //export
-    AVAsset *trimmingAsset = [AVAsset assetWithURL:_assetUrl];
-    AVAssetExportSession *trimmingExportSession = [[AVAssetExportSession alloc] initWithAsset:trimmingAsset presetName:AVCaptureSessionPresetHigh];
-    trimmingExportSession.outputURL = outputUrl;
-    trimmingExportSession.outputFileType = AVFileTypeMPEG4;
-    trimmingExportSession.shouldOptimizeForNetworkUse = YES;
-    
-    //异步输出
-    [trimmingExportSession exportAsynchronouslyWithCompletionHandler:^{
-        
-        switch ([trimmingExportSession status]) {
-            case AVAssetExportSessionStatusFailed:
-            {
-                NSLog(@"Export session faiied with error: %@", [trimmingExportSession error]);
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // completion(nil);
-                });
-            }
-                break;
-            case AVAssetExportSessionStatusCompleted:
-            {
-                NSLog(@"Successful");
-                NSURL *outputURL = trimmingExportSession.outputURL;
-                
-                
-                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-                if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
-                    [self writeExportedVideoToAssetsLibrary:outputURL];
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // completion(_filePath);
-                });
-            }
-                break;
-            default:
-                break;
-        }
-    }];
-}
+//- (void)trimmingVideoWithAsset:(AVAsset *)asset {
+//    //配置path
+//    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *docsDir = [dirPaths objectAtIndex:0];
+//    //todo 以上两步为何
+//    NSString *outputFilePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"trimmingAsset.mov"]];
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    if ([fileManager fileExistsAtPath:outputFilePath]) {
+//        NSError *error;
+//        if (![[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:&error]) {
+//            NSLog(@"ERROR: 清除旧文件发生错误");
+//        }
+//    }
+//    NSURL *outputUrl = [NSURL fileURLWithPath:outputFilePath];
+//    
+//    //export
+//    AVAsset *trimmingAsset = [AVAsset assetWithURL:_assetUrl];
+//    AVAssetExportSession *trimmingExportSession = [[AVAssetExportSession alloc] initWithAsset:trimmingAsset presetName:AVCaptureSessionPresetHigh];
+//    trimmingExportSession.outputURL = outputUrl;
+//    trimmingExportSession.outputFileType = AVFileTypeMPEG4;
+//    trimmingExportSession.shouldOptimizeForNetworkUse = YES;
+//    
+//    //异步输出
+//    [trimmingExportSession exportAsynchronouslyWithCompletionHandler:^{
+//        
+//        switch ([trimmingExportSession status]) {
+//            case AVAssetExportSessionStatusFailed:
+//            {
+//                NSLog(@"Export session faiied with error: %@", [trimmingExportSession error]);
+//                
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    // completion(nil);
+//                });
+//            }
+//                break;
+//            case AVAssetExportSessionStatusCompleted:
+//            {
+//                NSLog(@"Successful");
+//                NSURL *outputURL = trimmingExportSession.outputURL;
+//                
+//                //todo这里不保存相册
+////                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+////                if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
+////                    [self writeExportedVideoToAssetsLibrary:outputURL];
+////                }
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    // completion(_filePath);
+//                    [self fullScreemDisplayWithOutputUrl:outputURL];
+//                });
+//            }
+//                break;
+//            default:
+//                break;
+//        }
+//    }];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

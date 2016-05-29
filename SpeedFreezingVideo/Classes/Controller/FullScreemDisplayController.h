@@ -11,4 +11,5 @@
 
 @interface FullScreemDisplayController : UIViewController
 - (instancetype)initWithPlayer:(AVPlayer *)player videoOrientation:(AVCaptureVideoOrientation)videoOrientation;
+- (instancetype)initWithAssetUrl:(NSURL *)url videoOrientation:(AVCaptureVideoOrientation)videoOrientation;
 @end
