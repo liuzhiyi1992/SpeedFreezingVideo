@@ -303,6 +303,11 @@
     }
 }
 
+//解决点击对焦后每移动一下就zoom一下摄像头整个焦段问题
+- (void)correctFocus {
+    [self focusAtCapturePoint:CGPointMake(0.5f, 0.5f)];
+}
+
 //对焦
 - (void)focusAtCapturePoint:(CGPoint)point {
     if ([_videoDevice isFocusPointOfInterestSupported] &&
@@ -323,7 +328,6 @@
 - (void)exposeAtCapturePoint:(CGPoint)point {
     if ([_videoDevice isExposurePointOfInterestSupported] &&
             [_videoDevice isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
-        
         //获得锁再操作设备
         NSError *error;
         if ([_videoDevice lockForConfiguration:&error]) {
@@ -483,6 +487,11 @@
     [self focusAtCapturePoint:point];
     //刷新测光
     [self exposeAtCapturePoint:point];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self correctFocus];
+        NSLog(@"run");
+    });
 }
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {
