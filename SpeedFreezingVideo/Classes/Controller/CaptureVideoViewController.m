@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *assetThumbnailImageView;
 @property (weak, nonatomic) IBOutlet UIView *prepareMaskView;
 
-
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 
 @property (strong, nonatomic) AVCaptureDevice *audioDevice;
@@ -38,9 +37,7 @@
 
 @property (strong, nonatomic) CMMotionManager *motionManager;
 @property (assign, nonatomic) AVCaptureVideoOrientation deviceOrientation;
-
 @property (strong, nonatomic) ALAsset *albumLastVideo;
-
 @property (assign, nonatomic) BOOL isCaptureSessionPrepared;
 @end
 
@@ -465,6 +462,37 @@
             self.deviceOrientation = UIDeviceOrientationLandscapeLeft;
         }
     }
+}
+
+//setter
+- (void)setDeviceOrientation:(AVCaptureVideoOrientation)deviceOrientation {
+    if (_deviceOrientation != deviceOrientation) {
+        //变化
+        [self synchroniseThumbnailImageViewOrientation:deviceOrientation];
+    }
+    _deviceOrientation = deviceOrientation;
+}
+
+//同步相册预览View旋转
+- (void)synchroniseThumbnailImageViewOrientation:(AVCaptureVideoOrientation)deviceOrientation {
+    CGAffineTransform transform;
+    switch (deviceOrientation) {
+        case AVCaptureVideoOrientationPortrait:
+            transform = CGAffineTransformMakeRotation(0);
+            break;
+        case UIDeviceOrientationLandscapeLeft:
+            transform = CGAffineTransformMakeRotation(M_PI/2);
+            break;
+        case UIDeviceOrientationLandscapeRight:
+            transform = CGAffineTransformMakeRotation(-M_PI/2);
+            break;
+        case UIDeviceOrientationPortraitUpsideDown:
+            transform = CGAffineTransformMakeRotation(M_PI);
+            break;
+    }
+    [UIView animateWithDuration:0.5f animations:^{
+        _assetThumbnailImageView.transform = transform;
+    }];
 }
 
 - (void)selectLastVideoAssetFromAblum {

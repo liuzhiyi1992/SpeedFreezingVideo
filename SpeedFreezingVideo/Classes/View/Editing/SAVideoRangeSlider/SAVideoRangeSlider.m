@@ -41,7 +41,7 @@ const CGFloat FRAME_PIC_WIDTH = 20;
 @property (nonatomic) CGFloat frame_width;
 @property (nonatomic) Float64 durationSeconds;
 @property (nonatomic, strong) SAResizibleBubble *popoverBubble;
-@property (strong, nonatomic) FrameMaskingLayer *frameMaskingLayer;
+@property (strong, nonatomic) FrameMaskingLayer *frameMaskingLayer;//todo弃用
 @property (strong, nonatomic) CAShapeLayer *backgroundMaskLayer;
 @end
 
