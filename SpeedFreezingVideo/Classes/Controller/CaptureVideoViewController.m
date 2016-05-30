@@ -15,9 +15,10 @@
 #import <CoreMotion/CoreMotion.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+#define ERROR_TO_EXIT_WITH_MSG(msg) [self errorToExitWithMessage:msg]
 //todo 发生某些错误需要停止视频拍摄功能，对策：返回上一页
 
-@interface CaptureVideoViewController () <CapturePreviewViewDelegate, AVCaptureFileOutputRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface CaptureVideoViewController () <CapturePreviewViewDelegate, AVCaptureFileOutputRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet CapturePreviewView *videoPreviewView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *assetThumbnailImageView;
@@ -79,17 +80,16 @@
                 if (granted) {
                     [self configureCapture];
                 } else {
-                    NSLog(@"被拒绝，如需正常使用请与设置->隐私打开摄像头权限");
-                    //todo 提示打开权限方法
+                    ERROR_TO_EXIT_WITH_MSG(@"摄像头或麦克风权限被拒绝，如需正常使用请于设置->隐私打开权限");
                 }
             }];
             break;
         }
         case AVAuthorizationStatusDenied:
-            NSLog(@"权限被拒绝，如需正常使用请与设置->隐私打开摄像头权限");
+            ERROR_TO_EXIT_WITH_MSG(@"摄像头或麦克风权限被拒绝，如需正常使用请于设置->隐私打开权限");
             break;
         case AVAuthorizationStatusRestricted:
-            NSLog(@"您无法改变被锁定的权限");
+            ERROR_TO_EXIT_WITH_MSG(@"您无法改变被锁定的权限");
             break;
         default:
             break;
@@ -117,7 +117,13 @@
     if ([_captureSession canSetSessionPreset:AVCaptureSessionPresetHigh]) {
         [_captureSession setSessionPreset:AVCaptureSessionPresetHigh];
     } else {
-        NSLog(@"Can not set AVCaptureSession sessionPreset, using default %@", _captureSession.sessionPreset);
+        NSLog(@"ERROR: using default SessionPreset");
+        if ([_captureSession canSetSessionPreset:_captureSession.sessionPreset]) {
+            [_captureSession setSessionPreset:_captureSession.sessionPreset];
+        } else {
+            NSString *errorString = [NSString stringWithFormat:@"Can not set AVCaptureSession sessionPreset, using default %@", _captureSession.sessionPreset];
+            ERROR_TO_EXIT_WITH_MSG(errorString);
+        }
     }
     
     [_captureSession beginConfiguration];
@@ -137,7 +143,7 @@
     //视频输出
     self.videoOutput = [[AVCaptureMovieFileOutput alloc] init];
     if (![_captureSession canAddOutput:_videoOutput]) {
-        NSLog(@"ERROR: 配置视频输出出错");
+        ERROR_TO_EXIT_WITH_MSG(@"视频输出配置出错");
     } else {
         [_captureSession addOutput:_videoOutput];
         //todo 这些有用?
@@ -146,7 +152,7 @@
             captureConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
 //            captureConnection.videoScaleAndCropFactor = captureConnection.videoMaxScaleAndCropFactor;
         } else {
-            NSLog(@"ERROR: 视频稳定性出错");
+            ERROR_TO_EXIT_WITH_MSG(@"视频稳定性配置出错");
         }
     }
     
@@ -228,9 +234,9 @@
             return videoInput;
         } else {
             if ([mediaType isEqualToString:AVMediaTypeAudio]) {
-                NSLog(@"ERROR: 配置音频输入设备错误");
+                ERROR_TO_EXIT_WITH_MSG(@"配置音频输入设备出错");
             } else if ([mediaType isEqualToString:AVMediaTypeVideo]) {
-                NSLog(@"ERROR: 配置视频输入设备错误");
+                ERROR_TO_EXIT_WITH_MSG(@"配置视频输入设备出错");
             }
         }
     }
@@ -250,7 +256,7 @@
             return YES;
         }
     } else {
-        NSLog(@"获取媒体输入设备出错");
+        ERROR_TO_EXIT_WITH_MSG(@"获取媒体输入设备出错");
     }
     return NO;
 }
@@ -262,11 +268,11 @@
         if ( ![self captureSessionAddInput:input mediaType:AVMediaTypeVideo]) {
             if (nil != _videoInput) {
                 [_captureSession addInput:_videoInput];
-                NSLog(@"Error: 不能成功切换摄像头");
+                NSLog(@"ERROR: 不能成功切换摄像头");
             }
         }
     } else {
-        NSLog(@"ERROR: 获取视频输入设备错误");
+        ERROR_TO_EXIT_WITH_MSG(@"获取视频输入设备错误");
     }
 }
 
@@ -480,9 +486,14 @@
     }];
 }
 
+- (void)errorToExitWithMessage:(NSString *)message {
+    UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"错误" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    NSLog(@"ERROR: %@", message);
+    [errorAlert show];
+}
+
 #pragma mark - delegate
 - (void)previewViewFocusAtCapturePoint:(CGPoint)point {
-//    NSLog(@"focus mode -- %ld , exposure mode --- %ld", (long)[_videoDevice focusMode], (long)[_videoDevice exposureMode]);
     //刷新对焦
     [self focusAtCapturePoint:point];
     //刷新测光
@@ -490,7 +501,6 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self correctFocus];
-        NSLog(@"run");
     });
 }
 
@@ -501,14 +511,13 @@
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error {
     NSLog(@"录制完成");
     if (outputFileURL.absoluteString.length == 0) {
-        NSLog(@"ERROR: 保存视频错误");
+        ERROR_TO_EXIT_WITH_MSG(@"保存视频错误，有可能由内存不足导致");
     } else {
         //这里可以考虑保存相册
         VideoEditingController *editingController = [[VideoEditingController alloc] initWithAssetUrl:outputFileURL];
         //绑定视频方向
         objc_setAssociatedObject(outputFileURL, &kOrientation, @(_deviceOrientation), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         [self.navigationController pushViewController:editingController animated:YES];
-//        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -520,6 +529,12 @@
         [self.navigationController pushViewController:editingController animated:YES];
     }];
     
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - KVO
