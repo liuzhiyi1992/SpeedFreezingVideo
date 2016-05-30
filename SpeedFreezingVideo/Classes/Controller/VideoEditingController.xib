@@ -14,9 +14,13 @@
                 <outlet property="videoPlayerView" destination="YiP-ZY-FnV" id="oIo-PM-eyA"/>
                 <outlet property="videoPlayerViewWidthConstraint" destination="zok-q8-H4A" id="lGA-DQ-v6Q"/>
                 <outlet property="videoRangeButton" destination="Qc8-dq-2JP" id="ZiF-XG-lIF"/>
+                <outlet property="videoRangeButtonLeadingConstraint" destination="GS1-KC-Nvz" id="e5w-LM-xyz"/>
                 <outlet property="videoSpeedButton" destination="fRl-D0-dYP" id="sD0-4a-HYE"/>
+                <outlet property="videoSpeedButtonTrailingConstraint" destination="mYb-8S-c4t" id="8vq-Fu-IFS"/>
                 <outlet property="videoTrimmerHolderView" destination="U2e-Uf-2zW" id="LrJ-gp-pzn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="sizeAdaptiveConstraints" destination="wFx-f5-gVP" id="faa-nK-MLi"/>
+                <outletCollection property="sizeAdaptiveConstraints" destination="5r9-6c-T0T" id="tFf-6O-X5x"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -153,6 +157,7 @@
                     <exclude reference="0jr-KQ-W44"/>
                     <exclude reference="ClP-AS-Gtc"/>
                     <exclude reference="DG2-He-hR0"/>
+                    <exclude reference="EhH-wf-IFd"/>
                     <exclude reference="HXF-Zd-NUh"/>
                     <exclude reference="RRK-no-Zus"/>
                     <exclude reference="UXZ-em-iQc"/>

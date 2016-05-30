@@ -22,10 +22,14 @@ const char kOrientation;
 @property (weak, nonatomic) IBOutlet UIView *speedMultipleHolderView;
 @property (weak, nonatomic) IBOutlet UIButton *videoRangeButton;
 @property (weak, nonatomic) IBOutlet UIButton *videoSpeedButton;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoPlayerViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoRangeButtonLeadingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *videoSpeedButtonTrailingConstraint;
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *sizeAdaptiveConstraints;
+
 @property (weak, nonatomic) IBOutlet UIView *prepareMaskView;
 @property (strong, nonatomic) UIBarButtonItem *rightTopButton;
-
 
 @property (strong, nonatomic) NSURL *assetUrl;
 @property (strong, nonatomic) AVPlayerItem *playerItem;
@@ -94,6 +98,10 @@ const char kOrientation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //屏幕适配
+    [self screenAdaptation];
+    
     self.speedOperatingEffected = YES;
     _prepareMaskView.hidden = NO;
     [self registerNotification];
@@ -101,15 +109,46 @@ const char kOrientation;
     [self configureSpeedMultipleView];
     [self readyToPlay];
     
+    
+}
+
+- (void)screenAdaptation {
     //Orientation
     AVCaptureVideoOrientation videoOrientation = [objc_getAssociatedObject(self.assetUrl, &kOrientation) integerValue];
     if (videoOrientation == AVCaptureVideoOrientationPortrait) {
-//        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        //        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspectFill];
         self.videoPlayerViewWidthConstraint.constant = [UIScreen mainScreen].bounds.size.width * 0.4;
     } else if (videoOrientation == AVCaptureVideoOrientationLandscapeLeft || videoOrientation == AVCaptureVideoOrientationLandscapeRight) {
-//        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        //        [_videoPlayerView setVideoGravity:AVLayerVideoGravityResizeAspectFill];
         self.videoPlayerViewWidthConstraint.constant = [UIScreen mainScreen].bounds.size.width * 0.8;
     }
+    
+    //xib按iphone6P size设计
+    CGFloat adaptationScale = 1.f;
+    CGFloat contentFontSize = 15.f;
+    if ([UIScreen mainScreen].bounds.size.height == 480) {//i4
+        adaptationScale = 0.75f;
+        contentFontSize = 14.f;
+        _videoRangeButtonLeadingConstraint.constant = 20.f;
+        _videoSpeedButtonTrailingConstraint.constant = 20.f;
+    } else if ([UIScreen mainScreen].bounds.size.height == 568) {//i5
+        adaptationScale = 0.8f;
+        contentFontSize = 15.f;
+        _videoRangeButtonLeadingConstraint.constant = 20.f;
+        _videoSpeedButtonTrailingConstraint.constant = 20.f;
+    } else if ([UIScreen mainScreen].bounds.size.height == 667){//6
+        adaptationScale = 1.0f;
+        contentFontSize = 16.f;
+    } else {
+        return;
+    }
+    
+    for (NSLayoutConstraint *constraint in _sizeAdaptiveConstraints) {
+        constraint.constant = adaptationScale * constraint.constant;
+    }
+    
+    _videoRangeButton.titleLabel.font = [UIFont systemFontOfSize:contentFontSize];
+    _videoSpeedButton.titleLabel.font = [UIFont systemFontOfSize:contentFontSize];
 }
 
 - (void)modifyNavigationBar {
