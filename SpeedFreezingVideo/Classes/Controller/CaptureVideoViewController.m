@@ -124,19 +124,16 @@
     }
     
     [_captureSession beginConfiguration];
-    
     //使用后置摄像头
     self.videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     //配置video input
     self.videoInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeVideo];
     [self captureSessionAddInput:_videoInput mediaType:AVMediaTypeVideo];
-    
     //配置音频
     self.audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
     //配置audio input
     self.audioInput = [self createMediaInputWithDevice:_audioDevice mediaType:AVMediaTypeAudio];
     [self captureSessionAddInput:_audioInput mediaType:AVMediaTypeAudio];
-    
     //视频输出
     self.videoOutput = [[AVCaptureMovieFileOutput alloc] init];
     if (![_captureSession canAddOutput:_videoOutput]) {
@@ -152,7 +149,6 @@
             ERROR_TO_EXIT_WITH_MSG(@"视频稳定性配置出错");
         }
     }
-    
     //配置预览view
     [self configureVideoPreview];
     [_captureSession commitConfiguration];
@@ -216,7 +212,6 @@
     
     //todo 切换时锁定设备，方式同时修改?
     AVCaptureDeviceInput *videoInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeVideo];
-    
     [_captureSession beginConfiguration];
     [self captureSessionChangeVideoInput:videoInput];
     [_captureSession commitConfiguration];
