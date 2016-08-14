@@ -92,8 +92,6 @@ const char kOrientation;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [_player pause];
-    //考虑到要重新返回使用，不至nil
-//    _player = nil;
 }
 
 - (void)viewDidLoad {
@@ -108,8 +106,6 @@ const char kOrientation;
     [self modifyNavigationBar];
     [self configureSpeedMultipleView];
     [self readyToPlay];
-    
-    
 }
 
 - (void)screenAdaptation {
@@ -288,8 +284,9 @@ const char kOrientation;
     NSString *docsDir = [dirPaths objectAtIndex:0];
     //todo 视频名字要改
     NSString *outputFilePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"slowMotion.mov"]];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:outputFilePath])
+    if ([[NSFileManager defaultManager] fileExistsAtPath:outputFilePath]) {
         [[NSFileManager defaultManager] removeItemAtPath:outputFilePath error:nil];
+    }
     NSURL *_filePath = [NSURL fileURLWithPath:outputFilePath];
     
     //todo 稳定后修改下视频质量  考虑开放不同质量让用户选择
@@ -298,12 +295,10 @@ const char kOrientation;
                                                                          presetName:AVAssetExportPreset1920x1080];
     NSLog(@"----%@", assetExport.supportedFileTypes);
     assetExport.outputURL = _filePath;
-    //    assetExport.outputFileType = AVFileTypeQuickTimeMovie;
     assetExport.outputFileType = assetExport.supportedFileTypes.firstObject;
     assetExport.shouldOptimizeForNetworkUse = YES;
     
     //trimming
-//    NSLog(@"trimingtime%lld-----%lld", _playerItem.reversePlaybackEndTime.value/_playerItem.reversePlaybackEndTime.timescale, _playerItem.forwardPlaybackEndTime.value/_playerItem.forwardPlaybackEndTime.timescale);
     CMTime trimmingEndTime = CMTimeAdd(_playerItem.forwardPlaybackEndTime, extraTime);
     CMTime trimmingDuration = CMTimeSubtract(trimmingEndTime, _playerItem.reversePlaybackEndTime);
     CMTimeRange timeRange = CMTimeRangeMake(_playerItem.reversePlaybackEndTime, trimmingDuration);
@@ -324,7 +319,6 @@ const char kOrientation;
             {
                 NSLog(@"Successful");
                 NSURL *outputURL = assetExport.outputURL;
-                
                 //todo 这里先不保存到相册
 //                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 //                if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
