@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		48007F5C1CFA9C5C004A7F60 /* FullScreemDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48007F5A1CFA9C5C004A7F60 /* FullScreemDisplayController.m */; };
 		48007F5D1CFA9C5C004A7F60 /* FullScreemDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48007F5B1CFA9C5C004A7F60 /* FullScreemDisplayController.xib */; };
+		4803DA9E1D60AF730052F4CE /* CapturePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4803DA9B1D60AF730052F4CE /* CapturePreviewView.m */; };
+		4803DA9F1D60AF730052F4CE /* CaptureVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4803DA9D1D60AF730052F4CE /* CaptureVideoButton.m */; };
+		4803DAA31D60AFE00052F4CE /* VideoPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4803DAA21D60AFE00052F4CE /* VideoPlayingView.m */; };
+		4803DAA61D60B1840052F4CE /* EndOfPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4803DAA51D60B1840052F4CE /* EndOfPlayingView.m */; };
 		4810F4601CF1C6DE00550D10 /* SpeedMultipleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4810F45F1CF1C6DE00550D10 /* SpeedMultipleView.m */; };
 		4810F4621CF1C6F600550D10 /* SpeedMultipleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4810F4611CF1C6F600550D10 /* SpeedMultipleView.xib */; };
-		481467861CE89EE50003C3E0 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481467851CE89EE50003C3E0 /* AVKit.framework */; };
 		4848F6411CE73430009C6280 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6401CE73430009C6280 /* main.m */; };
 		4848F6441CE73430009C6280 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6431CE73430009C6280 /* AppDelegate.m */; };
 		4848F6471CE73431009C6280 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4848F6461CE73431009C6280 /* ViewController.m */; };
@@ -28,11 +31,8 @@
 		4879E0681CF83BB30004CFAC /* UIImage+colorless.m in Sources */ = {isa = PBXBuildFile; fileRef = 4879E0671CF83BB30004CFAC /* UIImage+colorless.m */; };
 		4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */; };
 		4881196D1CEC59BA00CA0C7F /* CaptureVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */; };
-		4881196E1CEC59BA00CA0C7F /* CapturePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119691CEC59BA00CA0C7F /* CapturePreviewView.m */; };
-		4881196F1CEC59BA00CA0C7F /* CaptureVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4881196B1CEC59BA00CA0C7F /* CaptureVideoButton.m */; };
 		488119731CEC5A5100CA0C7F /* VideoEditingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119711CEC5A5100CA0C7F /* VideoEditingController.m */; };
 		488119741CEC5A5100CA0C7F /* VideoEditingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488119721CEC5A5100CA0C7F /* VideoEditingController.xib */; };
-		488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 488119761CEC5FCA00CA0C7F /* VideoPlayingView.m */; };
 		48B824BD1CF45B3D005E565C /* UIColor+hexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B824BC1CF45B3D005E565C /* UIColor+hexColor.m */; };
 		48FC0BAD1CF2B8AD000D02CB /* UINavigationBar+transparency.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */; };
 		48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */; };
@@ -43,6 +43,14 @@
 		48007F591CFA9C5C004A7F60 /* FullScreemDisplayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullScreemDisplayController.h; sourceTree = "<group>"; };
 		48007F5A1CFA9C5C004A7F60 /* FullScreemDisplayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullScreemDisplayController.m; sourceTree = "<group>"; };
 		48007F5B1CFA9C5C004A7F60 /* FullScreemDisplayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullScreemDisplayController.xib; sourceTree = "<group>"; };
+		4803DA9A1D60AF730052F4CE /* CapturePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapturePreviewView.h; sourceTree = "<group>"; };
+		4803DA9B1D60AF730052F4CE /* CapturePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapturePreviewView.m; sourceTree = "<group>"; };
+		4803DA9C1D60AF730052F4CE /* CaptureVideoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoButton.h; sourceTree = "<group>"; };
+		4803DA9D1D60AF730052F4CE /* CaptureVideoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoButton.m; sourceTree = "<group>"; };
+		4803DAA11D60AFE00052F4CE /* VideoPlayingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayingView.h; sourceTree = "<group>"; };
+		4803DAA21D60AFE00052F4CE /* VideoPlayingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayingView.m; sourceTree = "<group>"; };
+		4803DAA41D60B1840052F4CE /* EndOfPlayingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndOfPlayingView.h; sourceTree = "<group>"; };
+		4803DAA51D60B1840052F4CE /* EndOfPlayingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndOfPlayingView.m; sourceTree = "<group>"; };
 		4810F45E1CF1C6DE00550D10 /* SpeedMultipleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedMultipleView.h; sourceTree = "<group>"; };
 		4810F45F1CF1C6DE00550D10 /* SpeedMultipleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedMultipleView.m; sourceTree = "<group>"; };
 		4810F4611CF1C6F600550D10 /* SpeedMultipleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeedMultipleView.xib; sourceTree = "<group>"; };
@@ -76,15 +84,9 @@
 		488119641CEC59BA00CA0C7F /* CaptureVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoViewController.h; sourceTree = "<group>"; };
 		488119651CEC59BA00CA0C7F /* CaptureVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoViewController.m; sourceTree = "<group>"; };
 		488119661CEC59BA00CA0C7F /* CaptureVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureVideoViewController.xib; sourceTree = "<group>"; };
-		488119681CEC59BA00CA0C7F /* CapturePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapturePreviewView.h; sourceTree = "<group>"; };
-		488119691CEC59BA00CA0C7F /* CapturePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapturePreviewView.m; sourceTree = "<group>"; };
-		4881196A1CEC59BA00CA0C7F /* CaptureVideoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoButton.h; sourceTree = "<group>"; };
-		4881196B1CEC59BA00CA0C7F /* CaptureVideoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureVideoButton.m; sourceTree = "<group>"; };
 		488119701CEC5A5100CA0C7F /* VideoEditingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEditingController.h; sourceTree = "<group>"; };
 		488119711CEC5A5100CA0C7F /* VideoEditingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEditingController.m; sourceTree = "<group>"; };
 		488119721CEC5A5100CA0C7F /* VideoEditingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoEditingController.xib; sourceTree = "<group>"; };
-		488119751CEC5FCA00CA0C7F /* VideoPlayingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayingView.h; sourceTree = "<group>"; };
-		488119761CEC5FCA00CA0C7F /* VideoPlayingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayingView.m; sourceTree = "<group>"; };
 		48B824BB1CF45B3D005E565C /* UIColor+hexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+hexColor.h"; sourceTree = "<group>"; };
 		48B824BC1CF45B3D005E565C /* UIColor+hexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+hexColor.m"; sourceTree = "<group>"; };
 		48FC0BA91CF2B8AD000D02CB /* UINavigationBar+transparency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+transparency.h"; sourceTree = "<group>"; };
@@ -99,13 +101,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				481467861CE89EE50003C3E0 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4803DA991D60AF730052F4CE /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				4803DA9A1D60AF730052F4CE /* CapturePreviewView.h */,
+				4803DA9B1D60AF730052F4CE /* CapturePreviewView.m */,
+				4803DA9C1D60AF730052F4CE /* CaptureVideoButton.h */,
+				4803DA9D1D60AF730052F4CE /* CaptureVideoButton.m */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
+		4803DAA01D60AFE00052F4CE /* Playing */ = {
+			isa = PBXGroup;
+			children = (
+				4803DAA11D60AFE00052F4CE /* VideoPlayingView.h */,
+				4803DAA21D60AFE00052F4CE /* VideoPlayingView.m */,
+				4803DAA41D60B1840052F4CE /* EndOfPlayingView.h */,
+				4803DAA51D60B1840052F4CE /* EndOfPlayingView.m */,
+			);
+			path = Playing;
+			sourceTree = "<group>";
+		};
 		4848F6331CE73430009C6280 = {
 			isa = PBXGroup;
 			children = (
@@ -210,13 +233,9 @@
 		488119671CEC59BA00CA0C7F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4803DAA01D60AFE00052F4CE /* Playing */,
+				4803DA991D60AF730052F4CE /* Capture */,
 				485E56DD1CED711A00159EC3 /* Editing */,
-				488119681CEC59BA00CA0C7F /* CapturePreviewView.h */,
-				488119691CEC59BA00CA0C7F /* CapturePreviewView.m */,
-				4881196A1CEC59BA00CA0C7F /* CaptureVideoButton.h */,
-				4881196B1CEC59BA00CA0C7F /* CaptureVideoButton.m */,
-				488119751CEC5FCA00CA0C7F /* VideoPlayingView.h */,
-				488119761CEC5FCA00CA0C7F /* VideoPlayingView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -313,23 +332,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				4879E0681CF83BB30004CFAC /* UIImage+colorless.m in Sources */,
-				4881196F1CEC59BA00CA0C7F /* CaptureVideoButton.m in Sources */,
 				48FC0BAD1CF2B8AD000D02CB /* UINavigationBar+transparency.m in Sources */,
+				4803DAA61D60B1840052F4CE /* EndOfPlayingView.m in Sources */,
 				4848F6471CE73431009C6280 /* ViewController.m in Sources */,
+				4803DA9F1D60AF730052F4CE /* CaptureVideoButton.m in Sources */,
 				4881196C1CEC59BA00CA0C7F /* CaptureVideoViewController.m in Sources */,
-				488119771CEC5FCA00CA0C7F /* VideoPlayingView.m in Sources */,
+				4803DA9E1D60AF730052F4CE /* CapturePreviewView.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
 				48007F5C1CFA9C5C004A7F60 /* FullScreemDisplayController.m in Sources */,
 				4810F4601CF1C6DE00550D10 /* SpeedMultipleView.m in Sources */,
 				485142201CF6AB3400258B1A /* FrameMaskingLayer.m in Sources */,
 				48B824BD1CF45B3D005E565C /* UIColor+hexColor.m in Sources */,
+				4803DAA31D60AFE00052F4CE /* VideoPlayingView.m in Sources */,
 				485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */,
 				48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */,
 				485E56FF1CEE006300159EC3 /* SpeedFreezesOperatingView.m in Sources */,
 				488119731CEC5A5100CA0C7F /* VideoEditingController.m in Sources */,
 				485E56ED1CED9EC700159EC3 /* SAVideoRangeSlider.m in Sources */,
 				4848F6411CE73430009C6280 /* main.m in Sources */,
-				4881196E1CEC59BA00CA0C7F /* CapturePreviewView.m in Sources */,
 				485E56EC1CED9EC700159EC3 /* SASliderRight.m in Sources */,
 				485E56E01CED71A100159EC3 /* VideoTrimmerView.m in Sources */,
 				485E56EB1CED9EC700159EC3 /* SASliderLeft.m in Sources */,
