@@ -96,7 +96,6 @@ const char kOrientation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //屏幕适配
     [self screenAdaptation];
     
