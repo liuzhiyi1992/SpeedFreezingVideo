@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,28 +16,102 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDC-Ne-syZ">
-                                <rect key="frame" x="271" y="279" width="58" height="42"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="enter">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mianPageBackground01.png" translatesAutoresizingMaskIntoConstraints="NO" id="KBz-Gm-6h1">
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="KBz-Gm-6h1" secondAttribute="height" id="7lh-uy-z52"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifg-gl-6Rb">
+                                <rect key="frame" x="70" y="499" width="60" height="45"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ifg-gl-6Rb" secondAttribute="height" id="q7e-Ai-pYz"/>
+                                </constraints>
+                                <state key="normal" image="album_button"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="q7e-Ai-pYz"/>
+                                    </mask>
+                                </variation>
                                 <connections>
-                                    <action selector="enterVideoCapture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fI4-2d-y9f"/>
+                                    <action selector="clickLibraryButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kSB-nP-D9L"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghd-av-FVz">
+                                <rect key="frame" x="245" y="499" width="60" height="45"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ghd-av-FVz" secondAttribute="height" id="wSA-uH-Dly"/>
+                                </constraints>
+                                <state key="normal" image="camera_button"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="wSA-uH-Dly"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="clickCameraButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NZ7-LF-c55"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIBRARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgB-nY-LCI">
+                                <rect key="frame" x="60" y="564" width="79" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOVIE CAM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTI-Jy-MhF">
+                                <rect key="frame" x="219.5" y="564" width="110" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YC4-oG-Xta">
+                                <rect key="frame" x="168" y="432" width="39" height="37"/>
+                            </pageControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zDC-Ne-syZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OHY-Sv-mOd"/>
-                            <constraint firstItem="zDC-Ne-syZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="srl-dl-aQX"/>
+                            <constraint firstItem="YC4-oG-Xta" firstAttribute="centerX" secondItem="KBz-Gm-6h1" secondAttribute="centerX" id="1xp-y4-q0p"/>
+                            <constraint firstItem="KBz-Gm-6h1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="9UD-Jq-7Xo"/>
+                            <constraint firstItem="IgB-nY-LCI" firstAttribute="top" secondItem="ifg-gl-6Rb" secondAttribute="bottom" constant="20" id="D4G-96-pwY"/>
+                            <constraint firstItem="KBz-Gm-6h1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DVs-60-hJL"/>
+                            <constraint firstAttribute="trailing" secondItem="ghd-av-FVz" secondAttribute="trailing" id="H8D-6W-3q7"/>
+                            <constraint firstItem="DTI-Jy-MhF" firstAttribute="centerX" secondItem="ghd-av-FVz" secondAttribute="centerX" id="I0R-KT-Y72"/>
+                            <constraint firstItem="ifg-gl-6Rb" firstAttribute="top" secondItem="KBz-Gm-6h1" secondAttribute="bottom" constant="60" id="ICk-50-3gV"/>
+                            <constraint firstItem="KBz-Gm-6h1" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="IGt-mz-Bga"/>
+                            <constraint firstItem="ghd-av-FVz" firstAttribute="width" secondItem="ifg-gl-6Rb" secondAttribute="width" id="O7n-2D-c6x"/>
+                            <constraint firstItem="ghd-av-FVz" firstAttribute="leading" secondItem="ifg-gl-6Rb" secondAttribute="trailing" id="Slm-Ro-EoR"/>
+                            <constraint firstItem="ghd-av-FVz" firstAttribute="top" secondItem="ifg-gl-6Rb" secondAttribute="top" id="e68-3q-YRe"/>
+                            <constraint firstItem="IgB-nY-LCI" firstAttribute="centerX" secondItem="ifg-gl-6Rb" secondAttribute="centerX" id="f52-X2-kV6"/>
+                            <constraint firstItem="YC4-oG-Xta" firstAttribute="bottom" secondItem="KBz-Gm-6h1" secondAttribute="bottom" constant="30" id="hCx-Gg-jYi"/>
+                            <constraint firstItem="ifg-gl-6Rb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="iGT-Gy-gE3"/>
+                            <constraint firstItem="ifg-gl-6Rb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="70" id="jkl-dR-LGe"/>
+                            <constraint firstItem="ifg-gl-6Rb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qxI-dk-3i1"/>
+                            <constraint firstItem="DTI-Jy-MhF" firstAttribute="top" secondItem="ghd-av-FVz" secondAttribute="bottom" constant="20" id="sMS-x4-p53"/>
+                            <constraint firstAttribute="trailing" secondItem="ghd-av-FVz" secondAttribute="trailing" constant="70" id="vzq-PU-ffn"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="iGT-Gy-gE3"/>
+                                <exclude reference="qxI-dk-3i1"/>
+                                <exclude reference="H8D-6W-3q7"/>
+                                <exclude reference="O7n-2D-c6x"/>
+                                <exclude reference="Slm-Ro-EoR"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="ezn-Rf-tXX"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="cameraButtonTralingConstraint" destination="vzq-PU-ffn" id="kYW-ew-PXr"/>
+                        <outlet property="libraryButton" destination="ifg-gl-6Rb" id="DQd-79-Wdm"/>
+                        <outlet property="libraryButtonLeadingConstraint" destination="jkl-dR-LGe" id="UU3-do-NEI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -57,4 +133,9 @@
             <point key="canvasLocation" x="-880" y="939"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="album_button" width="60" height="45"/>
+        <image name="camera_button" width="60" height="45"/>
+        <image name="mianPageBackground01.png" width="375" height="375"/>
+    </resources>
 </document>

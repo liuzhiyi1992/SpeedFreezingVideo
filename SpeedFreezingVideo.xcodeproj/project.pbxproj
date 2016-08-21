@@ -22,6 +22,7 @@
 		4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64B1CE73431009C6280 /* Assets.xcassets */; };
 		4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4848F64D1CE73431009C6280 /* LaunchScreen.storyboard */; };
 		485142201CF6AB3400258B1A /* FrameMaskingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4851421F1CF6AB3400258B1A /* FrameMaskingLayer.m */; };
+		485B2D0C1D69B36400FAED4C /* mianPageBackground01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 485B2D0B1D69B36400FAED4C /* mianPageBackground01@2x.png */; };
 		485E56E01CED71A100159EC3 /* VideoTrimmerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */; };
 		485E56EA1CED9EC700159EC3 /* SAResizibleBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E31CED9EC700159EC3 /* SAResizibleBubble.m */; };
 		485E56EB1CED9EC700159EC3 /* SASliderLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 485E56E51CED9EC700159EC3 /* SASliderLeft.m */; };
@@ -67,6 +68,7 @@
 		4848F6501CE73431009C6280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4851421E1CF6AB3400258B1A /* FrameMaskingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameMaskingLayer.h; sourceTree = "<group>"; };
 		4851421F1CF6AB3400258B1A /* FrameMaskingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameMaskingLayer.m; sourceTree = "<group>"; };
+		485B2D0B1D69B36400FAED4C /* mianPageBackground01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground01@2x.png"; sourceTree = "<group>"; };
 		485E56DE1CED71A100159EC3 /* VideoTrimmerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTrimmerView.h; sourceTree = "<group>"; };
 		485E56DF1CED71A100159EC3 /* VideoTrimmerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTrimmerView.m; sourceTree = "<group>"; };
 		485E56E21CED9EC700159EC3 /* SAResizibleBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAResizibleBubble.h; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		4848F63E1CE73430009C6280 /* SpeedFreezingVideo */ = {
 			isa = PBXGroup;
 			children = (
+				485B2D0A1D69B36400FAED4C /* Resource */,
 				48FD1C4B1CF9732000EF295F /* 慢快-数钱.mp4 */,
 				488119621CEC59BA00CA0C7F /* Classes */,
 				4848F6421CE73430009C6280 /* AppDelegate.h */,
@@ -170,6 +173,14 @@
 				4848F6401CE73430009C6280 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		485B2D0A1D69B36400FAED4C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				485B2D0B1D69B36400FAED4C /* mianPageBackground01@2x.png */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		485E56DD1CED711A00159EC3 /* Editing */ = {
@@ -321,6 +332,7 @@
 				4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */,
 				4848F64A1CE73431009C6280 /* Main.storyboard in Resources */,
 				48FD1C4C1CF9732000EF295F /* 慢快-数钱.mp4 in Resources */,
+				485B2D0C1D69B36400FAED4C /* mianPageBackground01@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,7 +408,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Haodong Qiu (G6BMKCT4W5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Haodong Qiu (G6BMKCT4W5)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -441,7 +454,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Haodong Qiu (G6BMKCT4W5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Haodong Qiu (G6BMKCT4W5)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
