@@ -9,9 +9,11 @@
 #import "FullScreemDisplayController.h"
 #import "VideoPlayingView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "EndOfPlayingView.h"
 
 @interface FullScreemDisplayController ()
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayingView;
+@property (weak, nonatomic) IBOutlet UIView *finishActionView;
 @property (assign, nonatomic) AVCaptureVideoOrientation videoOrientation;
 @property (strong, nonatomic) NSURL *assetUrl;
 @property (strong, nonatomic) AVPlayer *player;
@@ -41,11 +43,13 @@
 
 - (void)dealloc {
     //remove notify
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    _finishActionView.hidden = YES;
     [self registerNotification];
     [_videoPlayingView setPlayer:_player];
     [_videoPlayingView setVideoGravity:AVLayerVideoGravityResizeAspect];
@@ -53,7 +57,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     //transform
     if (_videoOrientation == AVCaptureVideoOrientationLandscapeLeft || _videoOrientation == AVCaptureVideoOrientationLandscapeRight) {
@@ -64,7 +67,7 @@
 }
 
 - (void)registerNotification {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
 - (void)writeExportedVideoToAssetsLibrary:(NSURL *)url {
@@ -104,8 +107,9 @@
 
 - (void)playerItemDidEnd:(NSNotification *)notify {
     [_player seekToTime:kCMTimeZero];
-
-    NSLog(@"播放完毕");
+    
+    self.finishActionView.hidden = NO;
+    NSLog(@"完成");
 }
 
 - (void)saveToAlbum {
@@ -113,9 +117,15 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [_player pause];
+    if ([[touches anyObject] view] == _videoPlayingView) {
+        [_player pause];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
     //todo 弹出操作按钮
-    [self dismissViewControllerAnimated:YES completion:nil];
+    EndOfPlayingView *operationView = [[EndOfPlayingView alloc] init];
+//    [operationView setTransform:CGAffineTransformMakeRotation(M_PI/2)];
+    [self.view addSubview:operationView];
 }
 
 - (void)didReceiveMemoryWarning {
