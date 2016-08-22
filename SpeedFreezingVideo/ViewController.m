@@ -8,8 +8,11 @@
 
 #import "ViewController.h"
 #import "CaptureVideoViewController.h"
+//#import <CoreMotion/CoreMotion.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "VideoEditingController.h"
 
-@interface ViewController ()
+@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryButtonLeadingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraButtonTralingConstraint;
@@ -66,11 +69,26 @@
 }
 
 - (IBAction)clickLibraryButton:(id)sender {
+    UIImagePickerController *myImagePickerController = [[UIImagePickerController alloc] init];
+    myImagePickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    myImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *)kUTTypeMovie, nil];
+    myImagePickerController.delegate = self;
+    myImagePickerController.editing = NO;
+    [self presentViewController:myImagePickerController animated:YES completion:nil];
 }
 
 - (IBAction)clickCameraButton:(id)sender {
     CaptureVideoViewController *controller = [[CaptureVideoViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSString *infoKey = UIImagePickerControllerMediaURL;
+    NSURL *assetUrl = [info objectForKey:infoKey];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        VideoEditingController *editingController = [[VideoEditingController alloc] initWithAssetUrl:assetUrl];
+        [self.navigationController pushViewController:editingController animated:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
