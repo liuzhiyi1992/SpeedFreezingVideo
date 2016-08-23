@@ -7,6 +7,9 @@
 //
 
 #import "EndOfPlayingView.h"
+
+#define BUTTON_MARGIN_GAP 40
+#define BUTTON_TITLE_LABEL_MARGIN 30
 @implementation EndOfPlayingView
 
 - (instancetype)init {
@@ -44,7 +47,7 @@
     [subTitleLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:subTitleLabel];
     NSDictionary *layoutLabels = NSDictionaryOfVariableBindings(topLabel, titleLabel, subTitleLabel);
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-130-[topLabel]-5-[titleLabel]-20-[subTitleLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:layoutLabels]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-130-[topLabel]-5-[titleLabel]-30-[subTitleLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:layoutLabels]];
     
     //Buttons
     UIButton *backToEditButton = [[UIButton alloc] init];
@@ -64,7 +67,8 @@
     [saveButton setImage:[UIImage imageNamed:@"album_button"] forState:UIControlStateNormal];
     [self addSubview:saveButton];
     NSDictionary *layoutButtons = NSDictionaryOfVariableBindings(backToEditButton, replayButton, saveButton);
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[backToEditButton]-40-[replayButton]-40-[saveButton]" options:NSLayoutFormatAlignAllBottom metrics:nil views:layoutButtons]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:[backToEditButton]-%d-[replayButton]-%d-[saveButton]", BUTTON_MARGIN_GAP, BUTTON_MARGIN_GAP] options:NSLayoutFormatAlignAllBottom metrics:nil views:layoutButtons]];
     
     //ButtonTitles
     UILabel *backToEditLabel = [[UILabel alloc] init];
@@ -74,7 +78,7 @@
     [backToEditLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:backToEditLabel];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:backToEditButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:backToEditLabel attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:backToEditButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:backToEditLabel attribute:NSLayoutAttributeBottom multiplier:1.f constant:-30.f]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:backToEditButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:backToEditLabel attribute:NSLayoutAttributeBottom multiplier:1.f constant:-BUTTON_TITLE_LABEL_MARGIN]];
     
     UILabel *replayLabel = [[UILabel alloc] init];
     [replayLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -83,16 +87,16 @@
     [replayLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:replayLabel];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:replayButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:replayLabel attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:replayButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:replayLabel attribute:NSLayoutAttributeBottom multiplier:1.f constant:-30.f]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:replayButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:replayLabel attribute:NSLayoutAttributeBottom multiplier:1.f constant:-BUTTON_TITLE_LABEL_MARGIN]];
     
     UILabel *saveLabel = [[UILabel alloc] init];
     [saveLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [saveLabel setText:@"REPLAY"];
+    [saveLabel setText:@"SAVE"];
     [saveLabel setFont:[UIFont systemFontOfSize:14.f]];
     [saveLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:saveLabel];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:saveButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:saveLabel attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:saveButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:saveLabel attribute:NSLayoutAttributeBottom multiplier:1.f constant:-30.f]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:saveButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:saveLabel attribute:NSLayoutAttributeBottom multiplier:1.f constant:-BUTTON_TITLE_LABEL_MARGIN]];
 }
 
 @end
