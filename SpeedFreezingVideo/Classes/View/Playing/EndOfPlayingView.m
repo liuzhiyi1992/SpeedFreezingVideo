@@ -24,6 +24,10 @@
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
     [self setFrame:[[UIScreen mainScreen] bounds]];
     
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat topMargin = 0.15 * screenHeight;
+    CGFloat bottomMargin = 0.15 * screenHeight;
+    
     //Labels
     UILabel *topLabel = [[UILabel alloc] init];
     [topLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -47,7 +51,8 @@
     [subTitleLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:subTitleLabel];
     NSDictionary *layoutLabels = NSDictionaryOfVariableBindings(topLabel, titleLabel, subTitleLabel);
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-130-[topLabel]-5-[titleLabel]-30-[subTitleLabel]" options:NSLayoutFormatAlignAllCenterX metrics:nil views:layoutLabels]];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%d-[topLabel]-5-[titleLabel]-30-[subTitleLabel]", (int)topMargin] options:NSLayoutFormatAlignAllCenterX metrics:nil views:layoutLabels]];
     
     //Buttons
     UIButton *backToEditButton = [[UIButton alloc] init];
@@ -60,7 +65,7 @@
     [replayButton setImage:[UIImage imageNamed:@"album_button"] forState:UIControlStateNormal];
     [self addSubview:replayButton];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:replayButton attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:replayButton attribute:NSLayoutAttributeBottom multiplier:1.f constant:150.f]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:replayButton attribute:NSLayoutAttributeBottom multiplier:1.f constant:bottomMargin]];
     
     UIButton *saveButton = [[UIButton alloc] init];
     [saveButton setTranslatesAutoresizingMaskIntoConstraints:NO];

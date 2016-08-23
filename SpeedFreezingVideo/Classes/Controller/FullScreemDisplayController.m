@@ -13,7 +13,6 @@
 
 @interface FullScreemDisplayController ()
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayingView;
-@property (weak, nonatomic) IBOutlet UIView *finishActionView;
 @property (assign, nonatomic) AVCaptureVideoOrientation videoOrientation;
 @property (strong, nonatomic) NSURL *assetUrl;
 @property (strong, nonatomic) AVPlayer *player;
@@ -48,8 +47,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    _finishActionView.hidden = YES;
     [self registerNotification];
     [_videoPlayingView setPlayer:_player];
     [_videoPlayingView setVideoGravity:AVLayerVideoGravityResizeAspect];
@@ -107,9 +104,8 @@
 
 - (void)playerItemDidEnd:(NSNotification *)notify {
     [_player seekToTime:kCMTimeZero];
-    
-    self.finishActionView.hidden = NO;
-    NSLog(@"完成");
+    EndOfPlayingView *operationView = [[EndOfPlayingView alloc] init];
+    [self.view addSubview:operationView];
 }
 
 - (void)saveToAlbum {
@@ -122,9 +118,7 @@
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-    //todo 弹出操作按钮
     EndOfPlayingView *operationView = [[EndOfPlayingView alloc] init];
-//    [operationView setTransform:CGAffineTransformMakeRotation(M_PI/2)];
     [self.view addSubview:operationView];
 }
 
