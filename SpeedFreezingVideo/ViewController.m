@@ -23,7 +23,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    [self modifyStatusBar];
     [self setupNavigationBarItem];
     [self configureLayout];
 }
@@ -34,6 +33,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self modifyStatusBar];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
