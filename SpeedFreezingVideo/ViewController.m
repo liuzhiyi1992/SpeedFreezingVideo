@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryButtonLeadingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraButtonTralingConstraint;
+@property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
 @end
 
 @implementation ViewController
@@ -39,6 +40,17 @@
 
 - (void)configureLayout {
     [self updateButtonPosition];
+    [self configureImageScrollView];
+}
+
+- (void)configureImageScrollView {
+    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    for (int i = 0; i < 3; i++) {
+        CGFloat imageOriginX = i * screenWidth;
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mianPageBackground%.2d@2x", i]]];
+        [imageView setFrame:CGRectMake(imageOriginX, 0, screenWidth, screenWidth)];
+        [self.imageScrollView addSubview:imageView];
+    }
 }
 
 - (void)updateButtonPosition {
