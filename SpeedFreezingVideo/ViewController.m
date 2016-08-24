@@ -11,11 +11,14 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "VideoEditingController.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+#define SCROLLING_IMAGEVIEW_COUNT 3
+
+@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryButtonLeadingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraButtonTralingConstraint;
 @property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *imageScrollViewPageControl;
 @end
 
 @implementation ViewController
@@ -41,6 +44,7 @@
 - (void)configureLayout {
     [self updateButtonPosition];
     [self configureImageScrollView];
+    [_imageScrollViewPageControl setNumberOfPages:SCROLLING_IMAGEVIEW_COUNT];
 }
 
 - (void)configureImageScrollView {
@@ -51,6 +55,11 @@
         [imageView setFrame:CGRectMake(imageOriginX, 0, screenWidth, screenWidth)];
         [self.imageScrollView addSubview:imageView];
     }
+    [self.imageScrollView setContentSize:CGSizeMake(3 * screenWidth, 0)];
+    [self.imageScrollView setShowsHorizontalScrollIndicator:NO];
+    [self.imageScrollView setBounces:NO];
+    [self.imageScrollView setPagingEnabled:YES];
+    [self.imageScrollView setDelegate:self];
 }
 
 - (void)updateButtonPosition {
@@ -76,7 +85,7 @@
 }
 
 - (void)clickRightTopButton:(id)sender {
-    NSLog(@"123");
+    NSLog(@"Help");
 }
 
 - (IBAction)clickLibraryButton:(id)sender {
@@ -100,6 +109,11 @@
         VideoEditingController *editingController = [[VideoEditingController alloc] initWithAssetUrl:assetUrl];
         [self.navigationController pushViewController:editingController animated:YES];
     }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat scrollContentOffsetX = scrollView.contentOffset.x;
+    self.imageScrollViewPageControl.currentPage = [[NSString stringWithFormat:@"%.0f", (scrollContentOffsetX / [[UIScreen mainScreen] bounds].size.width)] intValue];
 }
 
 - (void)didReceiveMemoryWarning {

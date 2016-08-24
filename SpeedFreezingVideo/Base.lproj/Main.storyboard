@@ -26,7 +26,7 @@
                                     <constraint firstAttribute="width" secondItem="hUx-T0-5Kl" secondAttribute="height" id="hF1-48-Um8"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifg-gl-6Rb">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifg-gl-6Rb">
                                 <rect key="frame" x="70" y="435" width="60" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -58,7 +58,7 @@
                                     <action selector="clickCameraButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NZ7-LF-c55"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIBRARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgB-nY-LCI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LIBRARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgB-nY-LCI">
                                 <rect key="frame" x="60" y="500" width="79" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
@@ -117,6 +117,7 @@
                     <connections>
                         <outlet property="cameraButtonTralingConstraint" destination="vzq-PU-ffn" id="kYW-ew-PXr"/>
                         <outlet property="imageScrollView" destination="hUx-T0-5Kl" id="muZ-Xk-giR"/>
+                        <outlet property="imageScrollViewPageControl" destination="YC4-oG-Xta" id="haw-rO-6he"/>
                         <outlet property="libraryButton" destination="ifg-gl-6Rb" id="DQd-79-Wdm"/>
                         <outlet property="libraryButtonLeadingConstraint" destination="jkl-dR-LGe" id="UU3-do-NEI"/>
                     </connections>
