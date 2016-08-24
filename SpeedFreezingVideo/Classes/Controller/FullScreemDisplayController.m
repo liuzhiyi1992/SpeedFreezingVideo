@@ -11,16 +11,16 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "EndOfPlayingView.h"
 
-@interface FullScreemDisplayController ()
+@interface FullScreemDisplayController () <EndOfPlayingViewDelegate>
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayingView;
 @property (assign, nonatomic) AVCaptureVideoOrientation videoOrientation;
 @property (strong, nonatomic) NSURL *assetUrl;
 @property (strong, nonatomic) AVPlayer *player;
+@property (assign, nonatomic) BOOL isOrientationLandscape;
 
 @end
 
 @implementation FullScreemDisplayController
-
 - (instancetype)initWithPlayer:(AVPlayer *)player videoOrientation:(AVCaptureVideoOrientation)videoOrientation {
     self = [super init];
     if (self) {
@@ -58,6 +58,7 @@
     //transform
     if (_videoOrientation == AVCaptureVideoOrientationLandscapeLeft || _videoOrientation == AVCaptureVideoOrientationLandscapeRight) {
         self.view.transform = CGAffineTransformMakeRotation(M_PI/2);
+        self.isOrientationLandscape = YES;
     }
     //play
     [_player play];
@@ -104,22 +105,46 @@
 
 - (void)playerItemDidEnd:(NSNotification *)notify {
     [_player seekToTime:kCMTimeZero];
-    EndOfPlayingView *operationView = [[EndOfPlayingView alloc] init];
-    [self.view addSubview:operationView];
+    [self showEndOfPlayingView];
 }
 
 - (void)saveToAlbum {
     [self writeExportedVideoToAssetsLibrary:_assetUrl];
 }
 
+- (void)showEndOfPlayingView {
+    EndOfPlayingView *operationView;
+    if (_isOrientationLandscape) {
+        operationView = [[EndOfPlayingView alloc] initWithVideoOrientation:VideoOrientationLandscape delegate:self];
+        CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+        [operationView setFrame:CGRectMake(0, 0, screenSize.height, screenSize.width)];
+    } else {
+        operationView = [[EndOfPlayingView alloc] initWithVideoOrientation:VideoOrientationPortrait delegate:self];
+    }
+    [self.view addSubview:operationView];
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     if ([[touches anyObject] view] == _videoPlayingView) {
         [_player pause];
+        [self showEndOfPlayingView];
     } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
+//        [self dismissViewControllerAnimated:YES completion:nil];
     }
-    EndOfPlayingView *operationView = [[EndOfPlayingView alloc] init];
-    [self.view addSubview:operationView];
+//    [self showEndOfPlayingView];
+}
+
+- (void)didClickSaveButton {
+    [self saveToAlbum];
+}
+
+- (void)didClickReplayButton {
+    [_player seekToTime:kCMTimeZero];
+    [_player play];
+}
+
+- (void)didClickBackToEditButton {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -98,6 +98,10 @@ const char kOrientation;
     [super viewDidLoad];
     //屏幕适配
     [self screenAdaptation];
+    if([[UIDevice currentDevice]respondsToSelector:@selector(setOrientation:)]) {
+        [[UIDevice currentDevice]performSelector:@selector(setOrientation:)
+                                      withObject:@(UIInterfaceOrientationLandscapeRight)];
+    }
     
     self.speedOperatingEffected = YES;
     _prepareMaskView.hidden = NO;

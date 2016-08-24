@@ -7,26 +7,53 @@
 //
 
 #import "EndOfPlayingView.h"
+#import "UIColor+hexColor.h"
+#import "UIView+ExtendTouchArea.h"
 
-#define BUTTON_MARGIN_GAP 40
+#define BUTTON_MARGIN_GAP 50
 #define BUTTON_TITLE_LABEL_MARGIN 30
-@implementation EndOfPlayingView
+#define BUTTON_TOUCH_EXTEND_INSET UIEdgeInsetsMake(0, -30, -40, -30)
 
-- (instancetype)init {
+@interface EndOfPlayingView ()
+
+@end
+@implementation EndOfPlayingView
+- (instancetype)initWithVideoOrientation:(VideoOrientation)orientation
+                                delegate:(id<EndOfPlayingViewDelegate>)delegate {
     self = [super init];
     if (self) {
-        [self setup];
+        _delegate = delegate;
+        [self setupWithVideoOrientation:orientation];
     }
     return self;
 }
 
-- (void)setup {
-    [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
-    [self setFrame:[[UIScreen mainScreen] bounds]];
-    
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self setupWithVideoOrientation:VideoOrientationPortrait];
+    }
+    return self;
+}
+
+- (void)setupWithVideoOrientation:(VideoOrientation)orientation {
     CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
     CGFloat topMargin = 0.15 * screenHeight;
     CGFloat bottomMargin = 0.15 * screenHeight;
+    switch (orientation) {
+        case VideoOrientationPortrait:
+            topMargin = 0.15 * screenHeight;
+            bottomMargin = 0.15 * screenHeight;
+            break;
+        case VideoOrientationLandscape:
+            topMargin = 0.05 * screenHeight;
+            bottomMargin = 0.09 * screenHeight;
+            break;
+        default:
+            break;
+    }
+    [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
+    [self setFrame:[[UIScreen mainScreen] bounds]];
     
     //Labels
     UILabel *topLabel = [[UILabel alloc] init];
@@ -57,19 +84,26 @@
     //Buttons
     UIButton *backToEditButton = [[UIButton alloc] init];
     [backToEditButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [backToEditButton setImage:[UIImage imageNamed:@"album_button"] forState:UIControlStateNormal];
+    [backToEditButton setTouchExtendInset:BUTTON_TOUCH_EXTEND_INSET];
+    [backToEditButton setImage:[UIImage imageNamed:@"editing_button"] forState:UIControlStateNormal];
+    [backToEditButton addTarget:self action:@selector(backToEditing) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:backToEditButton];
     
     UIButton *replayButton = [[UIButton alloc] init];
     [replayButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [replayButton setImage:[UIImage imageNamed:@"album_button"] forState:UIControlStateNormal];
+    [replayButton setTouchExtendInset:BUTTON_TOUCH_EXTEND_INSET];
+    [replayButton setImage:[UIImage imageNamed:@"replay_button"] forState:UIControlStateNormal];
+    [replayButton addTarget:self action:@selector(replayVideo) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:replayButton];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:replayButton attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:replayButton attribute:NSLayoutAttributeBottom multiplier:1.f constant:bottomMargin]];
     
     UIButton *saveButton = [[UIButton alloc] init];
     [saveButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [saveButton setImage:[UIImage imageNamed:@"album_button"] forState:UIControlStateNormal];
+    [saveButton setTouchExtendInset:BUTTON_TOUCH_EXTEND_INSET];
+    [saveButton setImage:[UIImage imageNamed:@"save_button"] forState:UIControlStateNormal];
+    [saveButton addTarget:self action:@selector(saveVideo) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:replayButton];
     [self addSubview:saveButton];
     NSDictionary *layoutButtons = NSDictionaryOfVariableBindings(backToEditButton, replayButton, saveButton);
     
@@ -78,6 +112,7 @@
     //ButtonTitles
     UILabel *backToEditLabel = [[UILabel alloc] init];
     [backToEditLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [backToEditLabel setTextColor:[UIColor hexColor:@"797979"]];
     [backToEditLabel setText:@"BACK TO EDIT"];
     [backToEditLabel setFont:[UIFont systemFontOfSize:14.f]];
     [backToEditLabel setTextColor:[UIColor whiteColor]];
@@ -87,6 +122,7 @@
     
     UILabel *replayLabel = [[UILabel alloc] init];
     [replayLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [replayLabel setTextColor:[UIColor hexColor:@"797979"]];
     [replayLabel setText:@"REPLAY"];
     [replayLabel setFont:[UIFont systemFontOfSize:14.f]];
     [replayLabel setTextColor:[UIColor whiteColor]];
@@ -96,12 +132,32 @@
     
     UILabel *saveLabel = [[UILabel alloc] init];
     [saveLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [saveLabel setTextColor:[UIColor hexColor:@"797979"]];
     [saveLabel setText:@"SAVE"];
     [saveLabel setFont:[UIFont systemFontOfSize:14.f]];
     [saveLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:saveLabel];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:saveButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:saveLabel attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:saveButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:saveLabel attribute:NSLayoutAttributeBottom multiplier:1.f constant:-BUTTON_TITLE_LABEL_MARGIN]];
+}
+
+- (void)backToEditing {
+    if ([_delegate respondsToSelector:@selector(didClickBackToEditButton)]) {
+        [_delegate didClickBackToEditButton];
+    }
+}
+
+- (void)replayVideo {
+    if ([_delegate respondsToSelector:@selector(didClickReplayButton)]) {
+        [_delegate didClickReplayButton];
+    }
+    [self removeFromSuperview];
+}
+
+- (void)saveVideo {
+    if ([_delegate respondsToSelector:@selector(didClickSaveButton)]) {
+        [_delegate didClickSaveButton];
+    }
 }
 
 @end

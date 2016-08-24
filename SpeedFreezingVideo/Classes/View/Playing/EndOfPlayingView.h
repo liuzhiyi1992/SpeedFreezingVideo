@@ -8,5 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, VideoOrientation) {
+    VideoOrientationPortrait = 0,
+    VideoOrientationLandscape = 1
+};
+
+@protocol EndOfPlayingViewDelegate <NSObject>
+- (void)didClickBackToEditButton;
+- (void)didClickReplayButton;
+- (void)didClickSaveButton;
+@end
+
 @interface EndOfPlayingView : UIView
+@property (assign, nonatomic) id<EndOfPlayingViewDelegate> delegate;
+- (instancetype)initWithVideoOrientation:(VideoOrientation)orientation
+                                delegate:(id<EndOfPlayingViewDelegate>)delegate;
 @end
