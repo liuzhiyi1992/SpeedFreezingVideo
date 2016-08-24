@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "CaptureVideoViewController.h"
-//#import <CoreMotion/CoreMotion.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "VideoEditingController.h"
 
