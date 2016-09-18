@@ -19,8 +19,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gsd-wl-tvO">
+                                <rect key="frame" x="0.0" y="395" width="375" height="272"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifg-gl-6Rb">
-                                <rect key="frame" x="70" y="435" width="60" height="45"/>
+                                <rect key="frame" x="70" y="478.5" width="60" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ifg-gl-6Rb" secondAttribute="height" id="q7e-Ai-pYz"/>
@@ -36,7 +40,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghd-av-FVz">
-                                <rect key="frame" x="245" y="435" width="60" height="45"/>
+                                <rect key="frame" x="245" y="478.5" width="60" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ghd-av-FVz" secondAttribute="height" id="wSA-uH-Dly"/>
@@ -52,13 +56,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIBRARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgB-nY-LCI">
-                                <rect key="frame" x="60" y="500" width="79" height="24"/>
+                                <rect key="frame" x="60" y="543.5" width="79" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOVIE CAM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTI-Jy-MhF">
-                                <rect key="frame" x="220" y="500" width="110" height="24"/>
+                                <rect key="frame" x="220" y="543.5" width="110" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -76,16 +80,23 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Gsd-wl-tvO" firstAttribute="top" secondItem="YC4-oG-Xta" secondAttribute="bottom" constant="-10" id="166-9n-Q9A"/>
                             <constraint firstItem="hUx-T0-5Kl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1OV-oG-Em7"/>
+                            <constraint firstAttribute="trailing" secondItem="Gsd-wl-tvO" secondAttribute="trailing" id="3fl-Qe-E99"/>
+                            <constraint firstItem="Gsd-wl-tvO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4Ds-y2-opS"/>
+                            <constraint firstItem="Gsd-wl-tvO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="745-uA-yV1"/>
                             <constraint firstItem="IgB-nY-LCI" firstAttribute="top" secondItem="ifg-gl-6Rb" secondAttribute="bottom" constant="20" id="D4G-96-pwY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gsd-wl-tvO" secondAttribute="trailing" id="GvA-7R-7L8"/>
                             <constraint firstAttribute="trailing" secondItem="ghd-av-FVz" secondAttribute="trailing" id="H8D-6W-3q7"/>
                             <constraint firstItem="DTI-Jy-MhF" firstAttribute="centerX" secondItem="ghd-av-FVz" secondAttribute="centerX" id="I0R-KT-Y72"/>
                             <constraint firstItem="hUx-T0-5Kl" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Ka1-E0-WHS"/>
                             <constraint firstItem="ghd-av-FVz" firstAttribute="width" secondItem="ifg-gl-6Rb" secondAttribute="width" id="O7n-2D-c6x"/>
                             <constraint firstItem="ghd-av-FVz" firstAttribute="leading" secondItem="ifg-gl-6Rb" secondAttribute="trailing" id="Slm-Ro-EoR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Gsd-wl-tvO" secondAttribute="bottom" id="TSa-8A-aSr"/>
                             <constraint firstItem="YC4-oG-Xta" firstAttribute="centerX" secondItem="hUx-T0-5Kl" secondAttribute="centerX" id="VKg-EC-Ir3"/>
                             <constraint firstItem="ifg-gl-6Rb" firstAttribute="top" secondItem="YC4-oG-Xta" secondAttribute="bottom" constant="30" id="Vfy-3E-myg"/>
-                            <constraint firstItem="ifg-gl-6Rb" firstAttribute="top" secondItem="hUx-T0-5Kl" secondAttribute="bottom" constant="60" id="cwl-ST-Yir"/>
+                            <constraint firstItem="ifg-gl-6Rb" firstAttribute="centerY" secondItem="Gsd-wl-tvO" secondAttribute="centerY" constant="-30" id="adE-Ye-1rg"/>
+                            <constraint firstItem="ifg-gl-6Rb" firstAttribute="top" secondItem="hUx-T0-5Kl" secondAttribute="bottom" constant="75" id="cwl-ST-Yir"/>
                             <constraint firstItem="ghd-av-FVz" firstAttribute="top" secondItem="ifg-gl-6Rb" secondAttribute="top" id="e68-3q-YRe"/>
                             <constraint firstItem="IgB-nY-LCI" firstAttribute="centerX" secondItem="ifg-gl-6Rb" secondAttribute="centerX" id="f52-X2-kV6"/>
                             <constraint firstItem="hUx-T0-5Kl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="gou-Qh-HI4"/>
@@ -104,7 +115,10 @@
                                 <exclude reference="m1R-5v-XCE"/>
                                 <exclude reference="sCj-We-i3V"/>
                                 <exclude reference="ycO-u8-XJq"/>
+                                <exclude reference="745-uA-yV1"/>
+                                <exclude reference="GvA-7R-7L8"/>
                                 <exclude reference="Vfy-3E-myg"/>
+                                <exclude reference="cwl-ST-Yir"/>
                                 <exclude reference="iGT-Gy-gE3"/>
                                 <exclude reference="qxI-dk-3i1"/>
                                 <exclude reference="H8D-6W-3q7"/>
