@@ -20,9 +20,11 @@
 
 @interface CaptureVideoViewController () <CapturePreviewViewDelegate, AVCaptureFileOutputRecordingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet CapturePreviewView *videoPreviewView;
-
 @property (weak, nonatomic) IBOutlet UIImageView *assetThumbnailImageView;
 @property (weak, nonatomic) IBOutlet UIView *prepareMaskView;
+@property (weak, nonatomic) IBOutlet UIButton *changeCameraButton;
+@property (weak, nonatomic) IBOutlet UIButton *switchFlashButton;
+
 
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 

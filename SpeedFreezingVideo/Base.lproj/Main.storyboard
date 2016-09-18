@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xgq-k6-zeh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xgq-k6-zeh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -19,14 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUx-T0-5Kl">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="hUx-T0-5Kl" secondAttribute="height" id="hF1-48-Um8"/>
-                                </constraints>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifg-gl-6Rb">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifg-gl-6Rb">
                                 <rect key="frame" x="70" y="435" width="60" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -58,7 +51,7 @@
                                     <action selector="clickCameraButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NZ7-LF-c55"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="LIBRARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgB-nY-LCI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LIBRARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgB-nY-LCI">
                                 <rect key="frame" x="60" y="500" width="79" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
@@ -73,6 +66,13 @@
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="YC4-oG-Xta">
                                 <rect key="frame" x="168" y="368" width="39" height="37"/>
                             </pageControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUx-T0-5Kl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hUx-T0-5Kl" secondAttribute="height" id="hF1-48-Um8"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -84,6 +84,7 @@
                             <constraint firstItem="ghd-av-FVz" firstAttribute="width" secondItem="ifg-gl-6Rb" secondAttribute="width" id="O7n-2D-c6x"/>
                             <constraint firstItem="ghd-av-FVz" firstAttribute="leading" secondItem="ifg-gl-6Rb" secondAttribute="trailing" id="Slm-Ro-EoR"/>
                             <constraint firstItem="YC4-oG-Xta" firstAttribute="centerX" secondItem="hUx-T0-5Kl" secondAttribute="centerX" id="VKg-EC-Ir3"/>
+                            <constraint firstItem="ifg-gl-6Rb" firstAttribute="top" secondItem="YC4-oG-Xta" secondAttribute="bottom" constant="30" id="Vfy-3E-myg"/>
                             <constraint firstItem="ifg-gl-6Rb" firstAttribute="top" secondItem="hUx-T0-5Kl" secondAttribute="bottom" constant="60" id="cwl-ST-Yir"/>
                             <constraint firstItem="ghd-av-FVz" firstAttribute="top" secondItem="ifg-gl-6Rb" secondAttribute="top" id="e68-3q-YRe"/>
                             <constraint firstItem="IgB-nY-LCI" firstAttribute="centerX" secondItem="ifg-gl-6Rb" secondAttribute="centerX" id="f52-X2-kV6"/>
@@ -103,6 +104,7 @@
                                 <exclude reference="m1R-5v-XCE"/>
                                 <exclude reference="sCj-We-i3V"/>
                                 <exclude reference="ycO-u8-XJq"/>
+                                <exclude reference="Vfy-3E-myg"/>
                                 <exclude reference="iGT-Gy-gE3"/>
                                 <exclude reference="qxI-dk-3i1"/>
                                 <exclude reference="H8D-6W-3q7"/>

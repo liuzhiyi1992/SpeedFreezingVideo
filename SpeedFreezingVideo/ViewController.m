@@ -76,6 +76,7 @@
 }
 
 - (void)setupNavigationBarItem {
+    self.navigationController.navigationBar.translucent = NO;
     UIButton *rightTopButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 44)];
     [rightTopButton setTitle:@"Help" forState:UIControlStateNormal];
     [rightTopButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
