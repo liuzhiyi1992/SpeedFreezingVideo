@@ -131,11 +131,14 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="cameraButton" destination="ghd-av-FVz" id="jbb-S6-N8v"/>
                         <outlet property="cameraButtonTralingConstraint" destination="vzq-PU-ffn" id="kYW-ew-PXr"/>
+                        <outlet property="cameraLabel" destination="DTI-Jy-MhF" id="H9f-EZ-woB"/>
                         <outlet property="imageScrollView" destination="hUx-T0-5Kl" id="muZ-Xk-giR"/>
                         <outlet property="imageScrollViewPageControl" destination="YC4-oG-Xta" id="haw-rO-6he"/>
                         <outlet property="libraryButton" destination="ifg-gl-6Rb" id="DQd-79-Wdm"/>
                         <outlet property="libraryButtonLeadingConstraint" destination="jkl-dR-LGe" id="UU3-do-NEI"/>
+                        <outlet property="libraryLabel" destination="IgB-nY-LCI" id="hAk-No-OnA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

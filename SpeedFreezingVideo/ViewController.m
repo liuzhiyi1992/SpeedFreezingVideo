@@ -10,11 +10,15 @@
 #import "CaptureVideoViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "VideoEditingController.h"
+#import "UIColor+hexColor.h"
 
 #define SCROLLING_IMAGEVIEW_COUNT 8
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
+@property (weak, nonatomic) IBOutlet UILabel *libraryLabel;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+@property (weak, nonatomic) IBOutlet UILabel *cameraLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryButtonLeadingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraButtonTralingConstraint;
 @property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
@@ -87,7 +91,34 @@
 }
 
 - (void)observeMainFunctionButton {
-    
+    [_libraryButton addTarget:self action:@selector(functionButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [_libraryButton addTarget:self action:@selector(functionButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
+    [_cameraButton addTarget:self action:@selector(functionButtonTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [_cameraButton addTarget:self action:@selector(functionButtonTouchDragExit:) forControlEvents:UIControlEventTouchDragExit];
+}
+
+- (void)functionButtonTouchDown:(UIButton *)sender {
+    if ([sender isEqual:_libraryButton]) {
+        [self changeLabelPressStatus:_libraryLabel isPress:YES];
+    } else if ([sender isEqual:_cameraButton]) {
+        [self changeLabelPressStatus:_cameraLabel isPress:YES];
+    }
+}
+
+- (void)functionButtonTouchDragExit:(UIButton *)sender {
+    if ([sender isEqual:_libraryButton]) {
+        [self changeLabelPressStatus:_libraryLabel isPress:NO];
+    } else if ([sender isEqual:_cameraButton]) {
+        [self changeLabelPressStatus:_cameraLabel isPress:NO];
+    }
+}
+
+- (void)changeLabelPressStatus:(UILabel *)targetLabel isPress:(BOOL)isPress {
+    if (isPress) {
+        [targetLabel setTextColor:[UIColor hexColor:@"7f7f7f"]];
+    } else {
+        [targetLabel setTextColor:[UIColor whiteColor]];
+    }
 }
 
 - (void)clickRightTopButton:(id)sender {
@@ -96,6 +127,7 @@
 }
 
 - (IBAction)clickLibraryButton:(id)sender {
+    [self changeLabelPressStatus:_libraryLabel isPress:NO];
     UIImagePickerController *myImagePickerController = [[UIImagePickerController alloc] init];
     myImagePickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     myImagePickerController.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *)kUTTypeMovie, nil];
@@ -105,6 +137,7 @@
 }
 
 - (IBAction)clickCameraButton:(id)sender {
+    [self changeLabelPressStatus:_cameraLabel isPress:NO];
     CaptureVideoViewController *controller = [[CaptureVideoViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
