@@ -306,8 +306,8 @@ const char kOrientation;
     CMTimeRange timeRange = CMTimeRangeMake(_playerItem.reversePlaybackEndTime, trimmingDuration);
     assetExport.timeRange = timeRange;
     
+    __weak __typeof(&*self)weakSelf = self;
     [assetExport exportAsynchronouslyWithCompletionHandler:^{
-        
         switch ([assetExport status]) {
             case AVAssetExportSessionStatusFailed:
             {
@@ -315,6 +315,7 @@ const char kOrientation;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"发生未知错误，可能为视频帧数不足，尝试让视频更长?" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                     [alert show];
+                    [weakSelf.rightTopButton setEnabled:YES];
                 });
             }
                 break;
