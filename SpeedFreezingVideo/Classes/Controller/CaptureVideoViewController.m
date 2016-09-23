@@ -609,8 +609,18 @@
         if ([_videoDevice lockForConfiguration:&error]) {
             if (_videoDevice.torchMode == AVCaptureTorchModeOff) {
                 [_videoDevice setTorchMode:AVCaptureTorchModeOn];
+                [sender setTitle:@"打开" forState:UIControlStateNormal];
+                [((UIButton *)sender) setTransform:CGAffineTransformMakeScale(-1, 1)];
+                [UIView animateWithDuration:0.3f animations:^{
+                    [((UIButton *)sender) setTransform:CGAffineTransformMakeScale(1, 1)];
+                }];
             } else {
                 [_videoDevice setTorchMode:AVCaptureTorchModeOff];
+                [sender setTitle:@"关闭" forState:UIControlStateNormal];
+                [((UIButton *)sender) setTransform:CGAffineTransformMakeScale(-1, 1)];
+                [UIView animateWithDuration:0.3f animations:^{
+                    [((UIButton *)sender) setTransform:CGAffineTransformMakeScale(1, 1)];
+                }];
             }
         }
     }
