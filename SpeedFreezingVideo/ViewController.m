@@ -11,7 +11,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "VideoEditingController.h"
 
-#define SCROLLING_IMAGEVIEW_COUNT 3
+#define SCROLLING_IMAGEVIEW_COUNT 8
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
@@ -49,13 +49,13 @@
 
 - (void)configureImageScrollView {
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < SCROLLING_IMAGEVIEW_COUNT; i++) {
         CGFloat imageOriginX = i * screenWidth;
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mianPageBackground%.2d@2x", i]]];
         [imageView setFrame:CGRectMake(imageOriginX, 0, screenWidth, screenWidth)];
         [self.imageScrollView addSubview:imageView];
     }
-    [self.imageScrollView setContentSize:CGSizeMake(3 * screenWidth, 0)];
+    [self.imageScrollView setContentSize:CGSizeMake(SCROLLING_IMAGEVIEW_COUNT * screenWidth, 0)];
     [self.imageScrollView setShowsHorizontalScrollIndicator:NO];
     [self.imageScrollView setBounces:NO];
     [self.imageScrollView setPagingEnabled:YES];
