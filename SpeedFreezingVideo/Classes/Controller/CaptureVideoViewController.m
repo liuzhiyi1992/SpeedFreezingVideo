@@ -601,11 +601,6 @@
 }
 
 - (IBAction)clickChangeCameraButton:(id)sender {
-    [UIView animateWithDuration:0.3f animations:^{
-        [((UIButton *)sender) setTransform:CGAffineTransformMakeScale(-1, 1)];
-    } completion:^(BOOL finished) {
-        [((UIButton *)sender) setTransform:CGAffineTransformIdentity];
-    }];
     [self changeCameraDevice];
 }
 
