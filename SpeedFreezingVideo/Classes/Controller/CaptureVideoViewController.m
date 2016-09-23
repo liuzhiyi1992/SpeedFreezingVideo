@@ -489,6 +489,7 @@
     }
     [UIView animateWithDuration:0.5f animations:^{
         _assetThumbnailImageView.transform = transform;
+        _changeCameraButton.transform = transform;
     }];
 }
 
