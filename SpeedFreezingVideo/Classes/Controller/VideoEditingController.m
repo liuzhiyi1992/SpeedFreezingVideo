@@ -296,7 +296,6 @@ const char kOrientation;
     //export
     AVAssetExportSession* assetExport = [[AVAssetExportSession alloc] initWithAsset:exportAsset
                                                                          presetName:AVAssetExportPreset1920x1080];
-    NSLog(@"----%@", assetExport.supportedFileTypes);
     assetExport.outputURL = _filePath;
     assetExport.outputFileType = assetExport.supportedFileTypes.firstObject;
     assetExport.shouldOptimizeForNetworkUse = YES;
@@ -314,7 +313,8 @@ const char kOrientation;
             {
                 NSLog(@"Export session faiied with error: %@", [assetExport error]);
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    // completion(nil);
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"发生未知错误，可能为视频帧数不足，尝试让视频更长?" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alert show];
                 });
             }
                 break;
@@ -322,16 +322,10 @@ const char kOrientation;
             {
                 NSLog(@"Successful");
                 NSURL *outputURL = assetExport.outputURL;
-                //todo 这里先不保存到相册
-//                ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-//                if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL]) {
-//                    [self writeExportedVideoToAssetsLibrary:outputURL];
-//                }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // completion(_filePath);
                     [self fullScreemDisplayWithOutputUrl:outputURL];
                 });
-                
             }
                 break;
             default:
