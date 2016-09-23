@@ -54,11 +54,8 @@
 }
 
 - (void)configureImageScrollView {
-    NSMutableArray *imageNameList = [NSMutableArray array];
-    for (int i = 0; i < SCROLLING_IMAGEVIEW_DISPLAY_NUM; i++) {
-        int imagePostfix = arc4random() % SCROLLING_IMAGEVIEW_COUNT;
-        [imageNameList addObject:[NSString stringWithFormat:@"mianPageBackground%.2d@2x", imagePostfix]];
-    }
+    NSArray *imageNameList = [self randomImageNameListWithCount:SCROLLING_IMAGEVIEW_DISPLAY_NUM];
+    [_imageScrollViewPageControl setNumberOfPages:imageNameList.count];
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     self.sdCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWidth, screenWidth) delegate:self placeholderImage:nil];
     _sdCycleScrollView.autoScroll = YES;
@@ -66,7 +63,15 @@
     _sdCycleScrollView.localizationImageNamesGroup = imageNameList;
     [_sdCycleScrollView setBackgroundColor:[UIColor whiteColor]];
     [_imageScrollView addSubview:_sdCycleScrollView];
-    [_imageScrollViewPageControl setNumberOfPages:imageNameList.count];
+}
+
+- (NSArray *)randomImageNameListWithCount:(int)count {
+    NSMutableArray *imageNameList = [NSMutableArray array];
+    for (int i = 0; i < count; i++) {
+        int imagePostfix = arc4random() % SCROLLING_IMAGEVIEW_COUNT;
+        [imageNameList addObject:[NSString stringWithFormat:@"mianPageBackground%.2d@2x", imagePostfix]];
+    }
+    return imageNameList;
 }
 
 - (void)updateButtonPosition {
@@ -153,12 +158,24 @@
     }];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat scrollContentOffsetX = scrollView.contentOffset.x;
-    self.imageScrollViewPageControl.currentPage = [[NSString stringWithFormat:@"%.0f", (scrollContentOffsetX / [[UIScreen mainScreen] bounds].size.width)] intValue];
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    CGFloat scrollContentOffsetX = scrollView.contentOffset.x;
+//    self.imageScrollViewPageControl.currentPage = [[NSString stringWithFormat:@"%.0f", (scrollContentOffsetX / [[UIScreen mainScreen] bounds].size.width)] intValue];
+//}
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index {
+    if ((cycleScrollView.localizationImageNamesGroup.count - 1) == index) {//last
+        NSLog(@"最后");
+        NSMutableArray *mutArray = [NSMutableArray arrayWithArray:[self randomImageNameListWithCount:SCROLLING_IMAGEVIEW_DISPLAY_NUM-1]];
+        [mutArray addObject:[cycleScrollView.localizationImageNamesGroup objectAtIndex:index]];
+        cycleScrollView.localizationImageNamesGroup = mutArray;
+    } else if (0 == index) {//first
+        NSLog(@"第一");
+        NSMutableArray *mutArray = [NSMutableArray arrayWithArray:cycleScrollView.localizationImageNamesGroup];
+        [mutArray removeLastObject];
+        [mutArray addObject:[[self randomImageNameListWithCount:1] firstObject]];
+        cycleScrollView.localizationImageNamesGroup = mutArray;
+    }
     _imageScrollViewPageControl.currentPage = index;
 }
 
