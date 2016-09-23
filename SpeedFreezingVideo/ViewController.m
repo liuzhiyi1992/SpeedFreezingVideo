@@ -86,7 +86,8 @@
 }
 
 - (void)clickRightTopButton:(id)sender {
-    NSLog(@"Help");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"专注视频局部变速N年" delegate:nil cancelButtonTitle:@"..." otherButtonTitles:@"赏个评语", nil];
+    [alert show];
 }
 
 - (IBAction)clickLibraryButton:(id)sender {
