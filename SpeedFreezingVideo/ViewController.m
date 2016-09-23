@@ -13,6 +13,7 @@
 #import "UIColor+hexColor.h"
 
 #define SCROLLING_IMAGEVIEW_COUNT 8
+#define SCROLLING_IMAGEVIEW_DISPLAY_NUM 3
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
@@ -49,18 +50,19 @@
 - (void)configureLayout {
     [self updateButtonPosition];
     [self configureImageScrollView];
-    [_imageScrollViewPageControl setNumberOfPages:SCROLLING_IMAGEVIEW_COUNT];
+    [_imageScrollViewPageControl setNumberOfPages:SCROLLING_IMAGEVIEW_DISPLAY_NUM];
 }
 
 - (void)configureImageScrollView {
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
-    for (int i = 0; i < SCROLLING_IMAGEVIEW_COUNT; i++) {
+    for (int i = 0; i < SCROLLING_IMAGEVIEW_DISPLAY_NUM; i++) {
         CGFloat imageOriginX = i * screenWidth;
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mianPageBackground%.2d@2x", i]]];
+        int imagePostfix = arc4random() % SCROLLING_IMAGEVIEW_COUNT;
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mianPageBackground%.2d@2x", imagePostfix]]];
         [imageView setFrame:CGRectMake(imageOriginX, 0, screenWidth, screenWidth)];
         [self.imageScrollView addSubview:imageView];
     }
-    [self.imageScrollView setContentSize:CGSizeMake(SCROLLING_IMAGEVIEW_COUNT * screenWidth, 0)];
+    [self.imageScrollView setContentSize:CGSizeMake(SCROLLING_IMAGEVIEW_DISPLAY_NUM * screenWidth, 0)];
     [self.imageScrollView setShowsHorizontalScrollIndicator:NO];
     [self.imageScrollView setBounces:NO];
     [self.imageScrollView setPagingEnabled:YES];
