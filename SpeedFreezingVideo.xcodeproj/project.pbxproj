@@ -309,6 +309,7 @@
 					4848F63B1CE73430009C6280 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = H3UP79P5WR;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -445,7 +446,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "6108632a-36f6-4234-b3f4-2088a6bb4457";
+				PROVISIONING_PROFILE = "26a303e3-4b4b-4b59-8ed0-6b986408986d";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -484,7 +485,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "6108632a-36f6-4234-b3f4-2088a6bb4457";
+				PROVISIONING_PROFILE = "26a303e3-4b4b-4b59-8ed0-6b986408986d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -494,12 +495,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhiyi liu (RR6K7Q4JYR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SpeedFreezingVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiuhaodong.sport;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.speedFreezingVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6108632a-36f6-4234-b3f4-2088a6bb4457";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -507,12 +512,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhiyi liu (RR6K7Q4JYR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SpeedFreezingVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.qiuhaodong.sport;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.speedFreezingVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6108632a-36f6-4234-b3f4-2088a6bb4457";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

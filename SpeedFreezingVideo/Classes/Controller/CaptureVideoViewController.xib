@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptureVideoViewController">
@@ -19,21 +20,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xD-Xw-Eom" customClass="CapturePreviewView">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1K-Vp-A3Z">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btj-6P-aeP">
-                            <rect key="frame" x="0.0" y="500" width="600" height="100"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXA-sv-Q0O" customClass="CaptureVideoButton">
-                                    <rect key="frame" x="270" y="20" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="aXA-sv-Q0O" secondAttribute="height" multiplier="1:1" id="oK7-y9-qYL"/>
                                     </constraints>
@@ -42,7 +39,6 @@
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tTb-bq-0jy">
-                                    <rect key="frame" x="30" y="30" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="hgN-r0-ECe"/>
                                         <constraint firstAttribute="width" secondItem="tTb-bq-0jy" secondAttribute="height" multiplier="1:1" id="pIh-z2-fZ6"/>
@@ -54,7 +50,7 @@
                                     </variation>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="aXA-sv-Q0O" firstAttribute="centerY" secondItem="btj-6P-aeP" secondAttribute="centerY" id="4ql-sL-Lv6"/>
                                 <constraint firstItem="aXA-sv-Q0O" firstAttribute="height" secondItem="btj-6P-aeP" secondAttribute="height" multiplier="3:5" id="Ec5-oQ-zNs"/>
@@ -66,20 +62,14 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJn-jC-AAj">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65U-fO-a4a">
-                                    <rect key="frame" x="564" y="10" width="30" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="65U-fO-a4a" secondAttribute="height" multiplier="1:1" id="mwG-Y6-n3c"/>
-                                    </constraints>
                                     <state key="normal" backgroundImage="camera_icon"/>
                                     <connections>
                                         <action selector="clickChangeCameraButton:" destination="-1" eventType="touchUpInside" id="65e-7n-Gl2"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chr-z6-ive">
-                                    <rect key="frame" x="6" y="2" width="46" height="46"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Chr-z6-ive" secondAttribute="height" multiplier="1:1" id="irx-aQ-Uv7"/>
                                     </constraints>
@@ -95,19 +85,18 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="Chr-z6-ive" firstAttribute="width" secondItem="Chr-z6-ive" secondAttribute="height" multiplier="1:1" id="2lD-IC-5vc"/>
-                                <constraint firstItem="65U-fO-a4a" firstAttribute="height" secondItem="sJn-jC-AAj" secondAttribute="height" multiplier="0.6:1" id="IEM-Zm-mr5"/>
                                 <constraint firstItem="Chr-z6-ive" firstAttribute="centerY" secondItem="sJn-jC-AAj" secondAttribute="centerY" id="SoX-lw-PLy"/>
-                                <constraint firstItem="Chr-z6-ive" firstAttribute="leading" secondItem="sJn-jC-AAj" secondAttribute="leading" constant="6" id="jOw-ZV-3Yj"/>
+                                <constraint firstItem="Chr-z6-ive" firstAttribute="leading" secondItem="sJn-jC-AAj" secondAttribute="leading" constant="8" id="jOw-ZV-3Yj"/>
                                 <constraint firstItem="65U-fO-a4a" firstAttribute="centerY" secondItem="sJn-jC-AAj" secondAttribute="centerY" id="kfc-Vn-txs"/>
                                 <constraint firstAttribute="height" constant="50" id="lCj-hy-Iyn"/>
-                                <constraint firstAttribute="trailing" secondItem="65U-fO-a4a" secondAttribute="trailing" constant="6" id="wgu-cn-zaB"/>
+                                <constraint firstAttribute="trailing" secondItem="65U-fO-a4a" secondAttribute="trailing" constant="12" id="wgu-cn-zaB"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="sJn-jC-AAj" secondAttribute="trailing" id="Fgu-OG-n2B"/>
                         <constraint firstAttribute="width" secondItem="0xD-Xw-Eom" secondAttribute="height" multiplier="8:15" id="MdO-EA-Ph6"/>
@@ -132,7 +121,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="0xD-Xw-Eom" secondAttribute="trailing" id="BQa-qF-lBq"/>
                 <constraint firstItem="0xD-Xw-Eom" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UMg-xu-RRC"/>
