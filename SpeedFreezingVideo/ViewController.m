@@ -11,11 +11,12 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "VideoEditingController.h"
 #import "UIColor+hexColor.h"
+#import "SDCycleScrollView.h"
 
 #define SCROLLING_IMAGEVIEW_COUNT 8
 #define SCROLLING_IMAGEVIEW_DISPLAY_NUM 3
 
-@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
+@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, SDCycleScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
 @property (weak, nonatomic) IBOutlet UILabel *libraryLabel;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
@@ -24,12 +25,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraButtonTralingConstraint;
 @property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *imageScrollViewPageControl;
+@property (strong, nonatomic) SDCycleScrollView *sdCycleScrollView;
 @end
 
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
     [self setupNavigationBarItem];
     [self configureLayout];
@@ -50,23 +51,22 @@
 - (void)configureLayout {
     [self updateButtonPosition];
     [self configureImageScrollView];
-    [_imageScrollViewPageControl setNumberOfPages:SCROLLING_IMAGEVIEW_DISPLAY_NUM];
 }
 
 - (void)configureImageScrollView {
-    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    NSMutableArray *imageNameList = [NSMutableArray array];
     for (int i = 0; i < SCROLLING_IMAGEVIEW_DISPLAY_NUM; i++) {
-        CGFloat imageOriginX = i * screenWidth;
         int imagePostfix = arc4random() % SCROLLING_IMAGEVIEW_COUNT;
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"mianPageBackground%.2d@2x", imagePostfix]]];
-        [imageView setFrame:CGRectMake(imageOriginX, 0, screenWidth, screenWidth)];
-        [self.imageScrollView addSubview:imageView];
+        [imageNameList addObject:[NSString stringWithFormat:@"mianPageBackground%.2d@2x", imagePostfix]];
     }
-    [self.imageScrollView setContentSize:CGSizeMake(SCROLLING_IMAGEVIEW_DISPLAY_NUM * screenWidth, 0)];
-    [self.imageScrollView setShowsHorizontalScrollIndicator:NO];
-    [self.imageScrollView setBounces:NO];
-    [self.imageScrollView setPagingEnabled:YES];
-    [self.imageScrollView setDelegate:self];
+    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    self.sdCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, screenWidth, screenWidth) delegate:self placeholderImage:nil];
+    _sdCycleScrollView.autoScroll = YES;
+    _sdCycleScrollView.showPageControl = NO;
+    _sdCycleScrollView.localizationImageNamesGroup = imageNameList;
+    [_sdCycleScrollView setBackgroundColor:[UIColor whiteColor]];
+    [_imageScrollView addSubview:_sdCycleScrollView];
+    [_imageScrollViewPageControl setNumberOfPages:imageNameList.count];
 }
 
 - (void)updateButtonPosition {
@@ -156,6 +156,10 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat scrollContentOffsetX = scrollView.contentOffset.x;
     self.imageScrollViewPageControl.currentPage = [[NSString stringWithFormat:@"%.0f", (scrollContentOffsetX / [[UIScreen mainScreen] bounds].size.width)] intValue];
+}
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index {
+    _imageScrollViewPageControl.currentPage = index;
 }
 
 - (void)didReceiveMemoryWarning {
