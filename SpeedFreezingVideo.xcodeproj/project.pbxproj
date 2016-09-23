@@ -36,11 +36,16 @@
 		488119741CEC5A5100CA0C7F /* VideoEditingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 488119721CEC5A5100CA0C7F /* VideoEditingController.xib */; };
 		48B824BD1CF45B3D005E565C /* UIColor+hexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B824BC1CF45B3D005E565C /* UIColor+hexColor.m */; };
 		48EF4F191D6D983A00C6BEFE /* UIView+ExtendTouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 48EF4F181D6D983A00C6BEFE /* UIView+ExtendTouchArea.m */; };
-		48EF4F1B1D6DA14B00C6BEFE /* mianPageBackground01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48EF4F1A1D6DA14B00C6BEFE /* mianPageBackground01@2x.png */; };
 		48EF4F1D1D6DA16900C6BEFE /* mianPageBackground02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 48EF4F1C1D6DA16900C6BEFE /* mianPageBackground02@2x.png */; };
 		48FC0BAD1CF2B8AD000D02CB /* UINavigationBar+transparency.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */; };
 		48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */; };
 		48FD1C4C1CF9732000EF295F /* 慢快-数钱.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 48FD1C4B1CF9732000EF295F /* 慢快-数钱.mp4 */; };
+		559767A21D9504E800699550 /* mianPageBackground01@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 559767A11D9504E800699550 /* mianPageBackground01@2x.jpg */; };
+		559767A81D95051200699550 /* mianPageBackground03@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 559767A31D95051200699550 /* mianPageBackground03@2x.jpg */; };
+		559767A91D95051200699550 /* mianPageBackground04@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 559767A41D95051200699550 /* mianPageBackground04@2x.jpg */; };
+		559767AA1D95051200699550 /* mianPageBackground05@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 559767A51D95051200699550 /* mianPageBackground05@2x.jpg */; };
+		559767AB1D95051200699550 /* mianPageBackground06@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 559767A61D95051200699550 /* mianPageBackground06@2x.jpg */; };
+		559767AC1D95051200699550 /* mianPageBackground07@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 559767A71D95051200699550 /* mianPageBackground07@2x.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,13 +101,18 @@
 		48B824BC1CF45B3D005E565C /* UIColor+hexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+hexColor.m"; sourceTree = "<group>"; };
 		48EF4F171D6D983A00C6BEFE /* UIView+ExtendTouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ExtendTouchArea.h"; sourceTree = "<group>"; };
 		48EF4F181D6D983A00C6BEFE /* UIView+ExtendTouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ExtendTouchArea.m"; sourceTree = "<group>"; };
-		48EF4F1A1D6DA14B00C6BEFE /* mianPageBackground01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground01@2x.png"; sourceTree = "<group>"; };
 		48EF4F1C1D6DA16900C6BEFE /* mianPageBackground02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground02@2x.png"; sourceTree = "<group>"; };
 		48FC0BA91CF2B8AD000D02CB /* UINavigationBar+transparency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+transparency.h"; sourceTree = "<group>"; };
 		48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+transparency.m"; sourceTree = "<group>"; };
 		48FC0BAB1CF2B8AD000D02CB /* UINavigationController+className.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+className.h"; sourceTree = "<group>"; };
 		48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+className.m"; sourceTree = "<group>"; };
 		48FD1C4B1CF9732000EF295F /* 慢快-数钱.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "慢快-数钱.mp4"; sourceTree = "<group>"; };
+		559767A11D9504E800699550 /* mianPageBackground01@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mianPageBackground01@2x.jpg"; sourceTree = "<group>"; };
+		559767A31D95051200699550 /* mianPageBackground03@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mianPageBackground03@2x.jpg"; sourceTree = "<group>"; };
+		559767A41D95051200699550 /* mianPageBackground04@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mianPageBackground04@2x.jpg"; sourceTree = "<group>"; };
+		559767A51D95051200699550 /* mianPageBackground05@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mianPageBackground05@2x.jpg"; sourceTree = "<group>"; };
+		559767A61D95051200699550 /* mianPageBackground06@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mianPageBackground06@2x.jpg"; sourceTree = "<group>"; };
+		559767A71D95051200699550 /* mianPageBackground07@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "mianPageBackground07@2x.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +196,13 @@
 			isa = PBXGroup;
 			children = (
 				485B2D0B1D69B36400FAED4C /* mianPageBackground00@2x.png */,
-				48EF4F1A1D6DA14B00C6BEFE /* mianPageBackground01@2x.png */,
+				559767A11D9504E800699550 /* mianPageBackground01@2x.jpg */,
 				48EF4F1C1D6DA16900C6BEFE /* mianPageBackground02@2x.png */,
+				559767A31D95051200699550 /* mianPageBackground03@2x.jpg */,
+				559767A41D95051200699550 /* mianPageBackground04@2x.jpg */,
+				559767A51D95051200699550 /* mianPageBackground05@2x.jpg */,
+				559767A61D95051200699550 /* mianPageBackground06@2x.jpg */,
+				559767A71D95051200699550 /* mianPageBackground07@2x.jpg */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -337,15 +352,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				4810F4621CF1C6F600550D10 /* SpeedMultipleView.xib in Resources */,
+				559767AB1D95051200699550 /* mianPageBackground06@2x.jpg in Resources */,
 				488119741CEC5A5100CA0C7F /* VideoEditingController.xib in Resources */,
 				4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */,
 				4881196D1CEC59BA00CA0C7F /* CaptureVideoViewController.xib in Resources */,
 				48007F5D1CFA9C5C004A7F60 /* FullScreemDisplayController.xib in Resources */,
+				559767AA1D95051200699550 /* mianPageBackground05@2x.jpg in Resources */,
+				559767A81D95051200699550 /* mianPageBackground03@2x.jpg in Resources */,
 				48EF4F1D1D6DA16900C6BEFE /* mianPageBackground02@2x.png in Resources */,
 				4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */,
 				4848F64A1CE73431009C6280 /* Main.storyboard in Resources */,
-				48EF4F1B1D6DA14B00C6BEFE /* mianPageBackground01@2x.png in Resources */,
 				48FD1C4C1CF9732000EF295F /* 慢快-数钱.mp4 in Resources */,
+				559767A21D9504E800699550 /* mianPageBackground01@2x.jpg in Resources */,
+				559767AC1D95051200699550 /* mianPageBackground07@2x.jpg in Resources */,
+				559767A91D95051200699550 /* mianPageBackground04@2x.jpg in Resources */,
 				485B2D0C1D69B36400FAED4C /* mianPageBackground00@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
