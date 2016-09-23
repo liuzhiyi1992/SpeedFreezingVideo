@@ -28,6 +28,7 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
     [self setupNavigationBarItem];
     [self configureLayout];
+    [self observeMainFunctionButton];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -83,6 +84,10 @@
     [rightTopButton.titleLabel setFont:[UIFont systemFontOfSize:18.f]];
     [rightTopButton addTarget:self action:@selector(clickRightTopButton:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightTopButton];
+}
+
+- (void)observeMainFunctionButton {
+    
 }
 
 - (void)clickRightTopButton:(id)sender {
