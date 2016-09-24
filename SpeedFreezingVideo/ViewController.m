@@ -12,6 +12,7 @@
 #import "VideoEditingController.h"
 #import "UIColor+hexColor.h"
 #import "SDCycleScrollView.h"
+#import "AboutController.h"
 
 #define SCROLLING_IMAGEVIEW_COUNT 8
 #define SCROLLING_IMAGEVIEW_DISPLAY_NUM 3
@@ -129,8 +130,10 @@
 }
 
 - (void)clickRightTopButton:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"专注视频局部变速N年" delegate:nil cancelButtonTitle:@"..." otherButtonTitles:@"赏个评语", nil];
-    [alert show];
+    AboutController *aboutController = [[AboutController alloc] init];
+    [self.navigationController pushViewController:aboutController animated:YES];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"专注视频局部变速N年" delegate:nil cancelButtonTitle:@"..." otherButtonTitles:@"赏个评语", nil];
+//    [alert show];
 }
 
 - (IBAction)clickLibraryButton:(id)sender {

@@ -77,7 +77,7 @@
                         <constraint firstAttribute="height" priority="700" constant="2" id="GUv-Oe-H7X"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc8-dq-2JP">
+                <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc8-dq-2JP">
                     <rect key="frame" x="55" y="418" width="110" height="21"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
