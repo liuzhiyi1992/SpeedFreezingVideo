@@ -165,16 +165,16 @@
 //}
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index {
-    if ((cycleScrollView.localizationImageNamesGroup.count - 1) == index) {//last
-        NSMutableArray *mutArray = [NSMutableArray arrayWithArray:[self randomImageNameListWithCount:SCROLLING_IMAGEVIEW_DISPLAY_NUM-1]];
-        [mutArray addObject:[cycleScrollView.localizationImageNamesGroup objectAtIndex:index]];
-        cycleScrollView.localizationImageNamesGroup = mutArray;
-    } else if (0 == index) {//first
-        NSMutableArray *mutArray = [NSMutableArray arrayWithArray:cycleScrollView.localizationImageNamesGroup];
-        [mutArray removeLastObject];
-        [mutArray addObject:[[self randomImageNameListWithCount:1] firstObject]];
-        cycleScrollView.localizationImageNamesGroup = mutArray;
-    }
+//    if ((cycleScrollView.localizationImageNamesGroup.count - 1) == index) {//last
+//        NSMutableArray *mutArray = [NSMutableArray arrayWithArray:[self randomImageNameListWithCount:SCROLLING_IMAGEVIEW_DISPLAY_NUM-1]];
+//        [mutArray addObject:[cycleScrollView.localizationImageNamesGroup objectAtIndex:index]];
+//        cycleScrollView.localizationImageNamesGroup = mutArray;
+//    } else if (0 == index) {//first
+//        NSMutableArray *mutArray = [NSMutableArray arrayWithArray:cycleScrollView.localizationImageNamesGroup];
+//        [mutArray removeLastObject];
+//        [mutArray addObject:[[self randomImageNameListWithCount:1] firstObject]];
+//        cycleScrollView.localizationImageNamesGroup = mutArray;
+//    }
     _imageScrollViewPageControl.currentPage = index;
 }
 
