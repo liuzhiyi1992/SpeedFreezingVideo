@@ -132,8 +132,6 @@
 - (void)clickRightTopButton:(id)sender {
     AboutController *aboutController = [[AboutController alloc] init];
     [self.navigationController pushViewController:aboutController animated:YES];
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"专注视频局部变速N年" delegate:nil cancelButtonTitle:@"..." otherButtonTitles:@"赏个评语", nil];
-//    [alert show];
 }
 
 - (IBAction)clickLibraryButton:(id)sender {
