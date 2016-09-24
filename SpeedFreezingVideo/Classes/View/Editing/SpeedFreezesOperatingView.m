@@ -7,6 +7,7 @@
 //
 
 #import "SpeedFreezesOperatingView.h"
+#import "UIView+ExtendTouchArea.h"
 
 const CGFloat speedSliderWidth = 17.f;
 const CGFloat speedSliderHeight = 17.f;
@@ -37,6 +38,7 @@ const CGFloat speedSliderLigatureHeight = 1.f;
         _videoUrl = videoUrl;
         _editingType = EditingTypeSpeed;
         [self configureView];
+        [self extendTouchArea];
     }
     return self;
 }
@@ -96,6 +98,12 @@ const CGFloat speedSliderLigatureHeight = 1.f;
     
     self.isSpeedSliderActive = YES;
     [self configureSpeedSliderInitialStatus];
+}
+
+- (void)extendTouchArea {
+    int extendMargin = -10;
+    [_leftSpeedSlider setTouchExtendInset:UIEdgeInsetsMake(extendMargin, extendMargin, extendMargin, extendMargin)];
+    [_rightSpeedSlider setTouchExtendInset:UIEdgeInsetsMake(extendMargin, extendMargin, extendMargin, extendMargin)];
 }
 
 - (void)configureSpeedSliderInitialStatus {
