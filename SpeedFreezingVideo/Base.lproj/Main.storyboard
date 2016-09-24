@@ -27,6 +27,8 @@
                                 <rect key="frame" x="70" y="478.5" width="60" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="ifg-gl-6Rb" secondAttribute="height" multiplier="4:3" id="Ifz-Bg-Wtk"/>
+                                    <constraint firstAttribute="width" constant="60" id="j8Z-Ud-Hkm"/>
                                     <constraint firstAttribute="width" secondItem="ifg-gl-6Rb" secondAttribute="height" id="q7e-Ai-pYz"/>
                                 </constraints>
                                 <state key="normal" image="album_button"/>
@@ -43,6 +45,7 @@
                                 <rect key="frame" x="245" y="478.5" width="60" height="45"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="ghd-av-FVz" secondAttribute="height" multiplier="4:3" id="aQ6-UR-lD7"/>
                                     <constraint firstAttribute="width" secondItem="ghd-av-FVz" secondAttribute="height" id="wSA-uH-Dly"/>
                                 </constraints>
                                 <state key="normal" image="camera_button"/>
@@ -86,10 +89,12 @@
                             <constraint firstItem="Gsd-wl-tvO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4Ds-y2-opS"/>
                             <constraint firstItem="Gsd-wl-tvO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="745-uA-yV1"/>
                             <constraint firstItem="IgB-nY-LCI" firstAttribute="top" secondItem="ifg-gl-6Rb" secondAttribute="bottom" constant="20" id="D4G-96-pwY"/>
+                            <constraint firstItem="DTI-Jy-MhF" firstAttribute="top" secondItem="IgB-nY-LCI" secondAttribute="top" id="Em4-X2-z5E"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gsd-wl-tvO" secondAttribute="trailing" id="GvA-7R-7L8"/>
                             <constraint firstAttribute="trailing" secondItem="ghd-av-FVz" secondAttribute="trailing" id="H8D-6W-3q7"/>
                             <constraint firstItem="DTI-Jy-MhF" firstAttribute="centerX" secondItem="ghd-av-FVz" secondAttribute="centerX" id="I0R-KT-Y72"/>
                             <constraint firstItem="hUx-T0-5Kl" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Ka1-E0-WHS"/>
+                            <constraint firstItem="ghd-av-FVz" firstAttribute="width" secondItem="ifg-gl-6Rb" secondAttribute="width" id="NZp-qz-WTZ"/>
                             <constraint firstItem="ghd-av-FVz" firstAttribute="width" secondItem="ifg-gl-6Rb" secondAttribute="width" id="O7n-2D-c6x"/>
                             <constraint firstItem="ghd-av-FVz" firstAttribute="leading" secondItem="ifg-gl-6Rb" secondAttribute="trailing" id="Slm-Ro-EoR"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Gsd-wl-tvO" secondAttribute="bottom" id="TSa-8A-aSr"/>
@@ -124,6 +129,7 @@
                                 <exclude reference="H8D-6W-3q7"/>
                                 <exclude reference="O7n-2D-c6x"/>
                                 <exclude reference="Slm-Ro-EoR"/>
+                                <exclude reference="sMS-x4-p53"/>
                             </mask>
                         </variation>
                     </view>
@@ -137,8 +143,11 @@
                         <outlet property="imageScrollView" destination="hUx-T0-5Kl" id="muZ-Xk-giR"/>
                         <outlet property="imageScrollViewPageControl" destination="YC4-oG-Xta" id="haw-rO-6he"/>
                         <outlet property="libraryButton" destination="ifg-gl-6Rb" id="DQd-79-Wdm"/>
-                        <outlet property="libraryButtonLeadingConstraint" destination="jkl-dR-LGe" id="UU3-do-NEI"/>
+                        <outlet property="libraryButtonLeadingConstraint" destination="jkl-dR-LGe" id="ajD-6m-bly"/>
+                        <outlet property="libraryButtonWidthConstraint" destination="j8Z-Ud-Hkm" id="DTE-Me-t86"/>
+                        <outlet property="libraryCenterYConstraint" destination="adE-Ye-1rg" id="KB9-0K-Fx6"/>
                         <outlet property="libraryLabel" destination="IgB-nY-LCI" id="hAk-No-OnA"/>
+                        <outlet property="libraryTopConstraint" destination="D4G-96-pwY" id="aRa-Es-d51"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

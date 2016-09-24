@@ -13,6 +13,7 @@
 #import "UIColor+hexColor.h"
 #import "SDCycleScrollView.h"
 #import "AboutController.h"
+#import "UIView+ExtendTouchArea.h"
 
 #define SCROLLING_IMAGEVIEW_COUNT 8
 #define SCROLLING_IMAGEVIEW_DISPLAY_NUM 3
@@ -22,11 +23,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *libraryLabel;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UILabel *cameraLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryButtonLeadingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraButtonTralingConstraint;
 @property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *imageScrollViewPageControl;
 @property (strong, nonatomic) SDCycleScrollView *sdCycleScrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryButtonLeadingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cameraButtonTralingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryButtonWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryCenterYConstraint;
+
 @end
 
 @implementation ViewController
@@ -50,8 +55,10 @@
 }
 
 - (void)configureLayout {
+    [self screenAdaptive];
     [self updateButtonPosition];
     [self configureImageScrollView];
+    [self extendTouchArea];
 }
 
 - (void)configureImageScrollView {
@@ -66,6 +73,35 @@
     [_imageScrollView addSubview:_sdCycleScrollView];
 }
 
+- (void)screenAdaptive {
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat marginRatio = 1;
+    CGFloat widthRatio = 1;
+    CGFloat fontSize = 20.f;
+    if (screenHeight == 480) {//i4
+        marginRatio = 0.4f;
+        widthRatio = 0.6f;
+        fontSize = 14.f;
+        _libraryCenterYConstraint.constant = -10;
+    } else if (screenHeight == 568) {//i5
+        marginRatio = 0.5f;
+        widthRatio = 0.7f;
+        fontSize = 16.f;
+        _libraryCenterYConstraint.constant = -10;
+    }
+    _libraryTopConstraint.constant *= marginRatio;
+    _libraryButtonWidthConstraint.constant *= widthRatio;
+    [_libraryLabel setFont:[UIFont systemFontOfSize:fontSize]];
+    [_cameraLabel setFont:[UIFont systemFontOfSize:fontSize]];
+}
+
+- (void)extendTouchArea {
+    int extendMargin = 0.4 * _libraryButtonWidthConstraint.constant;
+    int bottomMarigin = 0.7 * _libraryButtonWidthConstraint.constant;
+    [_libraryButton setTouchExtendInset:UIEdgeInsetsMake(-extendMargin, -extendMargin, -bottomMarigin, -extendMargin)];
+    [_cameraButton setTouchExtendInset:UIEdgeInsetsMake(-extendMargin, -extendMargin, -bottomMarigin, -extendMargin)];
+}
+
 - (NSArray *)randomImageNameListWithCount:(int)count {
     NSMutableArray *imageNameList = [NSMutableArray array];
     for (int i = 0; i < count; i++) {
@@ -77,7 +113,7 @@
 
 - (void)updateButtonPosition {
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
-    CGFloat buttonMargin = (screenWidth - 2*CGRectGetWidth(_libraryButton.frame)) / 4;
+    CGFloat buttonMargin = (screenWidth - 2*_libraryButtonWidthConstraint.constant) / 4;
     _libraryButtonLeadingConstraint.constant = buttonMargin;
     _cameraButtonTralingConstraint.constant = buttonMargin;
 }
