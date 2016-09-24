@@ -8,7 +8,7 @@
 
 #import "SpeedMultipleView.h"
 #import "SpeedFreezesOperatingView.h"
-
+#import "UIView+ExtendTouchArea.h"
 
 @interface SpeedMultipleView()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *speedButtons;
@@ -37,6 +37,7 @@
     for (UIButton *btn in _speedButtons) {
         btn.layer.borderWidth = 0.5f;
         btn.layer.borderColor = [UIColor whiteColor].CGColor;
+        [btn setTouchExtendInset:UIEdgeInsetsMake(-10, -10, -10, -10)];
     }
     [self clickSpeedButton:_originalSpeedRateButton];
 }
