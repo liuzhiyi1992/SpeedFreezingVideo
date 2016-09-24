@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIView *copyrightView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signViewCenterYConstraint;
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *adaptiveConstraints;
+@property (assign, nonatomic) BOOL isAnimating;
 
 @end
 
@@ -46,22 +47,34 @@
 }
 
 - (void)signAnim {
-    CGRect signViewOriginFrame = _signView.frame;
-    signViewOriginFrame.origin.y -= 50;
+    self.isAnimating = YES;
+    CGRect signViewFromFrame = _signView.frame;
+    CGRect signViewToFrame = signViewFromFrame;
+    signViewToFrame.origin.y -= 50;
     
     _copyrightView.alpha = 0;
+    _signView.alpha = 1;
     [UIView animateWithDuration:3.f animations:^{
         _signView.alpha = 0;
-        _signViewCenterYConstraint.constant = -50;
-        [_signView setFrame:signViewOriginFrame];
+        _signViewCenterYConstraint.constant -= 50;
+        [_signView setFrame:signViewToFrame];
     } completion:^(BOOL finished) {
         _copyrightView.alpha = 1;
+        _signViewCenterYConstraint.constant += 50;
+        [_signView setFrame:signViewFromFrame];
+        self.isAnimating = NO;
     }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if (!_isAnimating) {
+        [self signAnim];
+    }
 }
 
 /*
