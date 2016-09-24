@@ -13,6 +13,8 @@
                 <outlet property="signView" destination="W3L-Ig-v5D" id="4tp-tv-9Xf"/>
                 <outlet property="signViewCenterYConstraint" destination="vP0-Pn-qje" id="Mnr-kr-vs5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="adaptiveConstraints" destination="7Mx-gh-d6g" id="I55-Ge-Pmh"/>
+                <outletCollection property="adaptiveConstraints" destination="WaJ-Qy-WKT" id="kAq-HR-P82"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -147,7 +149,7 @@
         </view>
     </objects>
     <resources>
-        <image name="about_icon" width="90" height="90"/>
+        <image name="about_icon" width="180" height="180"/>
         <image name="chat_bubble" width="38" height="24"/>
     </resources>
 </document>

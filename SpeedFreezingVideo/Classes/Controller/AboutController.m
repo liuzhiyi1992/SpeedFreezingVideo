@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UIView *signView;
 @property (weak, nonatomic) IBOutlet UIView *copyrightView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signViewCenterYConstraint;
+@property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *adaptiveConstraints;
+
 @end
 
 @implementation AboutController
@@ -19,7 +21,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self modifyNavigationBar];
+    [self screenAdaptive];
     [self signAnim];
+}
+
+- (void)screenAdaptive {
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat adaptiveRatio= 1;
+    if (screenHeight == 480) {//i4
+        adaptiveRatio = 0.6f;
+    } else if (screenHeight == 568) {//i5
+        adaptiveRatio = 0.7f;
+    } else if (screenHeight == 667){//6
+        adaptiveRatio = 0.9f;
+    }
+    for (NSLayoutConstraint *constraint in _adaptiveConstraints) {
+        constraint.constant *= adaptiveRatio;
+    }
 }
 
 - (void)modifyNavigationBar {
