@@ -11,7 +11,7 @@
 		48007F5D1CFA9C5C004A7F60 /* FullScreemDisplayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48007F5B1CFA9C5C004A7F60 /* FullScreemDisplayController.xib */; };
 		4800BDE31D978C8000F8367A /* mianPageBackground08@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800BDE01D978C8000F8367A /* mianPageBackground08@2x.png */; };
 		4800BDE41D978C8000F8367A /* mianPageBackground09@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800BDE11D978C8000F8367A /* mianPageBackground09@2x.png */; };
-		4800BDE51D978C8000F8367A /* mianPageBackground10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800BDE21D978C8000F8367A /* mianPageBackground10@2x.png */; };
+		4800BDE71D978D9100F8367A /* mianPageBackground10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4800BDE61D978D9100F8367A /* mianPageBackground10@2x.png */; };
 		4803DA9E1D60AF730052F4CE /* CapturePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4803DA9B1D60AF730052F4CE /* CapturePreviewView.m */; };
 		4803DA9F1D60AF730052F4CE /* CaptureVideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4803DA9D1D60AF730052F4CE /* CaptureVideoButton.m */; };
 		4803DAA31D60AFE00052F4CE /* VideoPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4803DAA21D60AFE00052F4CE /* VideoPlayingView.m */; };
@@ -61,7 +61,7 @@
 		48007F5B1CFA9C5C004A7F60 /* FullScreemDisplayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullScreemDisplayController.xib; sourceTree = "<group>"; };
 		4800BDE01D978C8000F8367A /* mianPageBackground08@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground08@2x.png"; sourceTree = "<group>"; };
 		4800BDE11D978C8000F8367A /* mianPageBackground09@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground09@2x.png"; sourceTree = "<group>"; };
-		4800BDE21D978C8000F8367A /* mianPageBackground10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground10@2x.png"; sourceTree = "<group>"; };
+		4800BDE61D978D9100F8367A /* mianPageBackground10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground10@2x.png"; sourceTree = "<group>"; };
 		4803DA9A1D60AF730052F4CE /* CapturePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapturePreviewView.h; sourceTree = "<group>"; };
 		4803DA9B1D60AF730052F4CE /* CapturePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapturePreviewView.m; sourceTree = "<group>"; };
 		4803DA9C1D60AF730052F4CE /* CaptureVideoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureVideoButton.h; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 				559767B31D950B6300699550 /* mianPageBackground07@2x.png */,
 				4800BDE01D978C8000F8367A /* mianPageBackground08@2x.png */,
 				4800BDE11D978C8000F8367A /* mianPageBackground09@2x.png */,
-				4800BDE21D978C8000F8367A /* mianPageBackground10@2x.png */,
+				4800BDE61D978D9100F8367A /* mianPageBackground10@2x.png */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -398,7 +398,7 @@
 				4810F4621CF1C6F600550D10 /* SpeedMultipleView.xib in Resources */,
 				559767B81D950B6300699550 /* mianPageBackground07@2x.png in Resources */,
 				559767B71D950B6300699550 /* mianPageBackground06@2x.png in Resources */,
-				4800BDE51D978C8000F8367A /* mianPageBackground10@2x.png in Resources */,
+				4800BDE71D978D9100F8367A /* mianPageBackground10@2x.png in Resources */,
 				488119741CEC5A5100CA0C7F /* VideoEditingController.xib in Resources */,
 				4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */,
 				4881196D1CEC59BA00CA0C7F /* CaptureVideoViewController.xib in Resources */,
