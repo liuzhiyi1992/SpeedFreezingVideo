@@ -16,11 +16,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signViewCenterYConstraint;
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *adaptiveConstraints;
 @property (assign, nonatomic) BOOL isAnimating;
-
 @end
 
 @implementation AboutController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self modifyNavigationBar];
