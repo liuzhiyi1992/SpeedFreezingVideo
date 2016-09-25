@@ -17,6 +17,7 @@
 
 #define SCROLLING_IMAGEVIEW_COUNT 11
 #define SCROLLING_IMAGEVIEW_DISPLAY_NUM 3
+#define APP_ID @"1158640223"
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, SDCycleScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
