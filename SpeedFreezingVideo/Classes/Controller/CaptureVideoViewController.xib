@@ -118,6 +118,9 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1l-pr-wB0">
                     <rect key="frame" x="20" y="70" width="40" height="40"/>
                     <state key="normal" backgroundImage="slide_back_button"/>
+                    <connections>
+                        <action selector="clickSlideBackButton:" destination="-1" eventType="touchUpInside" id="6Li-q2-ojX"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1K-Vp-A3Z">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>

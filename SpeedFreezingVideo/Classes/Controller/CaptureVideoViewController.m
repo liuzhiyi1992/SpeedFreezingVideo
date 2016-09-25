@@ -25,7 +25,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *changeCameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *switchFlashButton;
 
-
 @property (strong, nonatomic) AVCaptureSession *captureSession;
 
 @property (strong, nonatomic) AVCaptureDevice *audioDevice;
@@ -165,7 +164,6 @@
     });
 }
 
-
 - (void)configureVideoOutput {
     self.videoOutput = [[AVCaptureMovieFileOutput alloc] init];
 }
@@ -212,7 +210,7 @@
             break;
     }
     
-    //todo 切换时锁定设备，方式同时修改?
+    //todo 切换时锁定设备，防止同时修改
     AVCaptureDeviceInput *videoInput = [self createMediaInputWithDevice:_videoDevice mediaType:AVMediaTypeVideo];
     [_captureSession beginConfiguration];
     [self captureSessionChangeVideoInput:videoInput];
@@ -289,7 +287,6 @@
 - (void)configureVideoPreview {
     [self.videoPreviewView setSession:_captureSession];
     self.videoPreviewView.delegate = self;
-//    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     
     //Gesture
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
@@ -625,6 +622,10 @@
             }
         }
     }
+}
+
+- (IBAction)clickSlideBackButton:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
