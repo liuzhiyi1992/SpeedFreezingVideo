@@ -564,7 +564,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "98031a58-b81b-4918-afb9-f41232aacfca";
+				PROVISIONING_PROFILE = "36cc5328-df4f-4114-a8fb-d6f36a3bc8e8";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -604,7 +604,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "98031a58-b81b-4918-afb9-f41232aacfca";
+				PROVISIONING_PROFILE = "36cc5328-df4f-4114-a8fb-d6f36a3bc8e8";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -615,6 +615,7 @@
 			baseConfigurationReference = E0E3EFDA3241D646D1599B07 /* Pods-SpeedFreezingVideo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: zhiyi liu (82KQAUTE69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: zhiyi liu (82KQAUTE69)";
 				DEVELOPMENT_TEAM = 82KQAUTE69;
@@ -623,7 +624,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.swizzleVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "98031a58-b81b-4918-afb9-f41232aacfca";
+				PROVISIONING_PROFILE = "36cc5328-df4f-4114-a8fb-d6f36a3bc8e8";
 				PROVISIONING_PROFILE_SPECIFIER = SpeedFreezingVideo;
 			};
 			name = Debug;
@@ -633,6 +634,7 @@
 			baseConfigurationReference = 00AA3BF0C61415F66BC97B25 /* Pods-SpeedFreezingVideo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: zhiyi liu (82KQAUTE69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: zhiyi liu (82KQAUTE69)";
 				DEVELOPMENT_TEAM = 82KQAUTE69;
@@ -641,7 +643,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.swizzleVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "98031a58-b81b-4918-afb9-f41232aacfca";
+				PROVISIONING_PROFILE = "36cc5328-df4f-4114-a8fb-d6f36a3bc8e8";
 				PROVISIONING_PROFILE_SPECIFIER = SpeedFreezingVideo;
 			};
 			name = Release;
