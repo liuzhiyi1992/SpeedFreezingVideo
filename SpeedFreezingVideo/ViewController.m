@@ -31,7 +31,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryButtonWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *libraryCenterYConstraint;
-
 @end
 
 @implementation ViewController

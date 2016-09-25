@@ -621,7 +621,7 @@
 				INFOPLIST_FILE = SpeedFreezingVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.speedFreezingVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.swizzleVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3e4bca09-57d4-443b-a2b2-17ac7f9aa2a4";
 				PROVISIONING_PROFILE_SPECIFIER = SpeedFreezingVideo;
@@ -639,7 +639,7 @@
 				INFOPLIST_FILE = SpeedFreezingVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.speedFreezingVideo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lzy.swizzleVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3e4bca09-57d4-443b-a2b2-17ac7f9aa2a4";
 				PROVISIONING_PROFILE_SPECIFIER = SpeedFreezingVideo;
