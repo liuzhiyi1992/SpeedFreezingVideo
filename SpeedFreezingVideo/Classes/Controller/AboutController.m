@@ -8,6 +8,8 @@
 
 #import "AboutController.h"
 
+#define APP_ID @"1158640223"
+
 @interface AboutController ()
 @property (weak, nonatomic) IBOutlet UIView *signView;
 @property (weak, nonatomic) IBOutlet UIView *copyrightView;
@@ -44,6 +46,9 @@
 - (void)modifyNavigationBar {
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+     UIBarButtonItem *rightTopButton = [[UIBarButtonItem alloc] initWithTitle:@"评价" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightTopButton)];
+    self.navigationItem.rightBarButtonItem = rightTopButton;
 }
 
 - (void)signAnim {
@@ -64,6 +69,12 @@
         [_signView setFrame:signViewFromFrame];
         self.isAnimating = NO;
     }];
+}
+
+- (void)clickRightTopButton {
+    NSString *urlString = [NSString stringWithFormat:
+     @"itms-apps://itunes.apple.com/app/id%@", APP_ID];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
 - (void)didReceiveMemoryWarning {
