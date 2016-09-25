@@ -15,7 +15,7 @@
 #import "AboutController.h"
 #import "UIView+ExtendTouchArea.h"
 
-#define SCROLLING_IMAGEVIEW_COUNT 8
+#define SCROLLING_IMAGEVIEW_COUNT 11
 #define SCROLLING_IMAGEVIEW_DISPLAY_NUM 3
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, SDCycleScrollViewDelegate>
