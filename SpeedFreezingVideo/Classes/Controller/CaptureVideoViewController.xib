@@ -25,10 +25,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xD-Xw-Eom" customClass="CapturePreviewView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I1K-Vp-A3Z">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btj-6P-aeP">
                             <rect key="frame" x="0.0" y="500" width="600" height="100"/>
                             <subviews>
@@ -107,38 +103,49 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="sJn-jC-AAj" secondAttribute="trailing" id="Fgu-OG-n2B"/>
                         <constraint firstAttribute="width" secondItem="0xD-Xw-Eom" secondAttribute="height" multiplier="8:15" id="MdO-EA-Ph6"/>
-                        <constraint firstItem="I1K-Vp-A3Z" firstAttribute="top" secondItem="0xD-Xw-Eom" secondAttribute="top" id="Qip-pP-PhR"/>
-                        <constraint firstAttribute="bottom" secondItem="I1K-Vp-A3Z" secondAttribute="bottom" id="SYe-ec-0Cx"/>
                         <constraint firstItem="sJn-jC-AAj" firstAttribute="leading" secondItem="0xD-Xw-Eom" secondAttribute="leading" id="TtU-FT-vQ9"/>
-                        <constraint firstItem="btj-6P-aeP" firstAttribute="top" secondItem="I1K-Vp-A3Z" secondAttribute="bottom" id="b88-To-C1R"/>
-                        <constraint firstItem="I1K-Vp-A3Z" firstAttribute="top" secondItem="sJn-jC-AAj" secondAttribute="bottom" id="g2A-CD-TdW"/>
                         <constraint firstAttribute="trailing" secondItem="btj-6P-aeP" secondAttribute="trailing" id="kEl-TJ-DGB"/>
                         <constraint firstAttribute="bottom" secondItem="btj-6P-aeP" secondAttribute="bottom" id="kNt-qK-2VP"/>
-                        <constraint firstItem="I1K-Vp-A3Z" firstAttribute="leading" secondItem="0xD-Xw-Eom" secondAttribute="leading" id="pKw-Ot-8At"/>
                         <constraint firstItem="sJn-jC-AAj" firstAttribute="top" secondItem="0xD-Xw-Eom" secondAttribute="top" id="r74-Zi-vlL"/>
-                        <constraint firstAttribute="trailing" secondItem="I1K-Vp-A3Z" secondAttribute="trailing" id="zfn-LG-ECN"/>
                         <constraint firstItem="btj-6P-aeP" firstAttribute="leading" secondItem="0xD-Xw-Eom" secondAttribute="leading" id="zvR-4a-o7B"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="MdO-EA-Ph6"/>
-                            <exclude reference="g2A-CD-TdW"/>
-                            <exclude reference="b88-To-C1R"/>
                         </mask>
                     </variation>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k1l-pr-wB0">
+                    <rect key="frame" x="20" y="70" width="40" height="40"/>
+                    <state key="normal" backgroundImage="slide_back_button"/>
+                </button>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1K-Vp-A3Z">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="0xD-Xw-Eom" secondAttribute="trailing" id="BQa-qF-lBq"/>
+                <constraint firstItem="k1l-pr-wB0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" symbolic="YES" id="Puf-MT-CmY"/>
                 <constraint firstItem="0xD-Xw-Eom" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UMg-xu-RRC"/>
+                <constraint firstItem="k1l-pr-wB0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Xlu-2R-7kA"/>
                 <constraint firstItem="0xD-Xw-Eom" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="doR-f5-Ddc"/>
+                <constraint firstItem="k1l-pr-wB0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="90" id="hEs-Cj-UCH"/>
                 <constraint firstAttribute="bottom" secondItem="0xD-Xw-Eom" secondAttribute="bottom" id="jxe-9U-rwU"/>
+                <constraint firstItem="k1l-pr-wB0" firstAttribute="top" secondItem="sJn-jC-AAj" secondAttribute="bottom" constant="20" id="oTf-wi-2ne"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Puf-MT-CmY"/>
+                    <exclude reference="hEs-Cj-UCH"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>
         <image name="camera_icon" width="25" height="20"/>
         <image name="flash_light_icon" width="20" height="20"/>
+        <image name="slide_back_button" width="40" height="40"/>
     </resources>
 </document>
