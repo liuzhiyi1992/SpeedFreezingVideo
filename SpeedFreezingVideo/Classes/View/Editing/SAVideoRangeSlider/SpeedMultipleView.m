@@ -12,24 +12,13 @@
 
 @interface SpeedMultipleView()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *speedButtons;
-//@property (strong, nonatomic) UIColor *originalColor;
 @property (weak, nonatomic) IBOutlet UIButton *originalSpeedRateButton;
-
-
 @end
 
 @implementation SpeedMultipleView
-
 + (SpeedMultipleView *)createView {
     SpeedMultipleView *multipleView = [[NSBundle mainBundle] loadNibNamed:@"SpeedMultipleView" owner:nil options:nil][0];
-    
-    
-//    UIButton *tmpButton = multipleView.speedButtons[0];
-//    multipleView.originalColor = tmpButton.backgroundColor;
-    
-    
     [multipleView configureView];
-    
     return multipleView;
 }
 
@@ -74,7 +63,6 @@
         default:
             break;
     }
-    
     [_delegate SpeedMultipleViewDidSelectedSpeedRate:speedRate];
 }
 
