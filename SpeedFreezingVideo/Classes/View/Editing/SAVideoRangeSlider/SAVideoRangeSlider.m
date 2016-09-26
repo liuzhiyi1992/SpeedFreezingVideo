@@ -147,7 +147,7 @@ const CGFloat FRAME_PIC_WIDTH = 20;
         _bubleText.font = [UIFont boldSystemFontOfSize:20];
         _bubleText.backgroundColor = [UIColor clearColor];
         _bubleText.textColor = [UIColor blackColor];
-        _bubleText.textAlignment = UITextAlignmentCenter;
+        _bubleText.textAlignment = NSTextAlignmentCenter;
         
         [_popoverBubble addSubview:_bubleText];
         
