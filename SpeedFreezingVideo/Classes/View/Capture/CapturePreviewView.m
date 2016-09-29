@@ -16,6 +16,7 @@
 @implementation CapturePreviewView
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self configureView];
 }
 
