@@ -44,7 +44,6 @@
 		48FB54F61D9640980083335C /* AboutController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48FB54F41D9640980083335C /* AboutController.xib */; };
 		48FC0BAD1CF2B8AD000D02CB /* UINavigationBar+transparency.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */; };
 		48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */; };
-		48FD1C4C1CF9732000EF295F /* 慢快-数钱.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 48FD1C4B1CF9732000EF295F /* 慢快-数钱.mp4 */; };
 		559767AE1D950B5A00699550 /* mianPageBackground01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 559767AD1D950B5A00699550 /* mianPageBackground01@2x.png */; };
 		559767B41D950B6300699550 /* mianPageBackground03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 559767AF1D950B6300699550 /* mianPageBackground03@2x.png */; };
 		559767B51D950B6300699550 /* mianPageBackground04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 559767B01D950B6300699550 /* mianPageBackground04@2x.png */; };
@@ -119,7 +118,6 @@
 		48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+transparency.m"; sourceTree = "<group>"; };
 		48FC0BAB1CF2B8AD000D02CB /* UINavigationController+className.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+className.h"; sourceTree = "<group>"; };
 		48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+className.m"; sourceTree = "<group>"; };
-		48FD1C4B1CF9732000EF295F /* 慢快-数钱.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "慢快-数钱.mp4"; sourceTree = "<group>"; };
 		559767AD1D950B5A00699550 /* mianPageBackground01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground01@2x.png"; sourceTree = "<group>"; };
 		559767AF1D950B6300699550 /* mianPageBackground03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground03@2x.png"; sourceTree = "<group>"; };
 		559767B01D950B6300699550 /* mianPageBackground04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground04@2x.png"; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				485B2D0A1D69B36400FAED4C /* Resource */,
-				48FD1C4B1CF9732000EF295F /* 慢快-数钱.mp4 */,
 				488119621CEC59BA00CA0C7F /* Classes */,
 				4848F6421CE73430009C6280 /* AppDelegate.h */,
 				4848F6431CE73430009C6280 /* AppDelegate.m */,
@@ -410,7 +407,6 @@
 				48EF4F1D1D6DA16900C6BEFE /* mianPageBackground02@2x.png in Resources */,
 				4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */,
 				4848F64A1CE73431009C6280 /* Main.storyboard in Resources */,
-				48FD1C4C1CF9732000EF295F /* 慢快-数钱.mp4 in Resources */,
 				48FB54F61D9640980083335C /* AboutController.xib in Resources */,
 				559767AE1D950B5A00699550 /* mianPageBackground01@2x.png in Resources */,
 				4800BDE31D978C8000F8367A /* mianPageBackground08@2x.png in Resources */,
