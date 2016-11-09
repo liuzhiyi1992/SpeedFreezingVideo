@@ -192,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				485B2D0A1D69B36400FAED4C /* Resource */,
-				48FD1C4B1CF9732000EF295F /* 慢快-数钱.mp4 */,
 				488119621CEC59BA00CA0C7F /* Classes */,
 				4848F6421CE73430009C6280 /* AppDelegate.h */,
 				4848F6431CE73430009C6280 /* AppDelegate.m */,
@@ -419,7 +418,6 @@
 				48EF4F1D1D6DA16900C6BEFE /* mianPageBackground02@2x.png in Resources */,
 				4848F64C1CE73431009C6280 /* Assets.xcassets in Resources */,
 				4848F64A1CE73431009C6280 /* Main.storyboard in Resources */,
-				48FD1C4C1CF9732000EF295F /* 慢快-数钱.mp4 in Resources */,
 				48FB54F61D9640980083335C /* AboutController.xib in Resources */,
 				559767AE1D950B5A00699550 /* mianPageBackground01@2x.png in Resources */,
 				4800BDE31D978C8000F8367A /* mianPageBackground08@2x.png in Resources */,
