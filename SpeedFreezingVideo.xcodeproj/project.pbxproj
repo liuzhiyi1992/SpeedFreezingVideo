@@ -45,6 +45,8 @@
 		48FC0BAD1CF2B8AD000D02CB /* UINavigationBar+transparency.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAA1CF2B8AD000D02CB /* UINavigationBar+transparency.m */; };
 		48FC0BAE1CF2B8AD000D02CB /* UINavigationController+className.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */; };
 		48FD1C4C1CF9732000EF295F /* 慢快-数钱.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 48FD1C4B1CF9732000EF295F /* 慢快-数钱.mp4 */; };
+		556C44361DD2F7FF007464AA /* SavedSucceedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556C44341DD2F7FF007464AA /* SavedSucceedViewController.m */; };
+		556C44371DD2F7FF007464AA /* SavedSucceedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556C44351DD2F7FF007464AA /* SavedSucceedViewController.xib */; };
 		559767AE1D950B5A00699550 /* mianPageBackground01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 559767AD1D950B5A00699550 /* mianPageBackground01@2x.png */; };
 		559767B41D950B6300699550 /* mianPageBackground03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 559767AF1D950B6300699550 /* mianPageBackground03@2x.png */; };
 		559767B51D950B6300699550 /* mianPageBackground04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 559767B01D950B6300699550 /* mianPageBackground04@2x.png */; };
@@ -120,6 +122,9 @@
 		48FC0BAB1CF2B8AD000D02CB /* UINavigationController+className.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+className.h"; sourceTree = "<group>"; };
 		48FC0BAC1CF2B8AD000D02CB /* UINavigationController+className.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+className.m"; sourceTree = "<group>"; };
 		48FD1C4B1CF9732000EF295F /* 慢快-数钱.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "慢快-数钱.mp4"; sourceTree = "<group>"; };
+		556C44331DD2F7FF007464AA /* SavedSucceedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedSucceedViewController.h; sourceTree = "<group>"; };
+		556C44341DD2F7FF007464AA /* SavedSucceedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedSucceedViewController.m; sourceTree = "<group>"; };
+		556C44351DD2F7FF007464AA /* SavedSucceedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedSucceedViewController.xib; sourceTree = "<group>"; };
 		559767AD1D950B5A00699550 /* mianPageBackground01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground01@2x.png"; sourceTree = "<group>"; };
 		559767AF1D950B6300699550 /* mianPageBackground03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground03@2x.png"; sourceTree = "<group>"; };
 		559767B01D950B6300699550 /* mianPageBackground04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mianPageBackground04@2x.png"; sourceTree = "<group>"; };
@@ -285,6 +290,9 @@
 				48FB54F21D9640980083335C /* AboutController.h */,
 				48FB54F31D9640980083335C /* AboutController.m */,
 				48FB54F41D9640980083335C /* AboutController.xib */,
+				556C44331DD2F7FF007464AA /* SavedSucceedViewController.h */,
+				556C44341DD2F7FF007464AA /* SavedSucceedViewController.m */,
+				556C44351DD2F7FF007464AA /* SavedSucceedViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -398,6 +406,7 @@
 				4810F4621CF1C6F600550D10 /* SpeedMultipleView.xib in Resources */,
 				559767B81D950B6300699550 /* mianPageBackground07@2x.png in Resources */,
 				559767B71D950B6300699550 /* mianPageBackground06@2x.png in Resources */,
+				556C44371DD2F7FF007464AA /* SavedSucceedViewController.xib in Resources */,
 				4800BDE71D978D9100F8367A /* mianPageBackground10@2x.png in Resources */,
 				488119741CEC5A5100CA0C7F /* VideoEditingController.xib in Resources */,
 				4848F64F1CE73431009C6280 /* LaunchScreen.storyboard in Resources */,
@@ -482,6 +491,7 @@
 				4803DA9E1D60AF730052F4CE /* CapturePreviewView.m in Sources */,
 				4848F6441CE73430009C6280 /* AppDelegate.m in Sources */,
 				48007F5C1CFA9C5C004A7F60 /* FullScreemDisplayController.m in Sources */,
+				556C44361DD2F7FF007464AA /* SavedSucceedViewController.m in Sources */,
 				4810F4601CF1C6DE00550D10 /* SpeedMultipleView.m in Sources */,
 				485142201CF6AB3400258B1A /* FrameMaskingLayer.m in Sources */,
 				48B824BD1CF45B3D005E565C /* UIColor+hexColor.m in Sources */,
