@@ -373,8 +373,10 @@ const char kOrientation;
 - (void)fullScreemDisplayWithOutputUrl:(NSURL *)url {
     _rightTopButton.enabled = YES;
     AVCaptureVideoOrientation videoOrientation = [objc_getAssociatedObject(self.assetUrl, &kOrientation) integerValue];
-    FullScreemDisplayController *controller = [[FullScreemDisplayController alloc] initWithAssetUrl:url videoOrientation:videoOrientation];
-    [self.navigationController presentViewController:controller animated:YES completion:nil];
+    FullScreemDisplayController *fullController = [[FullScreemDisplayController alloc] initWithAssetUrl:url videoOrientation:videoOrientation];
+    UINavigationController *fullNav = [[UINavigationController alloc] initWithRootViewController:fullController];
+    fullNav.navigationBarHidden = YES;
+    [self.navigationController presentViewController:fullNav animated:YES completion:nil];
 }
 
 - (UIImage *)createImageWithColor:(UIColor *) color {

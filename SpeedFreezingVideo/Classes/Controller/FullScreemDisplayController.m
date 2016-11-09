@@ -10,6 +10,7 @@
 #import "VideoPlayingView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "EndOfPlayingView.h"
+#import "SavedSucceedViewController.h"
 
 @interface FullScreemDisplayController () <EndOfPlayingViewDelegate>
 @property (weak, nonatomic) IBOutlet VideoPlayingView *videoPlayingView;
@@ -66,12 +67,18 @@
 
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerItemDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(needsDismiss) name:NOTIFICATION_NAME_FULLSCREEN_DISPLAY_NEEDS_DISMISS object:nil];
+}
+
+- (void)needsDismiss {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)writeExportedVideoToAssetsLibrary:(NSURL *)url {
     NSURL *exportURL = url;
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:exportURL]) {
+        __weak __typeof(&*self)weakSelf = self;
         [library writeVideoAtPathToSavedPhotosAlbum:exportURL completionBlock:^(NSURL *assetURL, NSError *error){
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
@@ -84,13 +91,15 @@
                 }
                 if(!error)
                 {
-                    // [activityView setHidden:YES];
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sucess"
-                                                                        message:@"video added to gallery successfully"
-                                                                       delegate:nil
-                                                              cancelButtonTitle:@"OK"
-                                                              otherButtonTitles:nil];
-                    [alertView show];
+                    SavedSucceedViewController *savedController = [[SavedSucceedViewController alloc] init];
+                    weakSelf.navigationController.navigationBarHidden = NO;
+                    [weakSelf.navigationController pushViewController:savedController animated:YES];
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sucess"
+//                                                                        message:@"video added to gallery successfully"
+//                                                                       delegate:nil
+//                                                              cancelButtonTitle:@"OK"
+//                                                              otherButtonTitles:nil];
+//                    [alertView show];
                     NSLog(@"保存成功");
                 }
 #if !TARGET_IPHONE_SIMULATOR
